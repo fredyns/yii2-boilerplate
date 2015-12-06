@@ -24,7 +24,7 @@ class ModelMenu extends ModelLink
 	/**
 	 * model control to manipulate links
 	 *
-	 * @var BaseModelControl
+	 * @var ModelControl
 	 */
 	public $control;
 

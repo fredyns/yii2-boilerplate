@@ -100,14 +100,17 @@ abstract class ModelLink extends \yii\base\Widget
 	static function linkParamIndex()
 	{
 		return [
-			'label'	 => Icon::create([
+			'label'			 => Icon::create([
 				'icon'	 => 'list',
 				'class'	 => 'model-action-icon',
 				'text'	 => '<span class="model-action-text">List</span>',
 			]),
-			'url'	 => [
+			'url'			 => [
 				static::actionRoute('index'),
 				'ru' => ReturnUrl::getToken(),
+			],
+			'buttonOptions'	 => [
+				'class' => 'btn btn-success',
 			],
 		];
 
@@ -121,14 +124,17 @@ abstract class ModelLink extends \yii\base\Widget
 	static function linkParamCreate()
 	{
 		return [
-			'label'	 => Icon::create([
+			'label'			 => Icon::create([
 				'icon'	 => 'plus',
 				'class'	 => 'model-action-icon',
 				'text'	 => '<span class="model-action-text">Create</span>',
 			]),
-			'url'	 => [
+			'url'			 => [
 				static::actionRoute('create'),
 				'ru' => ReturnUrl::getToken(),
+			],
+			'buttonOptions'	 => [
+				'class' => 'btn btn-success',
 			],
 		];
 
@@ -144,15 +150,18 @@ abstract class ModelLink extends \yii\base\Widget
 		$primaryKey = $model->primaryKey()[0];
 
 		return [
-			'label'	 => Icon::create([
+			'label'			 => Icon::create([
 				'icon'	 => 'eye-open',
 				'class'	 => 'model-action-icon',
 				'text'	 => '<span class="model-action-text">View</span>',
 			]),
-			'url'	 => [
+			'url'			 => [
 				static::actionRoute('view'),
 				$primaryKey	 => $model->$primaryKey,
 				'ru'		 => ReturnUrl::getToken(),
+			],
+			'buttonOptions'	 => [
+				'class' => 'btn btn-primary',
 			],
 		];
 
@@ -168,15 +177,18 @@ abstract class ModelLink extends \yii\base\Widget
 		$primaryKey = $model->primaryKey()[0];
 
 		return [
-			'label'	 => Icon::create([
+			'label'			 => Icon::create([
 				'icon'	 => 'pencil',
 				'class'	 => 'model-action-icon',
 				'text'	 => '<span class="model-action-text">Update</span>',
 			]),
-			'url'	 => [
+			'url'			 => [
 				static::actionRoute('update'),
 				$primaryKey	 => $model->$primaryKey,
 				'ru'		 => ReturnUrl::getToken(),
+			],
+			'buttonOptions'	 => [
+				'class' => 'btn btn-primary',
 			],
 		];
 
