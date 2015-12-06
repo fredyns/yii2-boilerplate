@@ -122,7 +122,7 @@ abstract class ModelLink extends \yii\base\Widget
 	{
 		return [
 			'label'	 => Icon::create([
-				'icon'	 => 'star',
+				'icon'	 => 'plus',
 				'class'	 => 'model-action-icon',
 				'text'	 => '<span class="model-action-text">Create</span>',
 			]),
