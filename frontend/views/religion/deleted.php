@@ -102,41 +102,30 @@ $this->params['breadcrumbs'][] = $this->title;
 								'width' => '40px',
 							],
 						],
+						'name',
 						[
-							'class'		 => 'yii\grid\ActionColumn',
-							'urlCreator' => function($action, $model, $key, $index)
-							{
-								// using the column name as key, not mapping to 'id' like the standard generator
-								$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
-								$params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;
-								return Url::toRoute($params);
-							},
-								'contentOptions' => ['nowrap' => 'nowrap']
+							"label"		 => 'Action',
+							"class"		 => \yii\grid\DataColumn::className(),
+							"options"	 => [
+								"width" => "120px",
 							],
-							'name',
-							[
-								"label"		 => 'Action',
-								"class"		 => \yii\grid\DataColumn::className(),
-								"options"	 => [
-									"width" => "120px",
-								],
-								"format"	 => "raw",
-								"value"		 => function($model)
-							{
-								return $model->menu->widgetDropdown(['view', 'update', 'restore']);
-							},
-							],
+							"format"	 => "raw",
+							"value"		 => function($model)
+						{
+							return $model->menu->widgetDropdown(['view', 'update', 'restore']);
+						},
 						],
-					]);
+					],
+				]);
 
-					?>
-				</div>
-
+				?>
 			</div>
 
 		</div>
 
-		<?php \yii\widgets\Pjax::end() ?>
+	</div>
+
+	<?php \yii\widgets\Pjax::end() ?>
 
 
 </div>

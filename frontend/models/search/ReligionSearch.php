@@ -30,7 +30,7 @@ class ReligionSearch extends Religion
 	 */
 	public function scenarios()
 	{
-// bypass scenarios() implementation in the parent class
+		// bypass scenarios() implementation in the parent class
 		return Model::scenarios();
 
 	}

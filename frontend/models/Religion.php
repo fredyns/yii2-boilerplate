@@ -9,6 +9,8 @@ use frontend\models\menu\ReligionMenu;
 
 /**
  * Description of Religion
+ * model used in all frontend sistem
+ * all code which aplied only in frontend belongs here
  *
  * @author fredy
  */
@@ -17,6 +19,11 @@ class Religion extends BaseReligion
 
 	/* ======================== model structure ======================== */
 
+	/**
+	 * @inheritdoc
+	 *
+	 * using frontend components
+	 */
 	public function init()
 	{
 		parent::init();
