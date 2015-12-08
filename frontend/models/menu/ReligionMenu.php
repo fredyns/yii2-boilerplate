@@ -3,6 +3,8 @@
 namespace frontend\models\menu;
 
 use Yii;
+use common\widgets\Icon;
+use cornernote\returnurl\ReturnUrl;
 
 /**
  * Description of ReligionMenu
