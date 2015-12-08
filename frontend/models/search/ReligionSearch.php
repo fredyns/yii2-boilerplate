@@ -59,51 +59,22 @@ class ReligionSearch extends Religion
 			return $dataProvider;
 		}
 
-		$query->andFilterWhere([
-			'id'			 => $this->id,
-			'created_at'	 => $this->created_at,
-			'updated_at'	 => $this->updated_at,
-			'deleted_at'	 => $this->deleted_at,
-			'createdBy_id'	 => $this->createdBy_id,
-			'updatedBy_id'	 => $this->updatedBy_id,
-			'deletedBy_id'	 => $this->deletedBy_id,
+		$query
+			->andFilterWhere([
+				'id'			 => $this->id,
+				'created_at'	 => $this->created_at,
+				'updated_at'	 => $this->updated_at,
+				'deleted_at'	 => $this->deleted_at,
+				'createdBy_id'	 => $this->createdBy_id,
+				'updatedBy_id'	 => $this->updatedBy_id,
+				'deletedBy_id'	 => $this->deletedBy_id,
 		]);
 
-		$query->andFilterWhere(['like', 'status', $this->status])
+		$query
+			->andFilterWhere(['like', 'status', $this->status])
 			->andFilterWhere(['like', 'name', $this->name]);
 
 		return $dataProvider;
-
-	}
-
-	/**
-	 * Create query instance for general searching
-	 *
-	 * @return ActiveQuery the newly created [[ActiveQuery]] instance.
-	 */
-	public function findModel($params)
-	{
-		$query = Religion::find();
-
-		$this->load($params);
-
-		if (!$this->validate())
-		{
-			// uncomment the following line if you do not want to any records when validation fails
-			// $query->where('0=1');
-			return $query;
-		}
-
-		$query->andFilterWhere([
-			'id'			 => $this->id,
-			'createdBy_id'	 => $this->createdBy_id,
-			'updatedBy_id'	 => $this->updatedBy_id,
-			'deletedBy_id'	 => $this->deletedBy_id,
-		]);
-
-		$query->andFilterWhere(['like', 'name', $this->name]);
-
-		return $query;
 
 	}
 
@@ -116,13 +87,10 @@ class ReligionSearch extends Religion
 	 */
 	public function searchActive($params)
 	{
-		$query = $this->findModel($params);
+		$scope = $this->formName();
+		$params[$scope]['status'] = Religion::STATUS_ACTIVE;
 
-		$query->andFilterWhere(['like', 'status', Religion::STATUS_ACTIVE]);
-
-		return new ActiveDataProvider([
-			'query' => $query,
-		]);
+		return $this->search($params);
 
 	}
 
@@ -135,13 +103,10 @@ class ReligionSearch extends Religion
 	 */
 	public function searchDeleted($params)
 	{
-		$query = $this->findModel($params);
+		$scope = $this->formName();
+		$params[$scope]['status'] = Religion::STATUS_DELETED;
 
-		$query->andFilterWhere(['like', 'status', Religion::STATUS_DELETED]);
-
-		return new ActiveDataProvider([
-			'query' => $query,
-		]);
+		return $this->search($params);
 
 	}
 
