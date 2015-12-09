@@ -322,6 +322,7 @@ class ReligionController extends Controller
 		{
 			Url::remember(null);
 			$url = \Yii::$app->session['__crudReturnUrl'];
+			$url = ReturnUrl::getUrl($url);
 			\Yii::$app->session['__crudReturnUrl'] = null;
 
 			return $this->redirect($url);
