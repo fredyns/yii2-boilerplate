@@ -11,6 +11,7 @@ use yii\web\HttpException;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
+use cornernote\returnurl\ReturnUrl;
 
 /**
  * ReligionController implements the CRUD actions for Religion model.
@@ -153,7 +154,7 @@ class ReligionController extends Controller
 			{
 				/* successfull, redirect to previous page */
 
-				return $this->redirect(Url::previous());
+				return $this->redirect(ReturnUrl::getUrl(Url::previous()));
 			}
 			elseif (!\Yii::$app->request->isPost)
 			{
@@ -201,7 +202,7 @@ class ReligionController extends Controller
 		{
 			/* back to previos page */
 
-			return $this->redirect(Url::previous());
+			return $this->redirect(ReturnUrl::getUrl(Url::previous()));
 		}
 		else
 		{
@@ -245,7 +246,7 @@ class ReligionController extends Controller
 
 			$msg = (isset($e->errorInfo[2])) ? $e->errorInfo[2] : $e->getMessage();
 			\Yii::$app->getSession()->setFlash('error', $msg);
-			return $this->redirect(Url::previous());
+			return $this->redirect(ReturnUrl::getUrl(Url::previous()));
 		}
 
 		/* decide page to redirect */
@@ -254,7 +255,7 @@ class ReligionController extends Controller
 		$isPivot = strstr('$id', ',');
 		if ($isPivot == true)
 		{
-			return $this->redirect(Url::previous());
+			return $this->redirect(ReturnUrl::getUrl(Url::previous()));
 		}
 		elseif (isset(\Yii::$app->session['__crudReturnUrl']) && \Yii::$app->session['__crudReturnUrl'] != '/')
 		{
@@ -304,7 +305,7 @@ class ReligionController extends Controller
 
 			\Yii::$app->getSession()->setFlash('error', $msg);
 
-			return $this->redirect(Url::previous());
+			return $this->redirect(ReturnUrl::getUrl(Url::previous()));
 		}
 
 		/* decide page to redirect */
