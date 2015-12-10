@@ -95,7 +95,14 @@ class ModelMenu extends ModelLink
 	 */
 	public function anchor($name = '')
 	{
-		return static::a($name, $this->control->model);
+		$allowed = $this->control->actionAllowed($name);
+
+		if ($allowed)
+		{
+			return static::a($name, $this->control->model);
+		}
+
+		return '';
 
 	}
 
@@ -107,7 +114,14 @@ class ModelMenu extends ModelLink
 	 */
 	public function button($name = '')
 	{
-		return static::btn($name, $this->control->model);
+		$allowed = $this->control->actionAllowed($name);
+
+		if ($allowed)
+		{
+			return static::btn($name, $this->control->model);
+		}
+
+		return '';
 
 	}
 
