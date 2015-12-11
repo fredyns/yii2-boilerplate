@@ -3,6 +3,7 @@
 namespace frontend\models\menu;
 
 use Yii;
+use common\base\ModelMenu;
 use common\widgets\Icon;
 use cornernote\returnurl\ReturnUrl;
 
@@ -12,7 +13,7 @@ use cornernote\returnurl\ReturnUrl;
  *
  * @author fredy
  */
-class ReligionMenu extends \common\base\ModelMenu
+class ReligionMenu extends ModelMenu
 {
 
 	/* ================ helper ================ */
@@ -24,7 +25,30 @@ class ReligionMenu extends \common\base\ModelMenu
 	 */
 	static function controllerRoute()
 	{
-		return '/religion';
+		return 'religion';
+
+	}
+
+	/* ================ urls ================ */
+
+	static function urlParamDeleted()
+	{
+		return [
+			static::actionRoute('deleted'),
+			'ru' => ReturnUrl::getToken(),
+		];
+
+	}
+
+	static function urlParamRestore($model = NULL)
+	{
+		$primaryKey = $model->primaryKey()[0];
+
+		return [
+			static::actionRoute('restore'),
+			$primaryKey	 => $model->$primaryKey,
+			'ru'		 => ReturnUrl::getToken(),
+		];
 
 	}
 
@@ -43,10 +67,7 @@ class ReligionMenu extends \common\base\ModelMenu
 				'class'	 => 'model-action-icon',
 				'text'	 => '<span class="model-action-text">Deleted</span>',
 			]),
-			'url'			 => [
-				static::actionRoute('deleted'),
-				'ru' => ReturnUrl::getToken(),
-			],
+			'url'			 => static::urlParamDeleted(),
 			'buttonOptions'	 => [
 				'class' => 'btn btn-default',
 			],
@@ -61,19 +82,13 @@ class ReligionMenu extends \common\base\ModelMenu
 	 */
 	static function linkParamRestore($model = NULL)
 	{
-		$primaryKey = $model->primaryKey()[0];
-
 		return [
 			'label'			 => Icon::create([
 				'icon'	 => 'back',
 				'class'	 => 'model-action-icon',
 				'text'	 => '<span class="model-action-text">Restore</span>',
 			]),
-			'url'			 => [
-				static::actionRoute('restore'),
-				$primaryKey	 => $model->$primaryKey,
-				'ru'		 => ReturnUrl::getToken(),
-			],
+			'url'			 => static::urlParamRestore($model),
 			'buttonOptions'	 => [
 				'class' => 'btn btn-default',
 			],
