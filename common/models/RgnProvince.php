@@ -24,7 +24,8 @@ class RgnProvince extends BaseRgnProvince
 			/* required */
 			[['name', 'country_id'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['status', 'number'], 'string'],
+			[['number'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
 			[['abbreviation'], 'string', 'max' => 32],
 			/* value limitation */

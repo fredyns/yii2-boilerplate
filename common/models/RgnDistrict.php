@@ -57,6 +57,7 @@ class RgnDistrict extends BaseRgnDistrict
 		return [
 			'id'			 => 'ID',
 			'status'		 => 'Status',
+			'number'		 => 'Number',
 			'name'			 => 'Name',
 			'city_id'		 => 'City',
 			'province_id'	 => 'Province',
@@ -76,7 +77,8 @@ class RgnDistrict extends BaseRgnDistrict
 			/* required */
 			[['name', 'city_id'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['status', 'number'], 'string'],
+			[['number'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
 			/* value limitation */
 			['status', 'in', 'range' => [

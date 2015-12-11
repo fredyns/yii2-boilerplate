@@ -69,6 +69,7 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 		return [
 			'id'			 => 'ID',
 			'status'		 => 'Status',
+			'number'		 => 'Number',
 			'name'			 => 'Name',
 			'district_id'	 => 'District',
 			'city_id'		 => 'City',
@@ -89,7 +90,8 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 			/* required */
 			[['name', 'district_id'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['status', 'number'], 'string'],
+			[['number'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
 			/* value limitation */
 			['status', 'in', 'range' => [

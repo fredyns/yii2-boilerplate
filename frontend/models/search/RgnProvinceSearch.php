@@ -20,7 +20,7 @@ class RgnProvinceSearch extends RgnProvince
 	{
 		return [
 			[['id', 'country_id'], 'integer'],
-			[['status', 'name', 'abbreviation'], 'safe'],
+			[['status', 'number', 'name', 'abbreviation'], 'safe'],
 		];
 
 	}
@@ -72,6 +72,7 @@ class RgnProvinceSearch extends RgnProvince
 
 		$query
 			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'number', '%' . $this->number, FALSE])
 			->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
 

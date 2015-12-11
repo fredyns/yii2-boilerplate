@@ -21,7 +21,7 @@ class RgnDistrictSearch extends RgnDistrict
 		return [
 			[['id', 'city_id'], 'integer'],
 			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
-			[['status', 'name'], 'safe'],
+			[['status', 'number', 'name'], 'safe'],
 		];
 
 	}
@@ -73,6 +73,7 @@ class RgnDistrictSearch extends RgnDistrict
 
 		$query
 			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'number', '%' . $this->number, FALSE])
 			->andFilterWhere(['like', 'name', $this->name]);
 
 		return $dataProvider;

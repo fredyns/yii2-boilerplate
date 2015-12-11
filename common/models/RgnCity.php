@@ -49,6 +49,7 @@ class RgnCity extends BaseRgnCity
 		return [
 			'id'			 => 'ID',
 			'status'		 => 'Status',
+			'number'		 => 'Number',
 			'name'			 => 'Name',
 			'abbreviation'	 => 'Abbreviation',
 			'province_id'	 => 'Province',
@@ -68,7 +69,8 @@ class RgnCity extends BaseRgnCity
 			/* required */
 			[['name', 'province_id'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['status', 'number'], 'string'],
+			[['number'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
 			[['abbreviation'], 'string', 'max' => 64],
 			/* value limitation */

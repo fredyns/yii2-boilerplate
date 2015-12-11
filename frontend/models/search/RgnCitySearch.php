@@ -21,7 +21,7 @@ class RgnCitySearch extends RgnCity
 		return [
 			[['id', 'province_id'], 'integer'],
 			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
-			[['status', 'name', 'abbreviation'], 'safe'],
+			[['status', 'number', 'name', 'abbreviation'], 'safe'],
 		];
 
 	}
@@ -73,6 +73,7 @@ class RgnCitySearch extends RgnCity
 
 		$query
 			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'number', '%' . $this->number, FALSE])
 			->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
 

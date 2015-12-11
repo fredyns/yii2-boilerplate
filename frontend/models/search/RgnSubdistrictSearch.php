@@ -20,7 +20,7 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 	{
 		return [
 			[['id', 'district_id'], 'integer'],
-			[['status', 'name'], 'safe'],
+			[['status', 'number', 'name'], 'safe'],
 		];
 
 	}
@@ -72,6 +72,7 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 
 		$query
 			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'number', '%' . $this->number, FALSE])
 			->andFilterWhere(['like', 'name', $this->name]);
 
 		return $dataProvider;

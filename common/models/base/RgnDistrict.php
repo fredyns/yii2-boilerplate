@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $status
+ * @property string $number
  * @property string $name
  * @property integer $city_id
  * @property integer $created_at
@@ -49,7 +50,7 @@ class RgnDistrict extends \common\base\Model
 	public function rules()
 	{
 		return [
-			[['status'], 'string'],
+			[['status', 'number'], 'string'],
 			[['name'], 'required'],
 			[['city_id'], 'integer'],
 			[['name'], 'string', 'max' => 255],
@@ -70,6 +71,7 @@ class RgnDistrict extends \common\base\Model
 		return [
 			'id'			 => 'ID',
 			'status'		 => 'Status',
+			'number'		 => 'Number',
 			'name'			 => 'Name',
 			'city_id'		 => 'City',
 			'created_at'	 => 'Created At',

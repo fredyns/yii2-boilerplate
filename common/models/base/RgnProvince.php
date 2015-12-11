@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $status
+ * @property string $number
  * @property string $name
  * @property string $abbreviation
  * @property integer $country_id
@@ -50,7 +51,7 @@ class RgnProvince extends \common\base\Model
 	public function rules()
 	{
 		return [
-			[['status'], 'string'],
+			[['status', 'number'], 'string'],
 			[['name'], 'required'],
 			[['country_id'], 'integer'],
 			[['name'], 'string', 'max' => 255],
@@ -72,6 +73,7 @@ class RgnProvince extends \common\base\Model
 		return [
 			'id'			 => 'ID',
 			'status'		 => 'Status',
+			'number'		 => 'Number',
 			'name'			 => 'Name',
 			'abbreviation'	 => 'Abbreviation',
 			'country_id'	 => 'Country',
