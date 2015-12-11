@@ -93,13 +93,13 @@ class ModelMenu extends ModelLink
 	 * @param string $name
 	 * @return string
 	 */
-	public function anchor($name = '')
+	public function anchor($name = '', $label = '')
 	{
 		$allowed = $this->control->actionAllowed($name);
 
 		if ($allowed)
 		{
-			return static::a($name, $this->control->model);
+			return static::a($name, $label, $this->control->model);
 		}
 
 		return '';
@@ -221,11 +221,17 @@ class ModelMenu extends ModelLink
 	{
 		$links = [];
 
-		foreach ($items as $item)
+		foreach ($items as $item => $label)
 		{
+			if (is_int($item))
+			{
+				$item = $label;
+				$label = '';
+			}
+
 			if ($this->control->actionAllowed($item))
 			{
-				$links[] = static::a($item, $this->control->model);
+				$links[] = static::a($item, $label, $this->control->model);
 			}
 		}
 
