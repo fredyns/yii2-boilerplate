@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="giiant-crud religion-index">
+<div class="giiant-crud religion-deleted">
 
 	<?php //     echo $this->render('_search', ['model' =>$searchModel]);
 
@@ -102,7 +102,17 @@ $this->params['breadcrumbs'][] = $this->title;
 								'width' => '40px',
 							],
 						],
-						'name',
+						//'name',
+						[
+							"class"		 => \yii\grid\DataColumn::className(),
+							"attribute"	 => 'name',
+							"format"	 => "raw",
+							"options"	 => [],
+							"value"		 => function($model)
+						{
+							return $model->menu->anchor('view', $model->name);
+						},
+						],
 						[
 							"label"		 => 'Action',
 							"class"		 => \yii\grid\DataColumn::className(),

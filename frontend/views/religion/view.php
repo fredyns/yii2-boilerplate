@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 use dmstr\bootstrap\Tabs;
+use frontend\models\menu\ReligionMenu;
 
 /**
  * @var yii\web\View $this
@@ -21,11 +22,11 @@ $this->params['breadcrumbs'][] = 'View';
 
     <!-- menu buttons -->
     <p class='pull-left'>
-		<?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . 'Edit', ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-		<?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']) ?>
+		<?= $model->menu->button('update'); ?>
+		<?= ReligionMenu::btn('create'); ?>
     </p>
     <p class="pull-right">
-		<?= Html::a('<span class="glyphicon glyphicon-list"></span> ' . 'List Religions', ['index'], ['class' => 'btn btn-default']) ?>
+		<?= $model->menu->button('index'); ?>
     </p>
 
     <div class="clearfix"></div>
@@ -42,7 +43,8 @@ $this->params['breadcrumbs'][] = 'View';
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2>
-				<?= $model->name ?>            </h2>
+				<?= $model->name ?>
+			</h2>
         </div>
 
         <div class="panel-body">
@@ -69,15 +71,8 @@ $this->params['breadcrumbs'][] = 'View';
 
 			<hr/>
 
-			<?=
+			<?= $model->menu->button('delete'); ?>
 
-			Html::a('<span class="glyphicon glyphicon-trash"></span> ' . 'Delete', ['delete', 'id' => $model->id], [
-				'class'			 => 'btn btn-danger',
-				'data-confirm'	 => '' . 'Are you sure to delete this item?' . '',
-				'data-method'	 => 'post',
-			]);
-
-			?>
 			<?php $this->endBlock(); ?>
 
 
