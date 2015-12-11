@@ -85,6 +85,24 @@ class ModelMenu extends ModelLink
 
 	}
 
+	/**
+	 * get url param
+	 *
+	 * @return array
+	 */
+	static function url($name = '')
+	{
+		$method = 'urlParam' . Inflector::camelize($name);
+
+		if (method_exists(static::className(), $method))
+		{
+			call_user_func_array(array(static::className(), $method), array($this->control->model));
+		}
+
+		return [];
+
+	}
+
 	/* ================ widget ================ */
 
 	/**
@@ -268,6 +286,8 @@ class ModelMenu extends ModelLink
 		return '';
 
 	}
+
+	/* ================================================================== */
 
 	/**
 	 * using sample in view
