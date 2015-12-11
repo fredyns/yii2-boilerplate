@@ -45,15 +45,16 @@ abstract class ModelLink extends \yii\base\Widget
 	 * @param string $name
 	 * @return string
 	 */
-	static function a($name = '', $model = NULL)
+	static function a($name = '', $label = '', $model = NULL)
 	{
 		$linkParams = static::linkParam($name, $model);
+		$linkLabel = ($label != '') ? $label : $linkParams['label'];
 
 		if ($linkParams)
 		{
 			$linkOptions = ArrayHelper::remove($linkParams, 'linkOptions', []);
 
-			return Html::a($linkParams['label'], $linkParams['url'], $linkOptions);
+			return Html::a($linkLabel, $linkParams['url'], $linkOptions);
 		}
 
 		return NULL;
