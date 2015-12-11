@@ -81,7 +81,7 @@ abstract class ModelLink extends \yii\base\Widget
 	/* ================ links params ================ */
 
 	/**
-	 * index link param
+	 * get link param
 	 *
 	 * @return array
 	 */
@@ -104,12 +104,9 @@ abstract class ModelLink extends \yii\base\Widget
 			'label'			 => Icon::create([
 				'icon'	 => 'list',
 				'class'	 => 'model-action-icon',
-				'text'	 => '<span class="model-action-text">List</span>',
+				'text'	 => 'List',
 			]),
-			'url'			 => [
-				static::actionRoute('index'),
-				'ru' => ReturnUrl::getToken(),
-			],
+			'url'			 => static::urlParamIndex(),
 			'buttonOptions'	 => [
 				'class' => 'btn btn-success',
 			],
@@ -128,12 +125,9 @@ abstract class ModelLink extends \yii\base\Widget
 			'label'			 => Icon::create([
 				'icon'	 => 'plus',
 				'class'	 => 'model-action-icon',
-				'text'	 => '<span class="model-action-text">Create</span>',
+				'text'	 => 'Create',
 			]),
-			'url'			 => [
-				static::actionRoute('create'),
-				'ru' => ReturnUrl::getToken(),
-			],
+			'url'			 => static::urlParamCreate(),
 			'buttonOptions'	 => [
 				'class' => 'btn btn-success',
 			],
@@ -148,19 +142,13 @@ abstract class ModelLink extends \yii\base\Widget
 	 */
 	static function linkParamView($model = NULL)
 	{
-		$primaryKey = $model->primaryKey()[0];
-
 		return [
 			'label'			 => Icon::create([
 				'icon'	 => 'eye-open',
 				'class'	 => 'model-action-icon',
-				'text'	 => '<span class="model-action-text">View</span>',
+				'text'	 => 'View',
 			]),
-			'url'			 => [
-				static::actionRoute('view'),
-				$primaryKey	 => $model->$primaryKey,
-				'ru'		 => ReturnUrl::getToken(),
-			],
+			'url'			 => static::urlParamView($model),
 			'buttonOptions'	 => [
 				'class' => 'btn btn-primary',
 			],
@@ -175,19 +163,13 @@ abstract class ModelLink extends \yii\base\Widget
 	 */
 	static function linkParamUpdate($model = NULL)
 	{
-		$primaryKey = $model->primaryKey()[0];
-
 		return [
 			'label'			 => Icon::create([
 				'icon'	 => 'pencil',
 				'class'	 => 'model-action-icon',
-				'text'	 => '<span class="model-action-text">Update</span>',
+				'text'	 => 'Update',
 			]),
-			'url'			 => [
-				static::actionRoute('update'),
-				$primaryKey	 => $model->$primaryKey,
-				'ru'		 => ReturnUrl::getToken(),
-			],
+			'url'			 => static::urlParamUpdate($model),
 			'buttonOptions'	 => [
 				'class' => 'btn btn-primary',
 			],
@@ -202,19 +184,13 @@ abstract class ModelLink extends \yii\base\Widget
 	 */
 	static function linkParamDelete($model = NULL)
 	{
-		$primaryKey = $model->primaryKey()[0];
-
 		return [
 			'label'			 => Icon::create([
 				'icon'	 => 'trash',
 				'class'	 => 'model-action-icon',
-				'text'	 => '<span class="model-action-text text-danger">Delete</span>',
+				'text'	 => 'Delete',
 			]),
-			'url'			 => [
-				static::actionRoute('delete'),
-				$primaryKey	 => $model->$primaryKey,
-				'ru'		 => ReturnUrl::getToken(),
-			],
+			'url'			 => static::urlParamDelete($model),
 			/* basic link options */
 			'linkOptions'	 => [
 				'data-confirm'	 => 'Are you sure to delete this item?',
@@ -225,6 +201,75 @@ abstract class ModelLink extends \yii\base\Widget
 			'buttonOptions'	 => [
 				'class' => 'btn btn-danger',
 			],
+		];
+
+	}
+
+	/* ================ url params ================ */
+
+	/**
+	 * get url param
+	 *
+	 * @return array
+	 */
+	static function urlParam($name = '', $model = NULL)
+	{
+		$method = 'urlParam' . Inflector::camelize($name);
+
+		return (method_exists(static::className(), $method)) ? call_user_func_array(array(static::className(), $method), array($model)) : [];
+
+	}
+
+	static function urlParamIndex()
+	{
+		return [
+			static::actionRoute('index'),
+			'ru' => ReturnUrl::getToken(),
+		];
+
+	}
+
+	static function urlParamCreate()
+	{
+		return [
+			static::actionRoute('create'),
+			'ru' => ReturnUrl::getToken(),
+		];
+
+	}
+
+	static function urlParamView($model = NULL)
+	{
+		$primaryKey = $model->primaryKey()[0];
+
+		return [
+			static::actionRoute('view'),
+			$primaryKey	 => $model->$primaryKey,
+			'ru'		 => ReturnUrl::getToken(),
+		];
+
+	}
+
+	static function urlParamUpdate($model = NULL)
+	{
+		$primaryKey = $model->primaryKey()[0];
+
+		return [
+			static::actionRoute('update'),
+			$primaryKey	 => $model->$primaryKey,
+			'ru'		 => ReturnUrl::getToken(),
+		];
+
+	}
+
+	static function urlParamDelete($model = NULL)
+	{
+		$primaryKey = $model->primaryKey()[0];
+
+		return [
+			static::actionRoute('delete'),
+			$primaryKey	 => $model->$primaryKey,
+			'ru'		 => ReturnUrl::getToken(),
 		];
 
 	}
