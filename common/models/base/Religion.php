@@ -13,11 +13,9 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $deleted_at
- * @property integer $archived_at
  * @property integer $createdBy_id
  * @property integer $updatedBy_id
  * @property integer $deletedBy_id
- * @property integer $archivedBy_id
  */
 class Religion extends \common\base\Model
 {
