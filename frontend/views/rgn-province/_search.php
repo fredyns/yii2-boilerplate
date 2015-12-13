@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
-use common\models\RgnCountry;
+use frontend\models\RgnCountry;
 
 /**
  * @var yii\web\View $this
@@ -28,7 +28,6 @@ use common\models\RgnCountry;
 
 	<?= $form->field($model, 'abbreviation') ?>
 
-	<?php //= $form->field($model, 'country_id') ?>
 	<?=
 
 		$form

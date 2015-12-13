@@ -1,8 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
-use \dmstr\bootstrap\Tabs;
+use dmstr\bootstrap\Tabs;
 
 /**
  * @var yii\web\View $this
@@ -36,14 +37,15 @@ use \dmstr\bootstrap\Tabs;
 			?>
 
             <div class="">
+
 				<?php $this->beginBlock('main'); ?>
 
                 <p>
-
 					<?= $form->field($model, 'id')->textInput(['readonly' => 'readonly', 'placeholder' => 'auto']) ?>
 					<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 					<?= $form->field($model, 'abbreviation')->textInput(['maxlength' => true]) ?>
                 </p>
+
 				<?php $this->endBlock(); ?>
 
 				<?=
@@ -62,8 +64,11 @@ use \dmstr\bootstrap\Tabs;
 				);
 
 				?>
+
                 <hr/>
+
 				<?php echo $form->errorSummary($model); ?>
+
 				<?=
 
 				Html::submitButton(

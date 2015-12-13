@@ -13,7 +13,7 @@ use frontend\models\menu\RgnCountryMenu;
  * @var frontend\models\RgnCountry $model
  */
 $this->title = 'Region Country ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Region > Countries', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Region Countries', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string) $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'View';
 
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = 'View';
 
         <div class="panel-body">
 
-			<?php $this->beginBlock('common\models\RgnCountry'); ?>
+			<?php $this->beginBlock('frontend\models\RgnCountry'); ?>
 
 			<?=
 
@@ -67,15 +67,8 @@ $this->params['breadcrumbs'][] = 'View';
 
 			<hr/>
 
-			<?=
+			<?= $model->menu->button('delete'); ?>
 
-			Html::a('<span class="glyphicon glyphicon-trash"></span> ' . 'Delete', ['delete', 'id' => $model->id], [
-				'class'			 => 'btn btn-danger',
-				'data-confirm'	 => '' . 'Are you sure to delete this item?' . '',
-				'data-method'	 => 'post',
-			]);
-
-			?>
 			<?php $this->endBlock(); ?>
 
 
@@ -113,32 +106,35 @@ $this->params['breadcrumbs'][] = 'View';
 				],
 				'columns'		 => [
 					[
-						'class'			 => 'yii\grid\ActionColumn',
-						'template'		 => '{view} {update}',
-						'contentOptions' => ['nowrap' => 'nowrap'],
-						'urlCreator'	 => function ($action, $model, $key, $index)
-					{
-						// using the column name as key, not mapping to 'id' like the standard generator
-						$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
-						$params[0] = 'rgn-province' . '/' . $action;
-						return $params;
-					},
-						'buttons'	 => [
+						'class'		 => 'yii\grid\SerialColumn',
+						'options'	 => [
+							'width' => '40px',
 						],
-						'controller' => 'rgn-province'
 					],
-					'id',
-					/* /
-					  [
-					  'attribute'	 => 'status',
-					  'value'		 => function ($model)
-					  {
-					  return common\models\RgnCountry::getStatusValueLabel($model->status);
-					  }
-					  ],
-					  // */
-					'name',
+					//'name',
+					[
+						"class"		 => \yii\grid\DataColumn::className(),
+						"attribute"	 => 'name',
+						"format"	 => "raw",
+						"options"	 => [],
+						"value"		 => function($model)
+					{
+						return $model->menu->anchor('view', $model->name);
+					},
+					],
 					'abbreviation',
+					[
+						"label"		 => 'Action',
+						"class"		 => \yii\grid\DataColumn::className(),
+						"options"	 => [
+							"width" => "120px",
+						],
+						"format"	 => "raw",
+						"value"		 => function($model)
+					{
+						return $model->menu->widgetDropdown();
+					},
+					],
 				]
 			])
 			. '</div>';
@@ -157,7 +153,7 @@ $this->params['breadcrumbs'][] = 'View';
 					'items'			 => [
 						[
 							'label'		 => '<b class=""># ' . $model->id . '</b>',
-							'content'	 => $this->blocks['common\models\RgnCountry'],
+							'content'	 => $this->blocks['frontend\models\RgnCountry'],
 							'active'	 => true,
 						],
 						[

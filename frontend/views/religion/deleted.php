@@ -8,7 +8,7 @@ use frontend\models\menu\ReligionMenu;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var frontend\models\search\Religion $searchModel
+ * @var frontend\models\search\ReligionSearch $searchModel
  */
 $this->title = 'Deleted Religions';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,9 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="giiant-crud religion-deleted">
 
-	<?php //     echo $this->render('_search', ['model' =>$searchModel]);
-
-	?>
+	<?php //     echo $this->render('_search', ['model' =>$searchModel]);	?>
 
     <div class="clearfix">
         <p class="pull-left">

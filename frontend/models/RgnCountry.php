@@ -14,7 +14,7 @@ use frontend\models\menu\RgnCountryMenu;
 class RgnCountry extends \common\models\RgnCountry
 {
 
-	/* ======================== model structure ======================== */
+	/* ======================== structure ======================== */
 
 	public function init()
 	{
@@ -27,6 +27,30 @@ class RgnCountry extends \common\models\RgnCountry
 		$this->menu = new RgnCountryMenu([
 			'control' => $this->control,
 		]);
+
+	}
+
+	/* ======================== relations ======================== */
+
+	/**
+	 * replace with frontend models which include Model Control & Menu
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getRgnPostcodes()
+	{
+		return $this->hasMany(\frontend\models\RgnPostcode::className(), ['country_id' => 'id']);
+
+	}
+
+	/**
+	 * replace with frontend models which include Model Control & Menu
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getRgnProvinces()
+	{
+		return $this->hasMany(\frontend\models\RgnProvince::className(), ['country_id' => 'id']);
 
 	}
 

@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = 'Edit';
 <div class="giiant-crud rgn-country-update">
 
     <p>
-		<?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> ' . 'View', ['view', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-    </p>
+		<?= $model->menu->button('view'); ?>
+	</p>
 
 	<?php
 

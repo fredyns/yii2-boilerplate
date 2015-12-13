@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 use dmstr\bootstrap\Tabs;
+use frontend\models\menu\RgnProvinceMenu;
 
 /**
  * @var yii\web\View $this
@@ -21,12 +22,12 @@ $this->params['breadcrumbs'][] = 'View';
 
     <!-- menu buttons -->
     <p class='pull-left'>
-		<?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . 'Edit', ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-		<?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+		<?= $model->menu->button('update'); ?>
+		<?= RgnProvinceMenu::button('create'); ?>
+	</p>
     <p class="pull-right">
-		<?= Html::a('<span class="glyphicon glyphicon-list"></span> ' . 'List RgnProvinces', ['index'], ['class' => 'btn btn-default']) ?>
-    </p>
+		<?= $model->menu->button('index'); ?>
+	</p>
 
     <div class="clearfix"></div>
 
@@ -50,7 +51,7 @@ $this->params['breadcrumbs'][] = 'View';
 
 
 
-			<?php $this->beginBlock('common\models\RgnProvince'); ?>
+			<?php $this->beginBlock('frontend\models\RgnProvince'); ?>
 
 			<?=
 
@@ -60,7 +61,7 @@ $this->params['breadcrumbs'][] = 'View';
 					'id',
 					[
 						'attribute'	 => 'status',
-						'value'		 => common\models\RgnProvince::getStatusValueLabel($model->status),
+						'value'		 => frontend\models\RgnProvince::getStatusValueLabel($model->status),
 					],
 					'name',
 					'abbreviation',
@@ -77,15 +78,8 @@ $this->params['breadcrumbs'][] = 'View';
 
 			<hr/>
 
-			<?=
+			<?= $model->menu->button('delete'); ?>
 
-			Html::a('<span class="glyphicon glyphicon-trash"></span> ' . 'Delete', ['delete', 'id' => $model->id], [
-				'class'			 => 'btn btn-danger',
-				'data-confirm'	 => '' . 'Are you sure to delete this item?' . '',
-				'data-method'	 => 'post',
-			]);
-
-			?>
 			<?php $this->endBlock(); ?>
 
 
@@ -122,22 +116,25 @@ $this->params['breadcrumbs'][] = 'View';
 				],
 				'columns'		 => [
 					[
-						'class'			 => 'yii\grid\ActionColumn',
-						'template'		 => '{view} {update}',
-						'contentOptions' => ['nowrap' => 'nowrap'],
-						'urlCreator'	 => function ($action, $model, $key, $index)
-					{
-						// using the column name as key, not mapping to 'id' like the standard generator
-						$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
-						$params[0] = 'rgn-city' . '/' . $action;
-						return $params;
-					},
-						'buttons'	 => [],
-						'controller' => 'rgn-city'
+						'class'		 => 'yii\grid\SerialColumn',
+						'options'	 => [
+							'width' => '40px',
+						],
 					],
-					'id',
 					'name',
 					'abbreviation',
+					[
+						"label"		 => 'Action',
+						"class"		 => \yii\grid\DataColumn::className(),
+						"options"	 => [
+							"width" => "120px",
+						],
+						"format"	 => "raw",
+						"value"		 => function($model)
+					{
+						return $model->menu->widgetDropdown();
+					},
+					],
 				]
 			])
 			. '</div>';
@@ -157,7 +154,7 @@ $this->params['breadcrumbs'][] = 'View';
 					'items'			 => [
 						[
 							'label'		 => '<b class=""># ' . $model->id . '</b>',
-							'content'	 => $this->blocks['common\models\RgnProvince'],
+							'content'	 => $this->blocks['frontend\models\RgnProvince'],
 							'active'	 => true,
 						],
 						[

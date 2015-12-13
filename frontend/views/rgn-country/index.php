@@ -8,18 +8,16 @@ use frontend\models\menu\RgnCountryMenu;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var frontend\models\search\RgnCountry $searchModel
+ * @var frontend\models\search\RgnCountrySearch $searchModel
  */
-$this->title = 'Region > Countries';
+$this->title = 'Region Countries';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <div class="giiant-crud rgn-country-index">
 
-	<?php //     echo $this->render('_search', ['model' =>$searchModel]);
-
-	?>
+	<?php //echo $this->render('_search', ['model' =>$searchModel]); ?>
 
     <div class="clearfix">
         <p class="pull-left">
@@ -27,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		</p>
 
         <div class="pull-right">
-			<?= RgnCountryMenu::btn('deleted'); ?>
 
+			<?= RgnCountryMenu::btn('deleted'); ?>
 
 			<?=
 
@@ -101,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							"options"	 => [],
 							"value"		 => function($model)
 						{
-							return Html::a($model->name, ['view', 'id' => $model->id]);
+							return $model->menu->anchor('view', $model->name);
 						},
 						],
 						'abbreviation',

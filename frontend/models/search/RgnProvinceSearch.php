@@ -70,9 +70,13 @@ class RgnProvinceSearch extends RgnProvince
 			'deletedBy_id'	 => $this->deletedBy_id,
 		]);
 
+		if ($this->number)
+		{
+			$query->andFilterWhere(['like', 'number', $this->number . '%', FALSE]);
+		}
+
 		$query
 			->andFilterWhere(['like', 'status', $this->status])
-			->andFilterWhere(['like', 'number', '%' . $this->number, FALSE])
 			->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
 

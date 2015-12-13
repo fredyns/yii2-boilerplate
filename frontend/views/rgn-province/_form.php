@@ -3,7 +3,7 @@
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use \dmstr\bootstrap\Tabs;
+use dmstr\bootstrap\Tabs;
 use kartik\select2\Select2;
 use common\models\RgnCountry;
 

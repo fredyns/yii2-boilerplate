@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+use cornernote\returnurl\ReturnUrl;
 
 /**
  * @var yii\web\View $this
@@ -14,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="giiant-crud rgn-province-create">
 
     <p class="pull-left">
-		<?= Html::a('Cancel', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
+		<?= Html::a('Cancel', ReturnUrl::getUrl(Url::previous()), ['class' => 'btn btn-default']) ?>
     </p>
     <div class="clearfix"></div>
 

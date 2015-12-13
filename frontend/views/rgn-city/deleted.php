@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>
-				<i><?= 'Deleted Region Cities' ?></i>
+				<i><?= $this->title ?></i>
 			</h2>
 		</div>
 
