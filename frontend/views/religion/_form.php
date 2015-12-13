@@ -40,7 +40,7 @@ use \dmstr\bootstrap\Tabs;
 
                 <p>
 
-					<?= $form->field($model, 'id')->textInput(['readonly' => 'readonly']) ?>
+					<?= $form->field($model, 'id')->textInput(['readonly' => 'readonly', 'placeholder' => 'auto']) ?>
 					<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
                 </p>
