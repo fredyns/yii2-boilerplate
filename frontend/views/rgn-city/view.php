@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 use dmstr\bootstrap\Tabs;
+use frontend\models\menu\RgnCityMenu;
 
 /**
  * @var yii\web\View $this
@@ -21,12 +22,12 @@ $this->params['breadcrumbs'][] = 'View';
 
     <!-- menu buttons -->
     <p class='pull-left'>
-		<?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . 'Edit', ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-		<?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+		<?= $model->menu->button('update'); ?>
+		<?= RgnCityMenu::btn('create'); ?>
+	</p>
     <p class="pull-right">
-		<?= Html::a('<span class="glyphicon glyphicon-list"></span> ' . 'List RgnCities', ['index'], ['class' => 'btn btn-default']) ?>
-    </p>
+		<?= $model->menu->button('index'); ?>
+	</p>
 
     <div class="clearfix"></div>
 
@@ -77,20 +78,14 @@ $this->params['breadcrumbs'][] = 'View';
 
 			<hr/>
 
-			<?=
+			<?= $model->menu->button('delete'); ?>
 
-			Html::a('<span class="glyphicon glyphicon-trash"></span> ' . 'Delete', ['delete', 'id' => $model->id], [
-				'class'			 => 'btn btn-danger',
-				'data-confirm'	 => '' . 'Are you sure to delete this item?' . '',
-				'data-method'	 => 'post',
-			]);
-
-			?>
 			<?php $this->endBlock(); ?>
 
 
 
 			<?php $this->beginBlock('RgnDistricts'); ?>
+
 			<div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 					<?=
 
@@ -106,7 +101,11 @@ $this->params['breadcrumbs'][] = 'View';
 					);
 
 					?>
-				</div></div><?php Pjax::begin(['id' => 'pjax-RgnDistricts', 'enableReplaceState' => false, 'linkSelector' => '#pjax-RgnDistricts ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+				</div>
+			</div>
+
+			<?php Pjax::begin(['id' => 'pjax-RgnDistricts', 'enableReplaceState' => false, 'linkSelector' => '#pjax-RgnDistricts ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+
 			<?=
 
 			'<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -166,6 +165,7 @@ $this->params['breadcrumbs'][] = 'View';
 			);
 
 			?>
+
 			<br/><br/>
 
 			<?= common\widgets\Moderation::widget(['model' => $model]); ?>
