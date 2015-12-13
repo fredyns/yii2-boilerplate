@@ -3,6 +3,7 @@
 namespace common\base;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 
 /**
@@ -90,13 +91,15 @@ class ModelMenu extends ModelLink
 	 *
 	 * @return array
 	 */
-	static function url($name = '')
+	static function url($name = '', $config = [])
 	{
 		$method = 'urlParam' . Inflector::camelize($name);
 
 		if (method_exists(static::className(), $method))
 		{
-			call_user_func_array(array(static::className(), $method), array($this->control->model));
+			$url = call_user_func_array(array(static::className(), $method), array($this->control->model));
+
+			return ArrayHelper::merge($url, $config);
 		}
 
 		return [];
