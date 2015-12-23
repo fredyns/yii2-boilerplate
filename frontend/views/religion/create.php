@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p class="pull-left">
 		<?= Html::a('Cancel', ReturnUrl::getUrl(Url::previous()), ['class' => 'btn btn-default']) ?>
     </p>
+
     <div class="clearfix"></div>
 
 	<?=

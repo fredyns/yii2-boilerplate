@@ -6,7 +6,8 @@ use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 use dmstr\bootstrap\Tabs;
-use frontend\models\menu\ReligionMenu;
+use frontend\models\access\ReligionAccess;
+use common\widgets\Moderation;
 
 /**
  * @var yii\web\View $this
@@ -22,11 +23,11 @@ $this->params['breadcrumbs'][] = 'View';
 
     <!-- menu buttons -->
     <p class='pull-left'>
-		<?= $model->menu->button('update'); ?>
-		<?= ReligionMenu::btn('create'); ?>
+		<?= $model->operation->button('update'); ?>
+		<?= ReligionAccess::button('create'); ?>
     </p>
     <p class="pull-right">
-		<?= $model->menu->button('index'); ?>
+		<?= ReligionAccess::button('index'); ?>
     </p>
 
     <div class="clearfix"></div>
@@ -41,15 +42,14 @@ $this->params['breadcrumbs'][] = 'View';
 	<?php endif; ?>
 
     <div class="panel panel-default">
+
         <div class="panel-heading">
             <h2>
 				<?= $model->name ?>
-			</h2>
+            </h2>
         </div>
 
         <div class="panel-body">
-
-
 
 			<?php $this->beginBlock('frontend\models\Religion'); ?>
 
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = 'View';
 					'id',
 					[
 						'attribute'	 => 'status',
-						'value'		 => frontend\models\Religion::getStatusValueLabel($model->status),
+						'value'		 => $model->statusLabel,
 					],
 					'name',
 				],
@@ -71,11 +71,10 @@ $this->params['breadcrumbs'][] = 'View';
 
 			<hr/>
 
-			<?= $model->menu->button('delete'); ?>
+			<?= $model->operation->button('delete'); ?>
+			<?= $model->operation->button('restore'); ?>
 
 			<?php $this->endBlock(); ?>
-
-
 
 			<?=
 
@@ -83,20 +82,22 @@ $this->params['breadcrumbs'][] = 'View';
 				[
 					'id'			 => 'relation-tabs',
 					'encodeLabels'	 => false,
-					'items'			 => [ [
+					'items'			 => [
+						[
 							'label'		 => '<b class=""># ' . $model->id . '</b>',
 							'content'	 => $this->blocks['frontend\models\Religion'],
 							'active'	 => true,
-						],]
+						],
+					],
 				]
 			);
 
 			?>
 
-			<br/><br/>
-
-			<?= \common\widgets\Moderation::widget(['model' => $model]); ?>
-
         </div>
     </div>
+
+	<br/>
+	<?= Moderation::widget(['model' => $model]); ?>
+
 </div>

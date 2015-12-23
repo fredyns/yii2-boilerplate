@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = 'Edit';
 <div class="giiant-crud religion-update">
 
     <p>
-		<?= $model->menu->button('view'); ?>
-	</p>
+		<?= $model->operation->button('view'); ?>
+    </p>
 
 	<?php
 

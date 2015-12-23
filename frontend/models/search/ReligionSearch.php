@@ -19,7 +19,8 @@ class ReligionSearch extends Religion
 	public function rules()
 	{
 		return [
-			[['id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
+			//[['id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
+			[['id'], 'integer'],
 			[['status', 'name'], 'safe'],
 		];
 
@@ -59,15 +60,14 @@ class ReligionSearch extends Religion
 			return $dataProvider;
 		}
 
-		$query
-			->andFilterWhere([
-				'id'			 => $this->id,
-				'created_at'	 => $this->created_at,
-				'updated_at'	 => $this->updated_at,
-				'deleted_at'	 => $this->deleted_at,
-				'createdBy_id'	 => $this->createdBy_id,
-				'updatedBy_id'	 => $this->updatedBy_id,
-				'deletedBy_id'	 => $this->deletedBy_id,
+		$query->andFilterWhere([
+			'id' => $this->id,
+			//'created_at'	 => $this->created_at,
+			//'updated_at'	 => $this->updated_at,
+			//'deleted_at'	 => $this->deleted_at,
+			//'createdBy_id'	 => $this->createdBy_id,
+			//'updatedBy_id'	 => $this->updatedBy_id,
+			//'deletedBy_id'	 => $this->deletedBy_id,
 		]);
 
 		$query
@@ -78,33 +78,17 @@ class ReligionSearch extends Religion
 
 	}
 
-	/**
-	 * Creates data provider instance for active Religion with search query applied
-	 *
-	 * @param array $params
-	 *
-	 * @return ActiveDataProvider
-	 */
-	public function searchActive($params)
+	public function searchIndex($params)
 	{
-		$scope = $this->formName();
-		$params[$scope]['status'] = Religion::STATUS_ACTIVE;
+		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
 
 		return $this->search($params);
 
 	}
 
-	/**
-	 * Creates data provider instance for active Religion with search query applied
-	 *
-	 * @param array $params
-	 *
-	 * @return ActiveDataProvider
-	 */
 	public function searchDeleted($params)
 	{
-		$scope = $this->formName();
-		$params[$scope]['status'] = Religion::STATUS_DELETED;
+		$params[$this->formName()]['status'] = static::STATUS_DELETED;
 
 		return $this->search($params);
 

@@ -4,59 +4,54 @@ namespace common\models;
 
 use Yii;
 use common\models\base\Religion as BaseReligion;
-use common\models\control\ReligionControl;
-use common\models\menu\ReligionMenu;
 
 /**
  * This is the model class for table "religion".
  *
- * @property ReligionControl $control
- * @property ReligionMenu $menu
+ * @property string $statusLabel
  */
 class Religion extends BaseReligion
 {
 
-	/* ======================== model structure ======================== */
-
-	public function init()
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
 	{
-		parent::init();
-
-		$this->control = new ReligionControl([
-			'model' => $this
-		]);
-
-		$this->menu = new ReligionMenu([
-			'control' => $this->control,
-		]);
+		return [
+			'id'			 => 'ID',
+			'status'		 => 'Status',
+			'statusLabel'	 => 'Status',
+			'name'			 => 'Name',
+			'created_at'	 => 'Created At',
+			'updated_at'	 => 'Updated At',
+			'deleted_at'	 => 'Deleted At',
+			'createdBy_id'	 => 'Created By',
+			'updatedBy_id'	 => 'Updated By',
+			'deletedBy_id'	 => 'Deleted By',
+		];
 
 	}
 
-	/* ======================== model operation ======================== */
+	public function getStatusLabel()
+	{
+		return parent::getStatusValueLabel($this->status);
+
+	}
 
 	public function delete()
 	{
-		$this->status = self::STATUS_DELETED;
-		$this->deleted_at = time();
-		$this->deletedBy_id = Yii::$app->user->getId();
+		$this->status = static::STATUS_ACTIVE;
 
-		/*
-		 * save only deletion attribute
-		 */
-		return $this->update(FALSE, ['status', 'deleted_at', 'deletedBy_id']);
+		return parent::softDelete();
 
 	}
 
 	public function restore()
 	{
-		$this->status = self::STATUS_ACTIVE;
-		$this->deleted_at = NULL;
-		$this->deletedBy_id = NULL;
+		$this->status = static::STATUS_ACTIVE;
 
-		/*
-		 * save all attribute, include update moderation
-		 */
-		return $this->update(FALSE);
+		return parent::restore();
 
 	}
 

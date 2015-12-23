@@ -46,15 +46,13 @@ class Religion extends \common\base\Model
 		return [
 			[['status'], 'string'],
 			[['name'], 'required'],
+			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			[['name'], 'string', 'max' => 64],
-			[
-				'status',
-				'in',
-				'range' => [
+			['status', 'in', 'range' => [
 					self::STATUS_ACTIVE,
 					self::STATUS_DELETED,
-				],
-			],
+				]
+			]
 		];
 
 	}
@@ -71,9 +69,9 @@ class Religion extends \common\base\Model
 			'created_at'	 => 'Created At',
 			'updated_at'	 => 'Updated At',
 			'deleted_at'	 => 'Deleted At',
-			'createdBy_id'	 => 'Created By',
-			'updatedBy_id'	 => 'Updated By',
-			'deletedBy_id'	 => 'Deleted By',
+			'createdBy_id'	 => 'Created By ID',
+			'updatedBy_id'	 => 'Updated By ID',
+			'deletedBy_id'	 => 'Deleted By ID',
 		];
 
 	}

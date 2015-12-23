@@ -24,13 +24,13 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?php // = $form->field($model, 'status') ?>
+	<?= $form->field($model, 'status') ?>
 
 	<?= $form->field($model, 'name') ?>
 
-	<?php // = $form->field($model, 'created_at')  ?>
+	<?php // echo $form->field($model, 'created_at') ?>
 
-	<?php // = $form->field($model, 'updated_at')  ?>
+	<?php // echo $form->field($model, 'updated_at') ?>
 
 	<?php // echo $form->field($model, 'deleted_at')  ?>
 

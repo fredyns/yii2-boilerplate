@@ -40,9 +40,15 @@ use \dmstr\bootstrap\Tabs;
 
                 <p>
 
-					<?= $form->field($model, 'id')->textInput(['readonly' => 'readonly', 'placeholder' => 'auto']) ?>
-					<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+					<?= $form->field($model, 'id')->textInput(['disabled' => 'disabled', 'placeholder' => 'autonumber']) ?>
+					<?=
 
+					$form->field($model, 'status')->dropDownList(
+						frontend\models\Religion::optsstatus()
+					);
+
+					?>
+					<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                 </p>
 				<?php $this->endBlock(); ?>
 
@@ -51,11 +57,13 @@ use \dmstr\bootstrap\Tabs;
 				Tabs::widget(
 					[
 						'encodeLabels'	 => false,
-						'items'			 => [ [
+						'items'			 => [
+							[
 								'label'		 => 'Religion',
 								'content'	 => $this->blocks['main'],
 								'active'	 => true,
-							],]
+							],
+						],
 					]
 				);
 
