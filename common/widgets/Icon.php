@@ -21,6 +21,11 @@ class Icon
 
 	static function create($params = [])
 	{
+		if (is_scalar($params))
+		{
+			return static::iGlyph($params);
+		}
+
 		$tag = ArrayHelper::remove($params, 'tag', 'i');
 		$type = ArrayHelper::remove($params, 'type', 'glyph');
 		$icon = ArrayHelper::remove($params, 'icon');

@@ -21,18 +21,11 @@ class Model extends \yii\db\ActiveRecord
 {
 
 	/**
-	 * Contain access and action control for model
+	 * Contain model operation control & link
 	 *
-	 * @var BaseModelControl
+	 * @var ModelOperation
 	 */
-	public $control;
-
-	/**
-	 * Contain all menu for model
-	 *
-	 * @var BaseModelMenu
-	 */
-	public $menu;
+	public $operation;
 
 	/* ======================== model structure ======================== */
 
@@ -40,12 +33,8 @@ class Model extends \yii\db\ActiveRecord
 	{
 		parent::init();
 
-		$this->control = new ModelControl([
+		$this->operation = new ModelOperation([
 			'model' => $this
-		]);
-
-		$this->menu = new ModelMenu([
-			'control' => $this->control,
 		]);
 
 	}
@@ -77,19 +66,6 @@ class Model extends \yii\db\ActiveRecord
 
 			$this->$targetAttribute = ArrayHelper::getValue($source, $sourceAttribute);
 		}
-
-	}
-
-	/*
-	 * create new model
-	 */
-
-	static function create(Array $params = [])
-	{
-		$runValidation = ArrayHelper::remove($params, '$runValidation', FALSE);
-		$model = new static($params);
-
-		return ($model->save($runValidation)) ? $model : NULL;
 
 	}
 
