@@ -201,7 +201,7 @@ class Model extends \yii\db\ActiveRecord
 			return $this->hasOne(User::className(), ['id' => $attribute]);
 		}
 
-		return new User();
+		return NULL;
 
 	}
 
