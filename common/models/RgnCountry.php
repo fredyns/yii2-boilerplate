@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-use \common\models\base\RgnCountry as BaseRgnCountry;
+use common\models\base\RgnCountry as BaseRgnCountry;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "rgn_country".
@@ -12,6 +13,43 @@ use \common\models\base\RgnCountry as BaseRgnCountry;
  */
 class RgnCountry extends BaseRgnCountry
 {
+
+	/*
+	 * Preparing option data for forms
+	 */
+
+	static function asOption()
+	{
+		$query = static::find()->all();
+
+		return ArrayHelper::map($query, 'id', 'name');
+
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			/* default value */
+			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			/* required */
+			[['name'], 'required'],
+			/* field type */
+			[['status'], 'string'],
+			[['name'], 'string', 'max' => 255],
+			[['abbreviation'], 'string', 'max' => 32],
+			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
+			/* value limitation */
+			['status', 'in', 'range' => [
+					self::STATUS_ACTIVE,
+					self::STATUS_DELETED,
+				]
+			],
+		];
+
+	}
 
 	/**
 	 * @inheritdoc
