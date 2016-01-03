@@ -11,11 +11,11 @@ use frontend\models\operation\RgnCityOperation;
  *
  * @author fredy
  *
- * @property frontend\models\RgnCountry $country
- * @property frontend\models\RgnProvince $province
+ * @property \frontend\models\RgnCountry $country
+ * @property \frontend\models\RgnProvince $province
  *
- * @property frontend\models\RgnDistrict[] $rgnDistricts
- * @property frontend\models\RgnPostcode[] $rgnPostcodes
+ * @property \frontend\models\RgnDistrict[] $rgnDistricts
+ * @property \frontend\models\RgnPostcode[] $rgnPostcodes
  */
 class RgnCity extends BaseCity
 {
@@ -35,7 +35,7 @@ class RgnCity extends BaseCity
 	 */
 	public function getProvince()
 	{
-		return $this->hasOne(frontend\models\RgnProvince::className(), ['id' => 'province_id']);
+		return $this->hasOne(\frontend\models\RgnProvince::className(), ['id' => 'province_id']);
 
 	}
 
@@ -44,7 +44,7 @@ class RgnCity extends BaseCity
 	 */
 	public function getRgnDistricts()
 	{
-		return $this->hasMany(frontend\models\RgnDistrict::className(), ['city_id' => 'id']);
+		return $this->hasMany(\frontend\models\RgnDistrict::className(), ['city_id' => 'id']);
 
 	}
 
@@ -53,7 +53,7 @@ class RgnCity extends BaseCity
 	 */
 	public function getRgnPostcodes()
 	{
-		return $this->hasMany(frontend\models\RgnPostcode::className(), ['city_id' => 'id']);
+		return $this->hasMany(\frontend\models\RgnPostcode::className(), ['city_id' => 'id']);
 
 	}
 

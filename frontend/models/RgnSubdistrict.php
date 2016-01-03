@@ -11,12 +11,12 @@ use frontend\models\operation\RgnSubdistrictOperation;
  *
  * @author fredy
  *
- * @property frontend\models\RgnCountry $country
- * @property frontend\models\RgnProvince $province
- * @property frontend\models\RgnCity $city
- * @property frontend\models\RgnDistrict $district
+ * @property \frontend\models\RgnCountry $country
+ * @property \frontend\models\RgnProvince $province
+ * @property \frontend\models\RgnCity $city
+ * @property \frontend\models\RgnDistrict $district
  *
- * @property frontend\models\RgnPostcode[] $rgnPostcodes
+ * @property \frontend\models\RgnPostcode[] $rgnPostcodes
  */
 class RgnSubdistrict extends BaseSubdistrict
 {

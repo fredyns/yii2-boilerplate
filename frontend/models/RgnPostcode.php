@@ -11,11 +11,11 @@ use frontend\models\operation\RgnPostcodeOperation;
  *
  * @author fredy
  *
- * @property frontend\models\RgnCountry $country
- * @property frontend\models\RgnProvince $province
- * @property frontend\models\RgnCity $city
- * @property frontend\models\RgnDistrict $district
- * @property frontend\models\RgnSubdistrict $subdistrict
+ * @property \frontend\models\RgnCountry $country
+ * @property \frontend\models\RgnProvince $province
+ * @property \frontend\models\RgnCity $city
+ * @property \frontend\models\RgnDistrict $district
+ * @property \frontend\models\RgnSubdistrict $subdistrict
  */
 class RgnPostcode extends BasePostcode
 {
@@ -35,7 +35,7 @@ class RgnPostcode extends BasePostcode
 	 */
 	public function getCity()
 	{
-		return $this->hasOne(frontend\models\RgnCity::className(), ['id' => 'city_id']);
+		return $this->hasOne(\frontend\models\RgnCity::className(), ['id' => 'city_id']);
 
 	}
 
@@ -44,7 +44,7 @@ class RgnPostcode extends BasePostcode
 	 */
 	public function getCountry()
 	{
-		return $this->hasOne(frontend\models\RgnCountry::className(), ['id' => 'country_id']);
+		return $this->hasOne(\frontend\models\RgnCountry::className(), ['id' => 'country_id']);
 
 	}
 
@@ -53,7 +53,7 @@ class RgnPostcode extends BasePostcode
 	 */
 	public function getDistrict()
 	{
-		return $this->hasOne(frontend\models\RgnDistrict::className(), ['id' => 'district_id']);
+		return $this->hasOne(\frontend\models\RgnDistrict::className(), ['id' => 'district_id']);
 
 	}
 
@@ -62,7 +62,7 @@ class RgnPostcode extends BasePostcode
 	 */
 	public function getProvince()
 	{
-		return $this->hasOne(frontend\models\RgnProvince::className(), ['id' => 'province_id']);
+		return $this->hasOne(\frontend\models\RgnProvince::className(), ['id' => 'province_id']);
 
 	}
 
@@ -71,7 +71,7 @@ class RgnPostcode extends BasePostcode
 	 */
 	public function getSubdistrict()
 	{
-		return $this->hasOne(frontend\models\RgnSubdistrict::className(), ['id' => 'subdistrict_id']);
+		return $this->hasOne(\frontend\models\RgnSubdistrict::className(), ['id' => 'subdistrict_id']);
 
 	}
 

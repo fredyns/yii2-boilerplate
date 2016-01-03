@@ -11,12 +11,12 @@ use frontend\models\operation\RgnDistrictOperation;
  *
  * @author fredy
  *
- * @property frontend\models\RgnCountry $country
- * @property frontend\models\RgnProvince $province
- * @property frontend\models\RgnCity $city
+ * @property \frontend\models\RgnCountry $country
+ * @property \frontend\models\RgnProvince $province
+ * @property \frontend\models\RgnCity $city
  * 
- * @property frontend\models\RgnPostcode[] $rgnPostcodes
- * @property frontend\models\RgnSubdistrict[] $rgnSubdistricts
+ * @property \frontend\models\RgnPostcode[] $rgnPostcodes
+ * @property \frontend\models\RgnSubdistrict[] $rgnSubdistricts
  */
 class RgnDistrict extends BaseDistrict
 {
@@ -36,7 +36,7 @@ class RgnDistrict extends BaseDistrict
 	 */
 	public function getCity()
 	{
-		return $this->hasOne(frontend\models\RgnCity::className(), ['id' => 'city_id']);
+		return $this->hasOne(\frontend\models\RgnCity::className(), ['id' => 'city_id']);
 
 	}
 
@@ -45,7 +45,7 @@ class RgnDistrict extends BaseDistrict
 	 */
 	public function getRgnPostcodes()
 	{
-		return $this->hasMany(frontend\models\RgnPostcode::className(), ['district_id' => 'id']);
+		return $this->hasMany(\frontend\models\RgnPostcode::className(), ['district_id' => 'id']);
 
 	}
 
@@ -54,7 +54,7 @@ class RgnDistrict extends BaseDistrict
 	 */
 	public function getRgnSubdistricts()
 	{
-		return $this->hasMany(frontend\models\RgnSubdistrict::className(), ['district_id' => 'id']);
+		return $this->hasMany(\frontend\models\RgnSubdistrict::className(), ['district_id' => 'id']);
 
 	}
 

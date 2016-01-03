@@ -11,8 +11,8 @@ use frontend\models\operation\RgnCountryOperation;
  *
  * @author fredy
  *
- * @property frontend\models\RgnPostcode[] $rgnPostcodes
- * @property frontend\models\RgnProvince[] $rgnProvinces
+ * @property \frontend\models\RgnPostcode[] $rgnPostcodes
+ * @property \frontend\models\RgnProvince[] $rgnProvinces
  */
 class RgnCountry extends BaseCountry
 {
@@ -32,7 +32,7 @@ class RgnCountry extends BaseCountry
 	 */
 	public function getRgnPostcodes()
 	{
-		return $this->hasMany(frontend\models\RgnPostcode::className(), ['country_id' => 'id']);
+		return $this->hasMany(\frontend\models\RgnPostcode::className(), ['country_id' => 'id']);
 
 	}
 
@@ -41,7 +41,7 @@ class RgnCountry extends BaseCountry
 	 */
 	public function getRgnProvinces()
 	{
-		return $this->hasMany(frontend\models\RgnProvince::className(), ['country_id' => 'id']);
+		return $this->hasMany(\frontend\models\RgnProvince::className(), ['country_id' => 'id']);
 
 	}
 
