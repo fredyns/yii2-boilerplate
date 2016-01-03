@@ -12,12 +12,12 @@ use common\widgets\Moderation;
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var frontend\models\search\ReligionSearch $searchModel
  */
-$this->title = 'Religions';
+$this->title = 'Deleted Religions';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="giiant-crud religion-index">
+<div class="giiant-crud religion-deleted">
 
 	<?php //     echo $this->render('_search', ['model' =>$searchModel]);   ?>
 
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="pull-right">
 
-			<?= ReligionAccess::button('deleted'); ?>
+			<?= ReligionAccess::button('index'); ?>
 
 		</div>
     </div>

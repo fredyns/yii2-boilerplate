@@ -5,7 +5,6 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use frontend\models\Religion;
 use frontend\models\access\ReligionAccess;
-use common\widgets\Moderation;
 
 /**
  * @var yii\web\View $this
