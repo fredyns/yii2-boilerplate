@@ -3,6 +3,7 @@
 namespace frontend\models\operation;
 
 use Yii;
+use yii\helpers\Html;
 use common\base\ModelOperation;
 use frontend\models\RgnPostcode;
 use cornernote\returnurl\ReturnUrl;
@@ -102,6 +103,19 @@ class RgnPostcodeOperation extends ModelOperation
 				'class' => 'btn btn-primary',
 			],
 		];
+
+	}
+
+	public function getLinkView($label = '', $linkOptions = ['title' => 'view detail'])
+	{
+		if ($label === '')
+		{
+			$label = $this->model->postcode;
+		}
+
+		$url = $this->url('view');
+
+		return Html::a($label, $url, $linkOptions);
 
 	}
 

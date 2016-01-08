@@ -8,16 +8,16 @@ use cornernote\returnurl\ReturnUrl;
 use common\widgets\Icon;
 
 /**
- * Description of RgnCity
+ * Description of RgnProvince
  *
  * @author fredy
  */
-class RgnCityAccess extends ModelAccess
+class RgnProvinceAccess extends ModelAccess
 {
 
 	static function controllerRoute()
 	{
-		return 'rgn-city';
+		return 'rgn-province';
 
 	}
 

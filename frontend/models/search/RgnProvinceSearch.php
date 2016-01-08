@@ -5,12 +5,12 @@ namespace frontend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Religion;
+use frontend\models\RgnProvince;
 
 /**
- * ReligionSearch represents the model behind the search form about `frontend\models\Religion`.
+ * RgnProvinceSearch represents the model behind the search form about `frontend\models\RgnProvince`.
  */
-class ReligionSearch extends Religion
+class RgnProvinceSearch extends RgnProvince
 {
 
 	/**
@@ -19,9 +19,9 @@ class ReligionSearch extends Religion
 	public function rules()
 	{
 		return [
-			//[['id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
-			[['id'], 'integer'],
-			[['status', 'name'], 'safe'],
+			//[['id', 'country_id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
+			[['id', 'country_id'], 'integer'],
+			[['status', 'number', 'name', 'abbreviation'], 'safe'],
 		];
 
 	}
@@ -45,7 +45,7 @@ class ReligionSearch extends Religion
 	 */
 	public function search($params)
 	{
-		$query = Religion::find();
+		$query = RgnProvince::find();
 
 		$dataProvider = new ActiveDataProvider([
 			'query'		 => $query,
@@ -64,7 +64,8 @@ class ReligionSearch extends Religion
 		}
 
 		$query->andFilterWhere([
-			'id' => $this->id,
+			'id'		 => $this->id,
+			'country_id' => $this->country_id,
 			//'created_at'	 => $this->created_at,
 			//'updated_at'	 => $this->updated_at,
 			//'deleted_at'	 => $this->deleted_at,
@@ -75,7 +76,9 @@ class ReligionSearch extends Religion
 
 		$query
 			->andFilterWhere(['like', 'status', $this->status])
-			->andFilterWhere(['like', 'name', $this->name]);
+			->andFilterWhere(['like', 'number', $this->number])
+			->andFilterWhere(['like', 'name', $this->name])
+			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
 
 		return $dataProvider;
 

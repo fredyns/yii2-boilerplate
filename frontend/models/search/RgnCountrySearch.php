@@ -48,7 +48,10 @@ class RgnCountrySearch extends RgnCountry
 		$query = RgnCountry::find();
 
 		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
+			'query'		 => $query,
+			'pagination' => [
+				'pageSize' => 50,
+			],
 		]);
 
 		$this->load($params);
