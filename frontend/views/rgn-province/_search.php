@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use frontend\models\search\RgnProvinceSearch;
 
 /**
  * @var yii\web\View $this
@@ -24,7 +25,7 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status') ?>
+	<?= $form->field($model, 'status')->dropDownList(RgnProvinceSearch::optsstatus()); ?>
 
 	<?= $form->field($model, 'number') ?>
 
@@ -34,17 +35,27 @@ use yii\widgets\ActiveForm;
 
 	<?=
 
-	$form->field($model, 'country_id')->dropDownList(
-		\frontend\models\RgnCountry::asOption(), ['prompt' => 'Select']
-	);
+		$form
+		->field($model, 'country_id')
+		->widget(Select2::classname(), [
+			'data'			 => RgnCountry::asOption(),
+			'pluginOptions'	 =>
+			[
+				'placeholder'		 => 'Select or type Country',
+				'multiple'			 => FALSE,
+				'allowClear'		 => TRUE,
+				'tags'				 => TRUE,
+				'maximumInputLength' => 255, /* country name maxlength */
+			],
+	]);
 
 	?>
 
 	<div class="form-group">
 		<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-		<?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+<?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
 	</div>
 
-	<?php ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 
 </div>

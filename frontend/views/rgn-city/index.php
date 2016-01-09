@@ -3,31 +3,31 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
-use frontend\models\RgnCountry;
-use frontend\models\access\RgnCountryAccess;
+use frontend\models\RgnCity;
+use frontend\models\access\RgnCityAccess;
 
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var frontend\models\search\RgnCountrySearch $searchModel
+ * @var frontend\models\search\RgnCitySearch $searchModel
  */
-$this->title = 'Region Countries';
+$this->title = 'Region Cities';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="giiant-crud rgn-country-index">
+<div class="giiant-crud rgn-city-index">
 
-	<?php //     echo $this->render('_search', ['model' =>$searchModel]);	?>
+	<?php //     echo $this->render('_search', ['model' =>$searchModel]);    ?>
 
     <div class="clearfix">
 
         <p class="pull-left">
-			<?= RgnCountryAccess::button('create'); ?>
+			<?= RgnCityAccess::button('create'); ?>
 		</p>
 
         <div class="pull-right">
-			<?= RgnCountryAccess::button('deleted'); ?>
+			<?= RgnCityAccess::button('deleted'); ?>
 		</div>
 
     </div>
@@ -62,6 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						[
 							'class' => 'yii\grid\SerialColumn',
 						],
+						'number',
 						[
 							"attribute"	 => "name",
 							"format"	 => "raw",
@@ -73,13 +74,27 @@ $this->params['breadcrumbs'][] = $this->title;
 						],
 						'abbreviation',
 						[
-							"label"		 => 'Action',
+							'attribute'	 => 'province_id',
+							"format"	 => "raw",
+							"options"	 => [],
+							'value'		 => function ($model)
+						{
+							if ($province = $model->getProvince()->one())
+							{
+								return $province->operation->linkView;
+							}
+
+							return '';
+						},
+						],
+						[
 							"class"		 => \yii\grid\DataColumn::className(),
+							"label"		 => 'Action',
 							"options"	 => [
 								"width" => "120px",
 							],
 							"format"	 => "raw",
-							"value"		 => function(RgnCountry $model)
+							"value"		 => function($model)
 						{
 							return $model->operation->widgetDropdown();
 						},

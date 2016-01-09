@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
-use frontend\models\RgnProvince;
-use frontend\models\access\RgnProvinceAccess;
-use frontend\models\form\RgnProvinceForm;
-use frontend\models\search\RgnProvinceSearch;
+use frontend\models\RgnCity;
+use frontend\models\access\RgnCityAccess;
+use frontend\models\form\RgnCityForm;
+use frontend\models\search\RgnCitySearch;
 use common\base\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -14,9 +14,9 @@ use dmstr\bootstrap\Tabs;
 use cornernote\returnurl\ReturnUrl;
 
 /**
- * RgnProvinceController implements the CRUD actions for RgnProvince model.
+ * RgnCityController implements the CRUD actions for RgnCity model.
  */
-class RgnProvinceController extends Controller
+class RgnCityController extends Controller
 {
 
 	/**
@@ -26,17 +26,17 @@ class RgnProvinceController extends Controller
 	public $enableCsrfValidation = false;
 
 	/**
-	 * Lists all active RgnProvince models.
+	 * Lists all RgnCity models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		if (RgnProvinceAccess::allowIndex() == FALSE)
+		if (RgnCityAccess::allowIndex() == FALSE)
 		{
-			throw RgnProvinceAccess::exception('index');
+			throw RgnCityAccess::exception('index');
 		}
 
-		$searchModel = new RgnProvinceSearch;
+		$searchModel = new RgnCitySearch;
 		$dataProvider = $searchModel->searchIndex($_GET);
 
 		Tabs::clearLocalStorage();
@@ -52,17 +52,17 @@ class RgnProvinceController extends Controller
 	}
 
 	/**
-	 * Lists all deleted RgnProvince models.
+	 * Lists all deleted RgnCity models.
 	 * @return mixed
 	 */
 	public function actionDeleted()
 	{
-		if (RgnProvinceAccess::allowDeleted() == FALSE)
+		if (RgnCityAccess::allowDeleted() == FALSE)
 		{
-			throw RgnProvinceAccess::exception('deleted');
+			throw RgnCityAccess::exception('deleted');
 		}
 
-		$searchModel = new RgnProvinceSearch;
+		$searchModel = new RgnCitySearch;
 		$dataProvider = $searchModel->searchDeleted($_GET);
 
 		Tabs::clearLocalStorage();
@@ -70,7 +70,7 @@ class RgnProvinceController extends Controller
 		Url::remember();
 		\Yii::$app->session['__crudReturnUrl'] = null;
 
-		return $this->render('index', [
+		return $this->render('deleted', [
 				'dataProvider'	 => $dataProvider,
 				'searchModel'	 => $searchModel,
 		]);
@@ -78,7 +78,7 @@ class RgnProvinceController extends Controller
 	}
 
 	/**
-	 * Displays a single RgnProvince model.
+	 * Displays a single RgnCity model.
 	 * @param integer $id
 	 *
 	 * @return mixed
@@ -103,18 +103,18 @@ class RgnProvinceController extends Controller
 	}
 
 	/**
-	 * Creates a new RgnProvince model.
+	 * Creates a new RgnCity model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
-		if (RgnProvinceAccess::allowCreate() == FALSE)
+		if (RgnCityAccess::allowCreate() == FALSE)
 		{
-			throw RgnProvinceAccess::exception('create');
+			throw RgnCityAccess::exception('create');
 		}
 
-		$model = new RgnProvinceForm();
+		$model = new RgnCityForm();
 
 		try
 		{
@@ -137,7 +137,7 @@ class RgnProvinceController extends Controller
 	}
 
 	/**
-	 * Updates an existing RgnProvince model.
+	 * Updates an existing RgnCity model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -165,7 +165,7 @@ class RgnProvinceController extends Controller
 	}
 
 	/**
-	 * Deletes an existing RgnProvince model.
+	 * Deletes an existing RgnCity model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -217,15 +217,15 @@ class RgnProvinceController extends Controller
 	}
 
 	/**
-	 * Finds the RgnProvince model based on its primary key value.
+	 * Finds the RgnCity model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return RgnProvince the loaded model
+	 * @return RgnCity the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = RgnProvince::findOne($id)) !== null)
+		if (($model = RgnCity::findOne($id)) !== null)
 		{
 			return $model;
 		}
@@ -237,15 +237,15 @@ class RgnProvinceController extends Controller
 	}
 
 	/**
-	 * Finds the RgnProvince model based on its primary key value for form purpose.
+	 * Finds the RgnCity model based on its primary key value for form.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return RgnProvince the loaded model
+	 * @return RgnCity the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
 	protected function findForm($id)
 	{
-		if (($model = RgnProvinceForm::findOne($id)) !== null)
+		if (($model = RgnCityForm::findOne($id)) !== null)
 		{
 			return $model;
 		}
@@ -253,27 +253,6 @@ class RgnProvinceController extends Controller
 		{
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
-
-	}
-
-	/**
-	 * Provide data for Depdrop options
-	 * @param type $selected
-	 *
-	 * @return mixed
-	 */
-	public function actionDepdropOptions($selected = 0)
-	{
-		echo \common\helpers\DepdropHelper::getOptionData([
-			'modelClass' => RgnProvince::className(),
-			'parents'	 => [
-				'country_id' => function($value)
-				{
-					return ($value > 0) ? $value : "";
-				},
-			],
-			'selected' => $selected,
-		]);
 
 	}
 

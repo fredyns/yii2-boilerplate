@@ -11,30 +11,29 @@ use frontend\models\RgnProvince;
 use frontend\models\RgnCity;
 use frontend\models\RgnDistrict;
 use frontend\models\RgnSubdistrict;
-use frontend\models\RgnPostcode;
-use frontend\models\access\RgnCountryAccess;
-use frontend\models\access\RgnProvinceAccess;
+use frontend\models\access\RgnCityAccess;
+use frontend\models\access\RgnDistrictAccess;
 use frontend\models\access\RgnPostcodeAccess;
 
 /**
  * @var yii\web\View $this
- * @var frontend\models\RgnCountry $model
+ * @var frontend\models\RgnCity $model
  */
-$this->title = 'Region Country ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Region Countries', 'url' => ['index']];
+$this->title = 'Region City ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Region Cities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string) $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'View';
 
 ?>
-<div class="giiant-crud rgn-country-view">
+<div class="giiant-crud rgn-city-view">
 
     <!-- menu buttons -->
     <p class='pull-left'>
 		<?= $model->operation->button('update'); ?>
-		<?= RgnCountryAccess::button('create'); ?>
+		<?= RgnCityAccess::button('create'); ?>
     </p>
     <p class="pull-right">
-		<?= RgnCountryAccess::button('index'); ?>
+		<?= RgnCityAccess::button('index'); ?>
     </p>
 
     <div class="clearfix"></div>
@@ -57,7 +56,7 @@ $this->params['breadcrumbs'][] = 'View';
 
         <div class="panel-body">
 
-			<?php $this->beginBlock('frontend\models\RgnCountry'); ?>
+			<?php $this->beginBlock('frontend\models\RgnCity'); ?>
 
 			<?=
 
@@ -69,8 +68,19 @@ $this->params['breadcrumbs'][] = 'View';
 						'attribute'	 => 'status',
 						'value'		 => $model->statusLabel,
 					],
+					'number',
 					'name',
 					'abbreviation',
+					[
+						'format'	 => 'html',
+						'attribute'	 => 'province_id',
+						'value'		 => ($model->getProvince()->one() ? $model->getProvince()->one()->operation->linkView : '<span class="label label-warning">?</span>'),
+					],
+					[
+						'format'	 => 'html',
+						'attribute'	 => 'country_id',
+						'value'		 => ($model->getCountry()->one() ? $model->getCountry()->one()->operation->linkView : '<span class="label label-warning">?</span>'),
+					],
 				],
 			]);
 
@@ -85,19 +95,75 @@ $this->params['breadcrumbs'][] = 'View';
 
 
 
+			<?php $this->beginBlock('RgnDistricts'); ?>
+			<div style='position: relative'>
+				<div style='position:absolute; right: 0px; top: 0px;'>
+
+					<?= RgnDistrictAccess::button('index', ['label' => 'All Districts', 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
+
+					<?= RgnDistrictAccess::button('create', ['label' => 'New District', 'urlOptions' => [ 'RgnDistrict' => ['city_id' => $model->id]], 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
+
+				</div>
+			</div>
+			<?php Pjax::begin(['id' => 'pjax-RgnDistricts', 'enableReplaceState' => false, 'linkSelector' => '#pjax-RgnDistricts ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+			<?=
+
+			'<div class="table-responsive">'
+			. \yii\grid\GridView::widget([
+				'layout'		 => '{summary}{pager}<br/>{items}{pager}',
+				'dataProvider'	 => new \yii\data\ActiveDataProvider([
+					'query'		 => $model->getRgnDistricts(),
+					'pagination' => [
+						'pageSize'	 => 50,
+						'pageParam'	 => 'page-rgndistricts',
+					],
+					]),
+				'pager'			 => [
+					'class'			 => yii\widgets\LinkPager::className(),
+					'firstPageLabel' => 'First',
+					'lastPageLabel'	 => 'Last'
+				],
+				'columns'		 => [
+					[
+						'class' => 'yii\grid\SerialColumn',
+					],
+					'number',
+					'name',
+				]
+			])
+			. '</div>'
+
+			?>
+			<?php Pjax::end() ?>
+			<?php $this->endBlock() ?>
+
+
 			<?php $this->beginBlock('RgnPostcodes'); ?>
 			<div style='position: relative'>
 				<div style='position:absolute; right: 0px; top: 0px;'>
 
 					<?= RgnPostcodeAccess::button('index', ['label' => 'All Postcodes', 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
 
-					<?= RgnPostcodeAccess::button('create', ['label' => 'New Postcode', 'urlOptions' => [ 'RgnPostcode' => ['country_id' => $model->id]], 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
+					<?=
+
+					RgnPostcodeAccess::button('create', [
+						'label'			 => 'New Postcode',
+						'urlOptions'	 => [
+							'RgnPostcode' => [
+								'country_id'	 => $model->country_id,
+								'province_id'	 => $model->province_id,
+								'city_id'		 => $model->id,
+							],
+						],
+						'buttonOptions'	 => ['class' => 'btn btn-success btn-xs'],
+					]);
+
+					?>
 
 				</div>
 			</div>
 
 			<?php Pjax::begin(['id' => 'pjax-RgnPostcodes', 'enableReplaceState' => false, 'linkSelector' => '#pjax-RgnPostcodes ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
-
 			<?=
 
 			'<div class="table-responsive">'
@@ -113,7 +179,7 @@ $this->params['breadcrumbs'][] = 'View';
 				'pager'			 => [
 					'class'			 => yii\widgets\LinkPager::className(),
 					'firstPageLabel' => 'First',
-					'lastPageLabel'	 => 'Last'
+					'lastPageLabel'	 => 'Last',
 				],
 				'columns'		 => [
 					[
@@ -132,7 +198,7 @@ $this->params['breadcrumbs'][] = 'View';
 						'attribute'	 => 'subdistrict_id',
 						"format"	 => "raw",
 						"options"	 => [],
-						'value'		 => function (RgnPostcode $model)
+						'value'		 => function ($model)
 					{
 						/**
 						 * @var RgnSubdistrict $subdistrict
@@ -202,61 +268,12 @@ $this->params['breadcrumbs'][] = 'View';
 					],
 				]
 			])
-			. '</div>';
+			. '</div>'
 
 			?>
-
 			<?php Pjax::end() ?>
-
 			<?php $this->endBlock() ?>
 
-
-			<?php $this->beginBlock('RgnProvinces'); ?>
-
-			<div style='position: relative'>
-				<div style='position:absolute; right: 0px; top: 0px;'>
-
-					<?= RgnProvinceAccess::button('index', ['label' => 'All Provinces', 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
-
-					<?= RgnProvinceAccess::button('create', ['label' => 'New Province', 'urlOptions' => [ 'RgnProvince' => ['country_id' => $model->id]], 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
-
-				</div>
-			</div>
-
-			<?php Pjax::begin(['id' => 'pjax-RgnProvinces', 'enableReplaceState' => false, 'linkSelector' => '#pjax-RgnProvinces ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
-			<?=
-
-			'<div class="table-responsive">'
-			. \yii\grid\GridView::widget([
-				'layout'		 => '{summary}{pager}<br/>{items}{pager}',
-				'dataProvider'	 => new \yii\data\ActiveDataProvider([
-					'query'		 => $model->getRgnProvinces(),
-					'pagination' => [
-						'pageSize'	 => 50,
-						'pageParam'	 => 'page-rgnprovinces',
-					],
-					]),
-				'pager'			 => [
-					'class'			 => yii\widgets\LinkPager::className(),
-					'firstPageLabel' => 'First',
-					'lastPageLabel'	 => 'Last',
-				],
-				'columns'		 => [
-					[
-						'class' => 'yii\grid\SerialColumn',
-					],
-					'number',
-					'name',
-					'abbreviation',
-				]
-			])
-			. '</div>';
-
-			?>
-
-			<?php Pjax::end() ?>
-
-			<?php $this->endBlock() ?>
 
 			<?=
 
@@ -267,17 +284,17 @@ $this->params['breadcrumbs'][] = 'View';
 					'items'			 => [
 						[
 							'label'		 => '<b class=""># ' . $model->id . '</b>',
-							'content'	 => $this->blocks['frontend\models\RgnCountry'],
+							'content'	 => $this->blocks['frontend\models\RgnCity'],
 							'active'	 => true,
+						],
+						[
+							'content'	 => $this->blocks['RgnDistricts'],
+							'label'		 => '<small>Region Districts <span class="badge badge-default">' . count($model->getRgnDistricts()->asArray()->all()) . '</span></small>',
+							'active'	 => false,
 						],
 						[
 							'content'	 => $this->blocks['RgnPostcodes'],
 							'label'		 => '<small>Region Postcodes <span class="badge badge-default">' . count($model->getRgnPostcodes()->asArray()->all()) . '</span></small>',
-							'active'	 => false,
-						],
-						[
-							'content'	 => $this->blocks['RgnProvinces'],
-							'label'		 => '<small>Region Provinces <span class="badge badge-default">' . count($model->getRgnProvinces()->asArray()->all()) . '</span></small>',
 							'active'	 => false,
 						],
 					],
@@ -285,10 +302,9 @@ $this->params['breadcrumbs'][] = 'View';
 			);
 
 			?>
+        </div>
 
-		</div>
-
-	</div>
+    </div>
 
 	<br/>
 

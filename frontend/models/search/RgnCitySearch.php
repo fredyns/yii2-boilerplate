@@ -5,12 +5,12 @@ namespace frontend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\RgnProvince;
+use frontend\models\RgnCity;
 
 /**
- * RgnProvinceSearch represents the model behind the search form about `frontend\models\RgnProvince`.
+ * RgnCitySearch represents the model behind the search form about `frontend\models\RgnCity`.
  */
-class RgnProvinceSearch extends RgnProvince
+class RgnCitySearch extends RgnCity
 {
 
 	/**
@@ -19,8 +19,7 @@ class RgnProvinceSearch extends RgnProvince
 	public function rules()
 	{
 		return [
-			//[['id', 'country_id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
-			[['id', 'country_id'], 'integer'],
+			[['id', 'province_id'], 'integer'],
 			[['status', 'number', 'name', 'abbreviation'], 'safe'],
 		];
 
@@ -45,7 +44,7 @@ class RgnProvinceSearch extends RgnProvince
 	 */
 	public function search($params)
 	{
-		$query = RgnProvince::find();
+		$query = RgnCity::find();
 
 		$dataProvider = new ActiveDataProvider([
 			'query'		 => $query,
@@ -64,14 +63,8 @@ class RgnProvinceSearch extends RgnProvince
 		}
 
 		$query->andFilterWhere([
-			'id'		 => $this->id,
-			'country_id' => $this->country_id,
-			//'created_at'	 => $this->created_at,
-			//'updated_at'	 => $this->updated_at,
-			//'deleted_at'	 => $this->deleted_at,
-			//'createdBy_id'	 => $this->createdBy_id,
-			//'updatedBy_id'	 => $this->updatedBy_id,
-			//'deletedBy_id'	 => $this->deletedBy_id,
+			'id'			 => $this->id,
+			'province_id'	 => $this->province_id,
 		]);
 
 		$query

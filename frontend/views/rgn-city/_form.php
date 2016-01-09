@@ -1,14 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use dmstr\bootstrap\Tabs;
 use frontend\models\RgnCountry;
 use kartik\select2\Select2;
+use kartik\depdrop\DepDrop;
 
 /**
  * @var yii\web\View $this
- * @var frontend\models\RgnProvince $model
+ * @var frontend\models\RgnCity $model
  * @var yii\widgets\ActiveForm $form
  */
 
@@ -23,12 +25,12 @@ use kartik\select2\Select2;
 
     <div class="panel-body">
 
-        <div class="rgn-province-form">
+        <div class="rgn-city-form">
 
 			<?php
 
 			$form = ActiveForm::begin([
-					'id'					 => 'RgnProvince',
+					'id'					 => 'RgnCity',
 					'layout'				 => 'horizontal',
 					'enableClientValidation' => true,
 					'errorSummaryCssClass'	 => 'error-summary alert alert-error'
@@ -49,6 +51,34 @@ use kartik\select2\Select2;
 					<?=
 
 						$form
+						->field($model, 'province_id')
+						->widget(DepDrop::classname(), [
+							'data'			 => [],
+							'type'			 => DepDrop::TYPE_SELECT2,
+							'select2Options' => [
+								'pluginOptions' => [
+									'multiple'			 => FALSE,
+									'allowClear'		 => TRUE,
+									'tags'				 => TRUE,
+									'maximumInputLength' => 255, /* province name maxlength */
+								],
+							],
+							'pluginOptions'	 => [
+								'initialize'	 => TRUE,
+								'placeholder'	 => 'Select or type province',
+								'depends'		 => ['rgncityform-country_id'],
+								'url'			 => Url::to([
+									'/rgn-province/depdrop-options',
+									'selected' => $model->province_id,
+								]),
+								'loadingText'	 => 'Loading provinces ...',
+							],
+					]);
+
+					?>
+					<?=
+
+						$form
 						->field($model, 'country_id')
 						->widget(Select2::classname(), [
 							'data'			 => RgnCountry::asOption(),
@@ -64,7 +94,6 @@ use kartik\select2\Select2;
 
 					?>
                 </p>
-
 				<?php $this->endBlock(); ?>
 
 				<?=
@@ -74,7 +103,7 @@ use kartik\select2\Select2;
 						'encodeLabels'	 => false,
 						'items'			 => [
 							[
-								'label'		 => 'RgnProvince',
+								'label'		 => 'RgnCity',
 								'content'	 => $this->blocks['main'],
 								'active'	 => true,
 							],

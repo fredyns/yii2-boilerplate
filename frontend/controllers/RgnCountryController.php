@@ -52,7 +52,7 @@ class RgnCountryController extends Controller
 	}
 
 	/**
-	 * Lists all RgnCountry models.
+	 * Lists all deleted RgnCountry models.
 	 * @return mixed
 	 */
 	public function actionDeleted()

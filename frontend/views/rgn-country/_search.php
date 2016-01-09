@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use frontend\models\search\RgnCountrySearch;
 
 /**
  * @var yii\web\View $this
@@ -24,7 +25,7 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status') ?>
+	<?= $form->field($model, 'status')->dropDownList(RgnCountrySearch::optsstatus()); ?>
 
 	<?= $form->field($model, 'name') ?>
 
