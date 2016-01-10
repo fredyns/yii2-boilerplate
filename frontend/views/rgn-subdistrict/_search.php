@@ -2,20 +2,20 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use frontend\models\search\RgnDistrictSearch;
+use frontend\models\search\RgnSubdistrictSearch;
 use frontend\models\RgnCountry;
 use kartik\select2\Select2;
 use kartik\depdrop\DepDrop;
 
 /**
  * @var yii\web\View $this
- * @var frontend\models\search\RgnDistrictSearch $model
+ * @var frontend\models\search\RgnSubdistrictSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 
 ?>
 
-<div class="rgn-district-search">
+<div class="rgn-subdistrict-search">
 
 	<?php
 
@@ -28,12 +28,40 @@ use kartik\depdrop\DepDrop;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(RgnDistrictSearch::optsstatus()); ?>
+	<?= $form->field($model, 'status')->dropDownList(RgnSubdistrictSearch::optsstatus()); ?>
 
 	<?= $form->field($model, 'number') ?>
 
 	<?= $form->field($model, 'name') ?>
 
+	<?=
+
+		$form
+		->field($model, 'district_id')
+		->widget(DepDrop::classname(), [
+			'data'			 => [],
+			'type'			 => DepDrop::TYPE_SELECT2,
+			'select2Options' => [
+				'pluginOptions' => [
+					'multiple'			 => FALSE,
+					'allowClear'		 => TRUE,
+					'tags'				 => TRUE,
+					'maximumInputLength' => 255, /* province name maxlength */
+				],
+			],
+			'pluginOptions'	 => [
+				'initialize'	 => TRUE,
+				'placeholder'	 => 'Select or type district',
+				'depends'		 => ['rgnsubdistrictsearch-city_id'],
+				'url'			 => Url::to([
+					'/rgn-district/depdrop-options',
+					'selected' => $model->city_id,
+				]),
+				'loadingText'	 => 'Loading provinces ...',
+			],
+	]);
+
+	?>
 	<?=
 
 		$form
@@ -52,7 +80,7 @@ use kartik\depdrop\DepDrop;
 			'pluginOptions'	 => [
 				'initialize'	 => TRUE,
 				'placeholder'	 => 'Select or type city',
-				'depends'		 => ['rgndistrictsearch-province_id'],
+				'depends'		 => ['rgnsubdistrictsearch-province_id'],
 				'url'			 => Url::to([
 					'/rgn-city/depdrop-options',
 					'selected' => $model->city_id,
@@ -80,7 +108,7 @@ use kartik\depdrop\DepDrop;
 			'pluginOptions'	 => [
 				'initialize'	 => TRUE,
 				'placeholder'	 => 'Select or type province',
-				'depends'		 => ['rgndistrictsearch-country_id'],
+				'depends'		 => ['rgnsubdistrictsearch-country_id'],
 				'url'			 => Url::to([
 					'/rgn-province/depdrop-options',
 					'selected' => $model->province_id,

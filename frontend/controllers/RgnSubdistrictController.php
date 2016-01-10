@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
-use frontend\models\RgnDistrict;
-use frontend\models\access\RgnDistrictAccess;
-use frontend\models\form\RgnDistrictForm;
-use frontend\models\search\RgnDistrictSearch;
+use frontend\models\RgnSubdistrict;
+use frontend\models\access\RgnSubdistrictAccess;
+use frontend\models\form\RgnSubdistrictForm;
+use frontend\models\search\RgnSubdistrictSearch;
 use common\base\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -14,9 +14,9 @@ use dmstr\bootstrap\Tabs;
 use cornernote\returnurl\ReturnUrl;
 
 /**
- * RgnDistrictController implements the CRUD actions for RgnDistrict model.
+ * RgnSubdistrictController implements the CRUD actions for RgnSubdistrict model.
  */
-class RgnDistrictController extends Controller
+class RgnSubdistrictController extends Controller
 {
 
 	/**
@@ -26,17 +26,17 @@ class RgnDistrictController extends Controller
 	public $enableCsrfValidation = false;
 
 	/**
-	 * Lists all RgnDistrict models.
+	 * Lists all RgnSubdistrict models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		if (RgnDistrictAccess::allowIndex() == FALSE)
+		if (RgnSubdistrictAccess::allowIndex() == FALSE)
 		{
-			throw RgnDistrictAccess::exception('index');
+			throw RgnSubdistrictAccess::exception('index');
 		}
 
-		$searchModel = new RgnDistrictSearch;
+		$searchModel = new RgnSubdistrictSearch;
 		$dataProvider = $searchModel->searchIndex($_GET);
 
 		Tabs::clearLocalStorage();
@@ -52,17 +52,17 @@ class RgnDistrictController extends Controller
 	}
 
 	/**
-	 * Lists all RgnDistrict models.
+	 * Lists all RgnSubdistrict models.
 	 * @return mixed
 	 */
 	public function actionDeleted()
 	{
-		if (RgnDistrictAccess::allowDeleted() == FALSE)
+		if (RgnSubdistrictAccess::allowDeleted() == FALSE)
 		{
-			throw RgnDistrictAccess::exception('deleted');
+			throw RgnSubdistrictAccess::exception('deleted');
 		}
 
-		$searchModel = new RgnDistrictSearch;
+		$searchModel = new RgnSubdistrictSearch;
 		$dataProvider = $searchModel->searchDeleted($_GET);
 
 		Tabs::clearLocalStorage();
@@ -78,7 +78,7 @@ class RgnDistrictController extends Controller
 	}
 
 	/**
-	 * Displays a single RgnDistrict model.
+	 * Displays a single RgnSubdistrict model.
 	 * @param integer $id
 	 *
 	 * @return mixed
@@ -103,18 +103,18 @@ class RgnDistrictController extends Controller
 	}
 
 	/**
-	 * Creates a new RgnDistrict model.
+	 * Creates a new RgnSubdistrict model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
-		if (RgnDistrictAccess::allowCreate() == FALSE)
+		if (RgnSubdistrictAccess::allowCreate() == FALSE)
 		{
-			throw RgnDistrictAccess::exception('create');
+			throw RgnSubdistrictAccess::exception('create');
 		}
 
-		$model = new RgnDistrictForm();
+		$model = new RgnSubdistrictForm();
 
 		try
 		{
@@ -137,7 +137,7 @@ class RgnDistrictController extends Controller
 	}
 
 	/**
-	 * Updates an existing RgnDistrict model.
+	 * Updates an existing RgnSubdistrict model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -165,7 +165,7 @@ class RgnDistrictController extends Controller
 	}
 
 	/**
-	 * Deletes an existing RgnDistrict model.
+	 * Deletes an existing RgnSubdistrict model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -217,15 +217,15 @@ class RgnDistrictController extends Controller
 	}
 
 	/**
-	 * Finds the RgnDistrict model based on its primary key value.
+	 * Finds the RgnSubdistrict model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return RgnDistrict the loaded model
+	 * @return RgnSubdistrict the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = RgnDistrict::findOne($id)) !== null)
+		if (($model = RgnSubdistrict::findOne($id)) !== null)
 		{
 			return $model;
 		}
@@ -237,15 +237,15 @@ class RgnDistrictController extends Controller
 	}
 
 	/**
-	 * Finds the RgnDistrict model based on its primary key value for modification.
+	 * Finds the RgnSubdistrict model based on its primary key value for modification.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return RgnDistrict the loaded model
+	 * @return RgnSubdistrict the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
 	protected function findForm($id)
 	{
-		if (($model = RgnDistrictForm::findOne($id)) !== null)
+		if (($model = RgnSubdistrictForm::findOne($id)) !== null)
 		{
 			return $model;
 		}
@@ -265,9 +265,9 @@ class RgnDistrictController extends Controller
 	public function actionDepdropOptions($selected = 0)
 	{
 		echo \common\helpers\DepdropHelper::getOptionData([
-			'modelClass' => RgnDistrict::className(),
+			'modelClass' => RgnSubdistrict::className(),
 			'parents'	 => [
-				'city_id' => function($value)
+				'district_id' => function($value)
 				{
 					return ($value > 0) ? $value : "";
 				},
