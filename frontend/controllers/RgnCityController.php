@@ -256,4 +256,25 @@ class RgnCityController extends Controller
 
 	}
 
+	/**
+	 * Provide data for Depdrop options
+	 * @param type $selected
+	 *
+	 * @return mixed
+	 */
+	public function actionDepdropOptions($selected = 0)
+	{
+		echo \common\helpers\DepdropHelper::getOptionData([
+			'modelClass' => RgnCity::className(),
+			'parents'	 => [
+				'province_id' => function($value)
+				{
+					return ($value > 0) ? $value : "";
+				},
+			],
+			'selected' => $selected,
+		]);
+
+	}
+
 }

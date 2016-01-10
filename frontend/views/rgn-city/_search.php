@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use frontend\models\search\RgnCitySearch;
+use frontend\models\RgnCountry;
+use kartik\select2\Select2;
+use kartik\depdrop\DepDrop;
 
 /**
  * @var yii\web\View $this

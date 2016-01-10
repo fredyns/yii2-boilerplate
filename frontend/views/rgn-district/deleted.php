@@ -10,12 +10,12 @@ use frontend\models\access\RgnDistrictAccess;
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var frontend\models\search\RgnDistrictSearch $searchModel
  */
-$this->title = 'Region Districts';
+$this->title = 'Rgn Districts';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="giiant-crud rgn-district-index">
+<div class="giiant-crud rgn-district-deleted">
 
 	<?php //     echo $this->render('_search', ['model' =>$searchModel]);  ?>
 
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		</p>
 
         <div class="pull-right">
-			<?= RgnDistrictAccess::button('deleted'); ?>
+			<?= RgnDistrictAccess::button('index'); ?>
 		</div>
 
     </div>
