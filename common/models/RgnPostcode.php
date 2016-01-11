@@ -28,7 +28,7 @@ class RgnPostcode extends BaseRgnPostcode
 			[['subdistrict_id', 'district_id', 'city_id', 'province_id'], 'safe'],
 			/* field type */
 			[['status'], 'string'],
-			[['postcode', 'subdistrict_id', 'district_id', 'city_id', 'province_id', 'country_id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
+			[['postcode'], 'integer'],
 			/* value limitation */
 			['status', 'in', 'range' => [
 					self::STATUS_ACTIVE,
@@ -40,9 +40,12 @@ class RgnPostcode extends BaseRgnPostcode
 				'exist',
 				'targetClass'		 => RgnCountry::className(),
 				'targetAttribute'	 => 'id',
-				'when'				 => function ($model, $attribute)
+				'when'				 => function (RgnPostcode $model, $attribute)
 				{
-					return is_numeric($model->$attribute);
+					$num = is_numeric($model->$attribute);
+					//$model->addError($attribute, "num: [{$num}]; val: [{$model->$attribute}];");
+
+					return $num;
 				},
 				'message' => "Country doesn't exist.",
 			],

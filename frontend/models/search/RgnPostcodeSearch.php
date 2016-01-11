@@ -5,12 +5,12 @@ namespace frontend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\RgnDistrict;
+use frontend\models\RgnPostcode;
 
 /**
- * RgnDistrictSearch represents the model behind the search form about `frontend\models\RgnDistrict`.
+ * RgnPostcodeSearch represents the model behind the search form about `frontend\models\RgnPostcode`.
  */
-class RgnDistrictSearch extends RgnDistrict
+class RgnPostcodeSearch extends RgnPostcode
 {
 
 	/**
@@ -19,8 +19,8 @@ class RgnDistrictSearch extends RgnDistrict
 	public function rules()
 	{
 		return [
-			[['id', 'city_id'], 'integer'],
-			[['status', 'number', 'name'], 'safe'],
+			[['id', 'postcode', 'subdistrict_id', 'district_id', 'city_id', 'province_id', 'country_id'], 'integer'],
+			[['status'], 'safe'],
 		];
 
 	}
@@ -44,7 +44,7 @@ class RgnDistrictSearch extends RgnDistrict
 	 */
 	public function search($params)
 	{
-		$query = RgnDistrict::find();
+		$query = RgnPostcode::find();
 
 		$dataProvider = new ActiveDataProvider([
 			'query'		 => $query,
@@ -63,14 +63,16 @@ class RgnDistrictSearch extends RgnDistrict
 		}
 
 		$query->andFilterWhere([
-			'id'		 => $this->id,
-			'city_id'	 => $this->city_id,
+			'id'			 => $this->id,
+			'postcode'		 => $this->postcode,
+			'subdistrict_id' => $this->subdistrict_id,
+			'district_id'	 => $this->district_id,
+			'city_id'		 => $this->city_id,
+			'province_id'	 => $this->province_id,
+			'country_id'	 => $this->country_id,
 		]);
 
-		$query
-			->andFilterWhere(['like', 'status', $this->status])
-			->andFilterWhere(['like', 'number', $this->number])
-			->andFilterWhere(['like', 'name', $this->name]);
+		$query->andFilterWhere(['like', 'status', $this->status]);
 
 		return $dataProvider;
 

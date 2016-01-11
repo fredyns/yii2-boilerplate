@@ -57,7 +57,7 @@ use kartik\depdrop\DepDrop;
 					'/rgn-district/depdrop-options',
 					'selected' => $model->city_id,
 				]),
-				'loadingText'	 => 'Loading provinces ...',
+				'loadingText'	 => 'Loading districts ...',
 			],
 	]);
 
@@ -85,7 +85,7 @@ use kartik\depdrop\DepDrop;
 					'/rgn-city/depdrop-options',
 					'selected' => $model->city_id,
 				]),
-				'loadingText'	 => 'Loading provinces ...',
+				'loadingText'	 => 'Loading cities ...',
 			],
 	]);
 

@@ -16,8 +16,8 @@ use frontend\models\access\RgnPostcodeAccess;
  * @var yii\web\View $this
  * @var frontend\models\RgnSubdistrict $model
  */
-$this->title = 'Rgn Subdistrict ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Rgn Subdistricts', 'url' => ['index']];
+$this->title = 'Regioon Subdistrict ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Regioon Subdistricts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string) $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'View';
 
@@ -220,7 +220,7 @@ $this->params['breadcrumbs'][] = 'View';
 						],
 						[
 							'content'	 => $this->blocks['RgnPostcodes'],
-							'label'		 => '<small>Rgn Postcodes <span class="badge badge-default">' . count($model->getRgnPostcodes()->asArray()->all()) . '</span></small>',
+							'label'		 => '<small>Regioon Postcodes <span class="badge badge-default">' . count($model->getRgnPostcodes()->asArray()->all()) . '</span></small>',
 							'active'	 => false,
 						],
 					],

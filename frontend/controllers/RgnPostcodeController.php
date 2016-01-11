@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
-use frontend\models\RgnSubdistrict;
-use frontend\models\access\RgnSubdistrictAccess;
-use frontend\models\form\RgnSubdistrictForm;
-use frontend\models\search\RgnSubdistrictSearch;
+use frontend\models\RgnPostcode;
+use frontend\models\access\RgnPostcodeAccess;
+use frontend\models\form\RgnPostcodeForm;
+use frontend\models\search\RgnPostcodeSearch;
 use common\base\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -14,9 +14,9 @@ use dmstr\bootstrap\Tabs;
 use cornernote\returnurl\ReturnUrl;
 
 /**
- * RgnSubdistrictController implements the CRUD actions for RgnSubdistrict model.
+ * RgnPostcodeController implements the CRUD actions for RgnPostcode model.
  */
-class RgnSubdistrictController extends Controller
+class RgnPostcodeController extends Controller
 {
 
 	/**
@@ -26,17 +26,17 @@ class RgnSubdistrictController extends Controller
 	public $enableCsrfValidation = false;
 
 	/**
-	 * Lists all RgnSubdistrict models.
+	 * Lists all RgnPostcode models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		if (RgnSubdistrictAccess::allowIndex() == FALSE)
+		if (RgnPostcodeAccess::allowIndex() == FALSE)
 		{
-			throw RgnSubdistrictAccess::exception('index');
+			throw RgnPostcodeAccess::exception('index');
 		}
 
-		$searchModel = new RgnSubdistrictSearch;
+		$searchModel = new RgnPostcodeSearch;
 		$dataProvider = $searchModel->searchIndex($_GET);
 
 		Tabs::clearLocalStorage();
@@ -52,17 +52,17 @@ class RgnSubdistrictController extends Controller
 	}
 
 	/**
-	 * Lists all RgnSubdistrict models.
+	 * Lists all RgnPostcode models.
 	 * @return mixed
 	 */
 	public function actionDeleted()
 	{
-		if (RgnSubdistrictAccess::allowDeleted() == FALSE)
+		if (RgnPostcodeAccess::allowDeleted() == FALSE)
 		{
-			throw RgnSubdistrictAccess::exception('deleted');
+			throw RgnPostcodeAccess::exception('deleted');
 		}
 
-		$searchModel = new RgnSubdistrictSearch;
+		$searchModel = new RgnPostcodeSearch;
 		$dataProvider = $searchModel->searchDeleted($_GET);
 
 		Tabs::clearLocalStorage();
@@ -70,7 +70,7 @@ class RgnSubdistrictController extends Controller
 		Url::remember();
 		\Yii::$app->session['__crudReturnUrl'] = null;
 
-		return $this->render('deleted', [
+		return $this->render('index', [
 				'dataProvider'	 => $dataProvider,
 				'searchModel'	 => $searchModel,
 		]);
@@ -78,7 +78,7 @@ class RgnSubdistrictController extends Controller
 	}
 
 	/**
-	 * Displays a single RgnSubdistrict model.
+	 * Displays a single RgnPostcode model.
 	 * @param integer $id
 	 *
 	 * @return mixed
@@ -103,18 +103,18 @@ class RgnSubdistrictController extends Controller
 	}
 
 	/**
-	 * Creates a new RgnSubdistrict model.
+	 * Creates a new RgnPostcode model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
-		if (RgnSubdistrictAccess::allowCreate() == FALSE)
+		if (RgnPostcodeAccess::allowCreate() == FALSE)
 		{
-			throw RgnSubdistrictAccess::exception('create');
+			throw RgnPostcodeAccess::exception('create');
 		}
 
-		$model = new RgnSubdistrictForm();
+		$model = new RgnPostcodeForm();
 
 		try
 		{
@@ -137,7 +137,7 @@ class RgnSubdistrictController extends Controller
 	}
 
 	/**
-	 * Updates an existing RgnSubdistrict model.
+	 * Updates an existing RgnPostcode model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -145,11 +145,6 @@ class RgnSubdistrictController extends Controller
 	public function actionUpdate($id)
 	{
 		$model = $this->findForm($id);
-
-		if ($model->operation->allowUpdate == FALSE)
-		{
-			throw $model->operation->exception('update');
-		}
 
 		if ($model->load($_POST) && $model->save())
 		{
@@ -165,7 +160,7 @@ class RgnSubdistrictController extends Controller
 	}
 
 	/**
-	 * Deletes an existing RgnSubdistrict model.
+	 * Deletes an existing RgnPostcode model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -217,15 +212,15 @@ class RgnSubdistrictController extends Controller
 	}
 
 	/**
-	 * Finds the RgnSubdistrict model based on its primary key value.
+	 * Finds the RgnPostcode model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return RgnSubdistrict the loaded model
+	 * @return RgnPostcode the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = RgnSubdistrict::findOne($id)) !== null)
+		if (($model = RgnPostcode::findOne($id)) !== null)
 		{
 			return $model;
 		}
@@ -237,15 +232,15 @@ class RgnSubdistrictController extends Controller
 	}
 
 	/**
-	 * Finds the RgnSubdistrict model based on its primary key value for modification.
+	 * Finds the RgnPostcode model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return RgnSubdistrict the loaded model
+	 * @return RgnPostcode the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
 	protected function findForm($id)
 	{
-		if (($model = RgnSubdistrictForm::findOne($id)) !== null)
+		if (($model = RgnPostcodeForm::findOne($id)) !== null)
 		{
 			return $model;
 		}
@@ -253,27 +248,6 @@ class RgnSubdistrictController extends Controller
 		{
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
-
-	}
-
-	/**
-	 * Provide data for Depdrop options
-	 * @param type $selected
-	 *
-	 * @return mixed
-	 */
-	public function actionDepdropOptions($selected = 0)
-	{
-		echo \common\helpers\DepdropHelper::getOptionData([
-			'modelClass' => RgnSubdistrict::className(),
-			'parents'	 => [
-				'district_id' => function($value)
-				{
-					return ($value > 0) ? $value : "";
-				},
-			],
-			'selected' => $selected,
-		]);
 
 	}
 

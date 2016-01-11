@@ -2,20 +2,20 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use frontend\models\search\RgnDistrictSearch;
+use frontend\models\search\RgnPostcodeSearch;
 use frontend\models\RgnCountry;
 use kartik\select2\Select2;
 use kartik\depdrop\DepDrop;
 
 /**
  * @var yii\web\View $this
- * @var frontend\models\search\RgnDistrictSearch $model
+ * @var frontend\models\search\RgnPostcodeSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 
 ?>
 
-<div class="rgn-district-search">
+<div class="rgn-postcode-search">
 
 	<?php
 
@@ -28,12 +28,66 @@ use kartik\depdrop\DepDrop;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(RgnDistrictSearch::optsstatus()); ?>
+	<?= $form->field($model, 'status')->dropDownList(RgnPostcodeSearch::optsstatus()); ?>
 
-	<?= $form->field($model, 'number') ?>
+	<?= $form->field($model, 'postcode') ?>
 
-	<?= $form->field($model, 'name') ?>
+	<?=
 
+		$form
+		->field($model, 'subdistrict_id')
+		->widget(DepDrop::classname(), [
+			'data'			 => [],
+			'type'			 => DepDrop::TYPE_SELECT2,
+			'select2Options' => [
+				'pluginOptions' => [
+					'multiple'			 => FALSE,
+					'allowClear'		 => TRUE,
+					'tags'				 => TRUE,
+					'maximumInputLength' => 255, /* province name maxlength */
+				],
+			],
+			'pluginOptions'	 => [
+				'initialize'	 => TRUE,
+				'placeholder'	 => 'Select or type subdistrict',
+				'depends'		 => ['rgnpostcodeform-district_id'],
+				'url'			 => Url::to([
+					'/rgn-subdistrict/depdrop-options',
+					'selected' => $model->subdistrict_id,
+				]),
+				'loadingText'	 => 'Loading subdistricts ...',
+			],
+	]);
+
+	?>
+	<?=
+
+		$form
+		->field($model, 'district_id')
+		->widget(DepDrop::classname(), [
+			'data'			 => [],
+			'type'			 => DepDrop::TYPE_SELECT2,
+			'select2Options' => [
+				'pluginOptions' => [
+					'multiple'			 => FALSE,
+					'allowClear'		 => TRUE,
+					'tags'				 => TRUE,
+					'maximumInputLength' => 255, /* province name maxlength */
+				],
+			],
+			'pluginOptions'	 => [
+				'initialize'	 => TRUE,
+				'placeholder'	 => 'Select or type district',
+				'depends'		 => ['rgnpostcodeform-city_id'],
+				'url'			 => Url::to([
+					'/rgn-district/depdrop-options',
+					'selected' => $model->city_id,
+				]),
+				'loadingText'	 => 'Loading districts ...',
+			],
+	]);
+
+	?>
 	<?=
 
 		$form
@@ -52,7 +106,7 @@ use kartik\depdrop\DepDrop;
 			'pluginOptions'	 => [
 				'initialize'	 => TRUE,
 				'placeholder'	 => 'Select or type city',
-				'depends'		 => ['rgndistrictsearch-province_id'],
+				'depends'		 => ['rgnpostcodeform-province_id'],
 				'url'			 => Url::to([
 					'/rgn-city/depdrop-options',
 					'selected' => $model->city_id,
@@ -80,7 +134,7 @@ use kartik\depdrop\DepDrop;
 			'pluginOptions'	 => [
 				'initialize'	 => TRUE,
 				'placeholder'	 => 'Select or type province',
-				'depends'		 => ['rgndistrictsearch-country_id'],
+				'depends'		 => ['rgnpostcodeform-country_id'],
 				'url'			 => Url::to([
 					'/rgn-province/depdrop-options',
 					'selected' => $model->province_id,
@@ -107,6 +161,7 @@ use kartik\depdrop\DepDrop;
 	]);
 
 	?>
+
 	<div class="form-group">
 		<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
 		<?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>

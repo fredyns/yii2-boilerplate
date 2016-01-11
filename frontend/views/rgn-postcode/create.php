@@ -6,14 +6,14 @@ use cornernote\returnurl\ReturnUrl;
 
 /**
  * @var yii\web\View $this
- * @var frontend\models\RgnSubdistrict $model
+ * @var frontend\models\RgnPostcode $model
  */
 $this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Regioon Subdistricts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Rgn Postcodes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<div class="giiant-crud rgn-subdistrict-create">
+<div class="giiant-crud rgn-postcode-create">
 
     <p class="pull-left">
 		<?= Html::a('Cancel', ReturnUrl::getUrl(Url::previous()), ['class' => 'btn btn-default']) ?>

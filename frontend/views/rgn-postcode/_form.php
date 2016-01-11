@@ -10,7 +10,7 @@ use kartik\depdrop\DepDrop;
 
 /**
  * @var yii\web\View $this
- * @var frontend\models\RgnDistrict $model
+ * @var frontend\models\RgnPostcode $model
  * @var yii\widgets\ActiveForm $form
  */
 
@@ -19,18 +19,18 @@ use kartik\depdrop\DepDrop;
 <div class="panel panel-default">
     <div class="panel-heading">
         <h2>
-			<?= $model->name ?>
+			<?= $model->postcode; ?>
 		</h2>
     </div>
 
     <div class="panel-body">
 
-        <div class="rgn-district-form">
+        <div class="rgn-postcode-form">
 
 			<?php
 
 			$form = ActiveForm::begin([
-					'id'					 => 'RgnDistrict',
+					'id'					 => 'RgnPostcode',
 					'layout'				 => 'horizontal',
 					'enableClientValidation' => true,
 					'errorSummaryCssClass'	 => 'error-summary alert alert-error'
@@ -45,8 +45,63 @@ use kartik\depdrop\DepDrop;
                 <p>
 
 					<?= $form->field($model, 'id')->textInput(['disabled' => 'disabled', 'placeholder' => 'autonumber']) ?>
-					<?= $form->field($model, 'number')->textInput(['maxlength' => true]) ?>
-					<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+					<?= $form->field($model, 'postcode')->textInput() ?>
+					<?=
+
+						$form
+						->field($model, 'subdistrict_id')
+						->widget(DepDrop::classname(), [
+							'data'			 => [],
+							'type'			 => DepDrop::TYPE_SELECT2,
+							'select2Options' => [
+								'pluginOptions' => [
+									'multiple'			 => FALSE,
+									'allowClear'		 => TRUE,
+									'tags'				 => TRUE,
+									'maximumInputLength' => 255, /* province name maxlength */
+								],
+							],
+							'pluginOptions'	 => [
+								'initialize'	 => TRUE,
+								'placeholder'	 => 'Select or type subdistrict',
+								'depends'		 => ['rgnpostcodeform-district_id'],
+								'url'			 => Url::to([
+									'/rgn-subdistrict/depdrop-options',
+									'selected' => $model->subdistrict_id,
+								]),
+								'loadingText'	 => 'Loading subdistricts ...',
+							],
+					]);
+
+					?>
+					<?=
+
+						$form
+						->field($model, 'district_id')
+						->widget(DepDrop::classname(), [
+							'data'			 => [],
+							'type'			 => DepDrop::TYPE_SELECT2,
+							'select2Options' => [
+								'pluginOptions' => [
+									'multiple'			 => FALSE,
+									'allowClear'		 => TRUE,
+									'tags'				 => TRUE,
+									'maximumInputLength' => 255, /* province name maxlength */
+								],
+							],
+							'pluginOptions'	 => [
+								'initialize'	 => TRUE,
+								'placeholder'	 => 'Select or type district',
+								'depends'		 => ['rgnpostcodeform-city_id'],
+								'url'			 => Url::to([
+									'/rgn-district/depdrop-options',
+									'selected' => $model->district_id,
+								]),
+								'loadingText'	 => 'Loading districts ...',
+							],
+					]);
+
+					?>
 					<?=
 
 						$form
@@ -65,7 +120,7 @@ use kartik\depdrop\DepDrop;
 							'pluginOptions'	 => [
 								'initialize'	 => TRUE,
 								'placeholder'	 => 'Select or type city',
-								'depends'		 => ['rgndistrictform-province_id'],
+								'depends'		 => ['rgnpostcodeform-province_id'],
 								'url'			 => Url::to([
 									'/rgn-city/depdrop-options',
 									'selected' => $model->city_id,
@@ -93,7 +148,7 @@ use kartik\depdrop\DepDrop;
 							'pluginOptions'	 => [
 								'initialize'	 => TRUE,
 								'placeholder'	 => 'Select or type province',
-								'depends'		 => ['rgndistrictform-country_id'],
+								'depends'		 => ['rgnpostcodeform-country_id'],
 								'url'			 => Url::to([
 									'/rgn-province/depdrop-options',
 									'selected' => $model->province_id,
@@ -131,7 +186,7 @@ use kartik\depdrop\DepDrop;
 						'encodeLabels'	 => false,
 						'items'			 => [
 							[
-								'label'		 => 'RgnDistrict',
+								'label'		 => 'RgnPostcode',
 								'content'	 => $this->blocks['main'],
 								'active'	 => true,
 							],

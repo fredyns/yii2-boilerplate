@@ -3,30 +3,30 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
-use frontend\models\access\RgnSubdistrictAccess;
+use frontend\models\access\RgnPostcodeAccess;
 
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var frontend\models\search\RgnSubdistrictSearch $searchModel
+ * @var frontend\models\search\RgnPostcodeSearch $searchModel
  */
-$this->title = 'Regioon Subdistricts';
+$this->title = 'Rgn Postcodes';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="giiant-crud rgn-subdistrict-deleted">
+<div class="giiant-crud rgn-postcode-deleted">
 
-	<?php //     echo $this->render('_search', ['model' =>$searchModel]);   ?>
+	<?php //     echo $this->render('_search', ['model' =>$searchModel]);	?>
 
     <div class="clearfix">
 
         <p class="pull-left">
-			<?= RgnDistrictAccess::button('create'); ?>
+			<?= RgnPostcodeAccess::button('create'); ?>
 		</p>
 
         <div class="pull-right">
-			<?= RgnDistrictAccess::button('index'); ?>
+			<?= RgnPostcodeAccess::button('index'); ?>
 		</div>
 
     </div>
@@ -58,17 +58,41 @@ $this->params['breadcrumbs'][] = $this->title;
 					'tableOptions'		 => ['class' => 'table table-striped table-bordered table-hover'],
 					'headerRowOptions'	 => ['class' => 'x'],
 					'columns'			 => [
-						'number',
-						'name',
 						[
-							'attribute'	 => 'district_id',
+							'class' => 'yii\grid\SerialColumn',
+						],
+						[
+							"attribute"	 => "postcode",
+							"format"	 => "raw",
+							"options"	 => [],
+							"value"		 => function($model)
+						{
+							return $model->operation->linkView;
+						}
+						],
+						[
+							'attribute'	 => 'country_id',
 							"format"	 => "raw",
 							"options"	 => [],
 							'value'		 => function ($model)
 						{
-							if ($district = $model->getDistrict()->one())
+							if ($country = $model->getCountry()->one())
 							{
-								return $district->operation->linkView;
+								return $country->operation->getLinkView($country->name, ['title' => 'view country', 'data-pjax' => 0]);
+							}
+
+							return '';
+						},
+						],
+						[
+							'attribute'	 => 'city_id',
+							"format"	 => "raw",
+							"options"	 => [],
+							'value'		 => function ($model)
+						{
+							if ($city = $model->getCity()->one())
+							{
+								return $city->operation->getLinkView($city->name, ['title' => 'view city', 'data-pjax' => 0]);
 							}
 
 							return '';

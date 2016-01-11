@@ -10,7 +10,7 @@ use frontend\models\access\RgnSubdistrictAccess;
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var frontend\models\search\RgnSubdistrictSearch $searchModel
  */
-$this->title = 'Rgn Subdistricts';
+$this->title = 'Regioon Subdistricts';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
