@@ -5,6 +5,8 @@ namespace frontend\models;
 use Yii;
 use common\models\RgnSubdistrict as BaseSubdistrict;
 use frontend\models\operation\RgnSubdistrictOperation;
+use frontend\models\RgnDistrict;
+use frontend\models\RgnPostcode;
 
 /**
  * Description of RgnSubdistrict
@@ -36,7 +38,9 @@ class RgnSubdistrict extends BaseSubdistrict
 	 */
 	public function getRgnPostcodes()
 	{
-		return $this->hasMany(\common\models\RgnPostcode::className(), ['subdistrict_id' => 'id']);
+		return $this
+				->hasMany(RgnPostcode::className(), ['district_id' => 'id'])
+				->andFilterWhere(['like', 'status', RgnPostcode::STATUS_ACTIVE]);
 
 	}
 
@@ -45,7 +49,7 @@ class RgnSubdistrict extends BaseSubdistrict
 	 */
 	public function getDistrict()
 	{
-		return $this->hasOne(\common\models\RgnDistrict::className(), ['id' => 'district_id']);
+		return $this->hasOne(RgnDistrict::className(), ['id' => 'district_id']);
 
 	}
 

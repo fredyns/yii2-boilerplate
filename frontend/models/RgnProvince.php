@@ -5,6 +5,9 @@ namespace frontend\models;
 use Yii;
 use common\models\RgnProvince as BaseProvince;
 use frontend\models\operation\RgnProvinceOperation;
+use frontend\models\RgnCountry;
+use frontend\models\RgnCity;
+use frontend\models\RgnPostcode;
 
 /**
  * Description of RgnProvince
@@ -34,7 +37,9 @@ class RgnProvince extends BaseProvince
 	 */
 	public function getRgnCities()
 	{
-		return $this->hasMany(\frontend\models\RgnCity::className(), ['province_id' => 'id']);
+		return $this
+				->hasMany(RgnCity::className(), ['province_id' => 'id'])
+				->andFilterWhere(['like', 'status', RgnCity::STATUS_ACTIVE]);
 
 	}
 
@@ -43,7 +48,9 @@ class RgnProvince extends BaseProvince
 	 */
 	public function getRgnPostcodes()
 	{
-		return $this->hasMany(\frontend\models\RgnPostcode::className(), ['province_id' => 'id']);
+		return $this
+				->hasMany(RgnPostcode::className(), ['province_id' => 'id'])
+				->andFilterWhere(['like', 'status', RgnPostcode::STATUS_ACTIVE]);
 
 	}
 
@@ -52,7 +59,7 @@ class RgnProvince extends BaseProvince
 	 */
 	public function getCountry()
 	{
-		return $this->hasOne(\frontend\models\RgnCountry::className(), ['id' => 'country_id']);
+		return $this->hasOne(RgnCountry::className(), ['id' => 'country_id']);
 
 	}
 
