@@ -59,7 +59,10 @@ $this->params['breadcrumbs'][] = $this->title;
 					'headerRowOptions'	 => ['class' => 'x'],
 					'columns'			 => [
 						[
-							'class' => 'yii\grid\SerialColumn',
+							'class'		 => 'yii\grid\SerialColumn',
+							"options"	 => [
+								"width" => "50px",
+							],
 						],
 						'number',
 						[
@@ -68,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							"options"	 => [],
 							"value"		 => function($model)
 						{
-							return $model->operation->linkView;
+							return $model->linkTo;
 						}
 						],
 						[
@@ -77,12 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							"options"	 => [],
 							'value'		 => function ($model)
 						{
-							if ($city = $model->getCity()->one())
-							{
-								return $city->operation->linkView;
-							}
-
-							return '';
+							return ($model->city) ? $model->city->linkTo : '<span class="label label-warning">?</span>';
 						},
 						],
 						[

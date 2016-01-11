@@ -18,8 +18,8 @@ use frontend\models\access\RgnPostcodeAccess;
  * @var yii\web\View $this
  * @var frontend\models\RgnPostcode $model
  */
-$this->title = 'Rgn Postcode ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Rgn Postcodes', 'url' => ['index']];
+$this->title = 'Region Postcode ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Region Postcodes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string) $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'View';
 
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = 'View';
 
         <div class="panel-body">
 
-			<?php $this->beginBlock('frontend\models\RgnPostcode'); ?>
+			<?php $this->beginBlock('RgnPostcode'); ?>
 
 			<?=
 
@@ -63,32 +63,31 @@ $this->params['breadcrumbs'][] = 'View';
 				'model'		 => $model,
 				'attributes' => [
 					'id',
-					'statusLabel',
 					'postcode',
 					[
 						'format'	 => 'html',
-						'attribute'	 => 'subdistrict_id',
-						'value'		 => ($model->getSubdistrict()->one() ? $model->getSubdistrict()->one()->operation->linkView : '<span class="label label-warning">?</span>'),
+						'attribute'	 => 'subdistrict',
+						'value'		 => ($model->subdistrict ? $model->subdistrict->linkTo : '<span class="label label-warning">?</span>'),
 					],
 					[
 						'format'	 => 'html',
 						'attribute'	 => 'district_id',
-						'value'		 => ($model->getDistrict()->one() ? $model->getDistrict()->one()->operation->linkView : '<span class="label label-warning">?</span>'),
+						'value'		 => ($model->district ? $model->district->linkTo : '<span class="label label-warning">?</span>'),
 					],
 					[
 						'format'	 => 'html',
 						'attribute'	 => 'city_id',
-						'value'		 => ($model->getCity()->one() ? $model->getCity()->one()->operation->linkView : '<span class="label label-warning">?</span>'),
+						'value'		 => ($model->city ? $model->city->linkTo : '<span class="label label-warning">?</span>'),
 					],
 					[
 						'format'	 => 'html',
 						'attribute'	 => 'province_id',
-						'value'		 => ($model->getProvince()->one() ? $model->getProvince()->one()->operation->linkView : '<span class="label label-warning">?</span>'),
+						'value'		 => ($model->province ? $model->province->linkTo : '<span class="label label-warning">?</span>'),
 					],
 					[
 						'format'	 => 'html',
-						'attribute'	 => 'country_id',
-						'value'		 => ($model->getCountry()->one() ? $model->getCountry()->one()->operation->linkView : '<span class="label label-warning">?</span>'),
+						'attribute'	 => 'district_id',
+						'value'		 => ($model->country ? $model->country->linkTo : '<span class="label label-warning">?</span>'),
 					],
 				],
 			]);
@@ -113,7 +112,7 @@ $this->params['breadcrumbs'][] = 'View';
 					'items'			 => [
 						[
 							'label'		 => '<b class=""># ' . $model->id . '</b>',
-							'content'	 => $this->blocks['frontend\models\RgnPostcode'],
+							'content'	 => $this->blocks['RgnPostcode'],
 							'active'	 => true,
 						],
 					],

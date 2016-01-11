@@ -11,7 +11,7 @@ use frontend\models\access\RgnCountryAccess;
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var frontend\models\search\RgnCountrySearch $searchModel
  */
-$this->title = 'Deleted Region Countries';
+$this->title = 'Region Countries';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -60,15 +60,18 @@ $this->params['breadcrumbs'][] = $this->title;
 					'headerRowOptions'	 => ['class' => 'x'],
 					'columns'			 => [
 						[
-							'class' => 'yii\grid\SerialColumn',
+							'class'		 => 'yii\grid\SerialColumn',
+							"options"	 => [
+								"width" => "50px",
+							],
 						],
 						[
 							"attribute"	 => "name",
 							"format"	 => "raw",
 							"options"	 => [],
-							"value"		 => function(RgnCountry $model)
+							"value"		 => function($model)
 						{
-							return $model->operation->linkView;
+							return $model->linkTo;
 						}
 						],
 						'abbreviation',

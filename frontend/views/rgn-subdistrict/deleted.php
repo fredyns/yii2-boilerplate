@@ -22,11 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="clearfix">
 
         <p class="pull-left">
-			<?= RgnDistrictAccess::button('create'); ?>
+			<?= RgnSubdistrictAccess::button('create'); ?>
 		</p>
 
         <div class="pull-right">
-			<?= RgnDistrictAccess::button('index'); ?>
+			<?= RgnSubdistrictAccess::button('index'); ?>
 		</div>
 
     </div>
@@ -58,20 +58,29 @@ $this->params['breadcrumbs'][] = $this->title;
 					'tableOptions'		 => ['class' => 'table table-striped table-bordered table-hover'],
 					'headerRowOptions'	 => ['class' => 'x'],
 					'columns'			 => [
+						[
+							'class'		 => 'yii\grid\SerialColumn',
+							"options"	 => [
+								"width" => "50px",
+							],
+						],
 						'number',
-						'name',
+						[
+							"attribute"	 => "name",
+							"format"	 => "raw",
+							"options"	 => [],
+							"value"		 => function($model)
+						{
+							return $model->linkTo;
+						}
+						],
 						[
 							'attribute'	 => 'district_id',
 							"format"	 => "raw",
 							"options"	 => [],
 							'value'		 => function ($model)
 						{
-							if ($district = $model->getDistrict()->one())
-							{
-								return $district->operation->linkView;
-							}
-
-							return '';
+							return ($model->district) ? $model->district->linkTo : '<span class="label label-warning">?</span>';
 						},
 						],
 						[

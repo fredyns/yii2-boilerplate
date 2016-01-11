@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = 'View';
 
         <div class="panel-body">
 
-			<?php $this->beginBlock('frontend\models\Religion'); ?>
+			<?php $this->beginBlock('Religion'); ?>
 
 			<?=
 
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = 'View';
 					'items'			 => [
 						[
 							'label'		 => '<b class=""># ' . $model->id . '</b>',
-							'content'	 => $this->blocks['frontend\models\Religion'],
+							'content'	 => $this->blocks['Religion'],
 							'active'	 => true,
 						],
 					],

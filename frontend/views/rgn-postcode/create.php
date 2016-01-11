@@ -9,7 +9,7 @@ use cornernote\returnurl\ReturnUrl;
  * @var frontend\models\RgnPostcode $model
  */
 $this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Rgn Postcodes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Region Postcodes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

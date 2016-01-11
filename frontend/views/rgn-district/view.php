@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = 'View';
 
         <div class="panel-body">
 
-			<?php $this->beginBlock('frontend\models\RgnDistrict'); ?>
+			<?php $this->beginBlock('RgnDistrict'); ?>
 
 			<?=
 
@@ -63,16 +63,22 @@ $this->params['breadcrumbs'][] = 'View';
 				'model'		 => $model,
 				'attributes' => [
 					'id',
-					[
-						'attribute'	 => 'status',
-						'value'		 => $model->statusLabel,
-					],
 					'number',
 					'name',
 					[
 						'format'	 => 'html',
 						'attribute'	 => 'city_id',
-						'value'		 => ($model->getCity()->one() ? $model->getCity()->one()->operation->linkView : '<span class="label label-warning">?</span>'),
+						'value'		 => ($model->city ? $model->city->linkTo : '<span class="label label-warning">?</span>'),
+					],
+					[
+						'format'	 => 'html',
+						'attribute'	 => 'province_id',
+						'value'		 => ($model->province ? $model->province->linkTo : '<span class="label label-warning">?</span>'),
+					],
+					[
+						'format'	 => 'html',
+						'attribute'	 => 'country_id',
+						'value'		 => ($model->country ? $model->country->linkTo : '<span class="label label-warning">?</span>'),
 					],
 				],
 			]);
@@ -88,6 +94,77 @@ $this->params['breadcrumbs'][] = 'View';
 
 
 
+			<?php $this->beginBlock('RgnSubdistricts'); ?>
+			<div style='position: relative'>
+				<div style='position:absolute; right: 0px; top: 0px;'>
+
+					<?= RgnSubdistrictAccess::button('index', ['label' => 'All Subdistricts', 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
+
+					<?=
+
+					RgnSubdistrictAccess::button('create', [
+						'label'			 => 'New Subdistrict',
+						'urlOptions'	 => [
+							'RgnSubdistrictForm' => [
+								'country_id'	 => $model->country_id,
+								'province_id'	 => $model->province_id,
+								'city_id'		 => $model->city_id,
+								'district_id'	 => $model->id,
+							],
+						],
+						'buttonOptions'	 => ['class' => 'btn btn-success btn-xs'],
+					]);
+
+					?>
+
+				</div>
+			</div>
+
+			<?php Pjax::begin(['id' => 'pjax-RgnSubdistricts', 'enableReplaceState' => false, 'linkSelector' => '#pjax-RgnSubdistricts ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+			<?=
+
+			'<div class="table-responsive">'
+			. \yii\grid\GridView::widget([
+				'layout'		 => '{summary}{pager}<br/>{items}{pager}',
+				'dataProvider'	 => new \yii\data\ActiveDataProvider([
+					'query'		 => $model->getRgnSubdistricts(),
+					'pagination' => [
+						'pageSize'	 => 50,
+						'pageParam'	 => 'page-rgnsubdistricts',
+					],
+					]),
+				'pager'			 => [
+					'class'			 => yii\widgets\LinkPager::className(),
+					'firstPageLabel' => 'First',
+					'lastPageLabel'	 => 'Last'
+				],
+				'columns'		 => [
+					[
+						'class'		 => 'yii\grid\SerialColumn',
+						"options"	 => [
+							"width" => "50px",
+						],
+					],
+					'number',
+					[
+						"attribute"	 => "name",
+						"format"	 => "raw",
+						"options"	 => [],
+						"value"		 => function($model)
+					{
+						return $model->linkTo;
+					}
+					],
+				]
+			])
+			. '</div>'
+
+			?>
+			<?php Pjax::end() ?>
+			<?php $this->endBlock() ?>
+
+
+
 			<?php $this->beginBlock('RgnPostcodes'); ?>
 			<div style='position: relative'>
 				<div style='position:absolute; right: 0px; top: 0px;'>
@@ -99,7 +176,7 @@ $this->params['breadcrumbs'][] = 'View';
 					RgnPostcodeAccess::button('create', [
 						'label'			 => 'New Postcode',
 						'urlOptions'	 => [
-							'RgnPostcode' => [
+							'RgnPostcodeForm' => [
 								'country_id'	 => $model->country_id,
 								'province_id'	 => $model->province_id,
 								'city_id'		 => $model->city_id,
@@ -134,7 +211,10 @@ $this->params['breadcrumbs'][] = 'View';
 				],
 				'columns'		 => [
 					[
-						'class' => 'yii\grid\SerialColumn',
+						'class'		 => 'yii\grid\SerialColumn',
+						"options"	 => [
+							"width" => "50px",
+						],
 					],
 					[
 						"attribute"	 => "postcode",
@@ -142,7 +222,7 @@ $this->params['breadcrumbs'][] = 'View';
 						"options"	 => [],
 						"value"		 => function($model)
 					{
-						return $model->operation->linkView;
+						return $model->linkTo;
 					}
 					],
 					[
@@ -151,110 +231,17 @@ $this->params['breadcrumbs'][] = 'View';
 						"options"	 => [],
 						'value'		 => function ($model)
 					{
-						/**
-						 * @var RgnSubdistrict $subdistrict
-						 */
-						if ($subdistrict = $model->getSubdistrict()->one())
-						{
-							//return Html::a($rel->name, ['rgn-subdistrict/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-							return $subdistrict->operation->getLinkView($subdistrict->name, ['title' => 'view subdistrict', 'data-pjax' => 0]);
-						}
-
-						return '';
+						return ($model->subdistrict) ? $model->subdistrict->linkTo : '<span class="label label-warning">?</span>';
 					},
 					],
-					[
-						'attribute'	 => 'district_id',
-						"format"	 => "raw",
-						"options"	 => [],
-						'value'		 => function ($model)
-					{
-						/**
-						 * @var RgnDistrict $district
-						 */
-						if ($district = $model->getDistrict()->one())
-						{
-							//return Html::a($rel->name, ['rgn-district/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-							return $district->operation->getLinkView($district->name, ['title' => 'view district', 'data-pjax' => 0]);
-						}
-
-						return '';
-					},
-					],
-					[
-						'attribute'	 => 'city_id',
-						"format"	 => "raw",
-						"options"	 => [],
-						'value'		 => function ($model)
-					{
-						/**
-						 * @var RgnCity $city
-						 */
-						if ($city = $model->getCity()->one())
-						{
-							//return Html::a($rel->name, ['rgn-city/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-							return $city->operation->getLinkView($city->name, ['title' => 'view city', 'data-pjax' => 0]);
-						}
-
-						return '';
-					},
-					],
-				]
-			])
-			. '</div>'
-
-			?>
-			<?php Pjax::end() ?>
-			<?php $this->endBlock() ?>
-
-
-			<?php $this->beginBlock('RgnSubdistricts'); ?>
-			<div style='position: relative'>
-				<div style='position:absolute; right: 0px; top: 0px;'>
-
-					<?= RgnSubdistrictAccess::button('index', ['label' => 'All Subdistricts', 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
-
-					<?= RgnSubdistrictAccess::button('create', ['label' => 'New Subdistrict', 'urlOptions' => [ 'RgnSubdistrict' => ['district_id' => $model->id]], 'buttonOptions' => ['class' => 'btn btn-success btn-xs']]); ?>
-
-				</div>
-			</div>
-
-			<?php Pjax::begin(['id' => 'pjax-RgnSubdistricts', 'enableReplaceState' => false, 'linkSelector' => '#pjax-RgnSubdistricts ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
-			<?=
-
-			'<div class="table-responsive">'
-			. \yii\grid\GridView::widget([
-				'layout'		 => '{summary}{pager}<br/>{items}{pager}',
-				'dataProvider'	 => new \yii\data\ActiveDataProvider([
-					'query'		 => $model->getRgnSubdistricts(),
-					'pagination' => [
-						'pageSize'	 => 50,
-						'pageParam'	 => 'page-rgnsubdistricts',
-					],
-					]),
-				'pager'			 => [
-					'class'			 => yii\widgets\LinkPager::className(),
-					'firstPageLabel' => 'First',
-					'lastPageLabel'	 => 'Last'
 				],
-				'columns'		 => [
-					'id',
-					[
-						'attribute'	 => 'status',
-						'value'		 => function ($model)
-						{
-							return frontend\models\RgnDistrict::getStatusValueLabel($model->status);
-						}
-					],
-					'number',
-					'name',
-				]
 			])
 			. '</div>'
 
 			?>
 			<?php Pjax::end() ?>
 			<?php $this->endBlock() ?>
+
 
 
 			<?=
@@ -266,17 +253,17 @@ $this->params['breadcrumbs'][] = 'View';
 					'items'			 => [
 						[
 							'label'		 => '<b class=""># ' . $model->id . '</b>',
-							'content'	 => $this->blocks['frontend\models\RgnDistrict'],
+							'content'	 => $this->blocks['RgnDistrict'],
 							'active'	 => true,
-						],
-						[
-							'content'	 => $this->blocks['RgnPostcodes'],
-							'label'		 => '<small>Region Postcodes <span class="badge badge-default">' . count($model->getRgnPostcodes()->asArray()->all()) . '</span></small>',
-							'active'	 => false,
 						],
 						[
 							'content'	 => $this->blocks['RgnSubdistricts'],
 							'label'		 => '<small>Region Subdistricts <span class="badge badge-default">' . count($model->getRgnSubdistricts()->asArray()->all()) . '</span></small>',
+							'active'	 => false,
+						],
+						[
+							'content'	 => $this->blocks['RgnPostcodes'],
+							'label'		 => '<small>Region Postcodes <span class="badge badge-default">' . count($model->getRgnPostcodes()->asArray()->all()) . '</span></small>',
 							'active'	 => false,
 						],
 					],

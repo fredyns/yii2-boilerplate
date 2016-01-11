@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = 'View';
 
         <div class="panel-body">
 
-			<?php $this->beginBlock('frontend\models\RgnSubdistrict'); ?>
+			<?php $this->beginBlock('RgnSubdistrict'); ?>
 
 			<?=
 
@@ -61,16 +61,27 @@ $this->params['breadcrumbs'][] = 'View';
 				'model'		 => $model,
 				'attributes' => [
 					'id',
-					[
-						'attribute'	 => 'status',
-						'value'		 => $model->statusLabel,
-					],
 					'number',
 					'name',
 					[
 						'format'	 => 'html',
 						'attribute'	 => 'district_id',
-						'value'		 => ($model->getDistrict()->one() ? Html::a($model->getDistrict()->one()->name, ['rgn-district/view', 'id' => $model->getDistrict()->one()->id,]) : '<span class="label label-warning">?</span>'),
+						'value'		 => ($model->district ? $model->district->linkTo : '<span class="label label-warning">?</span>'),
+					],
+					[
+						'format'	 => 'html',
+						'attribute'	 => 'city_id',
+						'value'		 => ($model->city ? $model->city->linkTo : '<span class="label label-warning">?</span>'),
+					],
+					[
+						'format'	 => 'html',
+						'attribute'	 => 'province_id',
+						'value'		 => ($model->province ? $model->province->linkTo : '<span class="label label-warning">?</span>'),
+					],
+					[
+						'format'	 => 'html',
+						'attribute'	 => 'country_id',
+						'value'		 => ($model->country ? $model->country->linkTo : '<span class="label label-warning">?</span>'),
 					],
 				],
 			]);
@@ -97,7 +108,7 @@ $this->params['breadcrumbs'][] = 'View';
 					RgnPostcodeAccess::button('create', [
 						'label'			 => 'New Postcode',
 						'urlOptions'	 => [
-							'RgnPostcode' => [
+							'RgnPostcodeForm' => [
 								'country_id'	 => $model->country_id,
 								'province_id'	 => $model->province_id,
 								'city_id'		 => $model->city_id,
@@ -132,7 +143,10 @@ $this->params['breadcrumbs'][] = 'View';
 				],
 				'columns'		 => [
 					[
-						'class' => 'yii\grid\SerialColumn',
+						'class'		 => 'yii\grid\SerialColumn',
+						"options"	 => [
+							"width" => "50px",
+						],
 					],
 					[
 						"attribute"	 => "postcode",
@@ -140,64 +154,10 @@ $this->params['breadcrumbs'][] = 'View';
 						"options"	 => [],
 						"value"		 => function($model)
 					{
-						return $model->operation->linkView;
+						return $model->linkTo;
 					}
 					],
-					[
-						'attribute'	 => 'subdistrict_id',
-						"format"	 => "raw",
-						"options"	 => [],
-						'value'		 => function ($model)
-					{
-						/**
-						 * @var RgnSubdistrict $subdistrict
-						 */
-						if ($subdistrict = $model->getSubdistrict()->one())
-						{
-							//return Html::a($rel->name, ['rgn-subdistrict/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-							return $subdistrict->operation->getLinkView($subdistrict->name, ['title' => 'view subdistrict', 'data-pjax' => 0]);
-						}
-
-						return '';
-					},
-					],
-					[
-						'attribute'	 => 'district_id',
-						"format"	 => "raw",
-						"options"	 => [],
-						'value'		 => function ($model)
-					{
-						/**
-						 * @var RgnDistrict $district
-						 */
-						if ($district = $model->getDistrict()->one())
-						{
-							//return Html::a($rel->name, ['rgn-district/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-							return $district->operation->getLinkView($district->name, ['title' => 'view district', 'data-pjax' => 0]);
-						}
-
-						return '';
-					},
-					],
-					[
-						'attribute'	 => 'city_id',
-						"format"	 => "raw",
-						"options"	 => [],
-						'value'		 => function ($model)
-					{
-						/**
-						 * @var RgnCity $city
-						 */
-						if ($city = $model->getCity()->one())
-						{
-							//return Html::a($rel->name, ['rgn-city/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-							return $city->operation->getLinkView($city->name, ['title' => 'view city', 'data-pjax' => 0]);
-						}
-
-						return '';
-					},
-					],
-				]
+				],
 			])
 			. '</div>'
 
@@ -215,7 +175,7 @@ $this->params['breadcrumbs'][] = 'View';
 					'items'			 => [
 						[
 							'label'		 => '<b class=""># ' . $model->id . '</b>',
-							'content'	 => $this->blocks['frontend\models\RgnSubdistrict'],
+							'content'	 => $this->blocks['RgnSubdistrict'],
 							'active'	 => true,
 						],
 						[

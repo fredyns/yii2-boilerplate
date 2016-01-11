@@ -9,7 +9,7 @@ use cornernote\returnurl\ReturnUrl;
  * @var frontend\models\RgnCountry $model
  */
 $this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Rgn Countries', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Region Countries', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

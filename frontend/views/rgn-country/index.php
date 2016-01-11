@@ -60,7 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
 					'headerRowOptions'	 => ['class' => 'x'],
 					'columns'			 => [
 						[
-							'class' => 'yii\grid\SerialColumn',
+							'class'		 => 'yii\grid\SerialColumn',
+							"options"	 => [
+								"width" => "50px",
+							],
 						],
 						[
 							"attribute"	 => "name",
@@ -68,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							"options"	 => [],
 							"value"		 => function($model)
 						{
-							return $model->operation->linkView;
+							return $model->linkTo;
 						}
 						],
 						'abbreviation',

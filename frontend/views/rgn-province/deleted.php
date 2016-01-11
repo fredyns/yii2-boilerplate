@@ -11,7 +11,7 @@ use frontend\models\access\RgnProvinceAccess;
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var frontend\models\search\RgnProvinceSearch $searchModel
  */
-$this->title = 'Deleted Region Provinces';
+$this->title = 'Region Provinces';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -60,18 +60,21 @@ $this->params['breadcrumbs'][] = $this->title;
 					'headerRowOptions'	 => ['class' => 'x'],
 					'columns'			 => [
 						[
-							'class' => 'yii\grid\SerialColumn',
+							'class'		 => 'yii\grid\SerialColumn',
+							"options"	 => [
+								"width" => "50px",
+							],
 						],
+						'number',
 						[
 							"attribute"	 => "name",
 							"format"	 => "raw",
 							"options"	 => [],
 							"value"		 => function(RgnProvince $model)
 						{
-							return $model->operation->linkView;
+							return $model->linkTo;
 						}
 						],
-						'number',
 						'abbreviation',
 						[
 							'attribute'	 => 'country_id',
@@ -79,12 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							"options"	 => [],
 							'value'		 => function ($model)
 						{
-							if ($country = $model->getCountry()->one())
-							{
-								return $country->operation->linkView;
-							}
-
-							return '';
+							return ($model->country) ? $model->country->linkTo : '<span class="label label-warning">?</span>';
 						},
 						],
 						[
@@ -94,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
 								"width" => "120px",
 							],
 							"format"	 => "raw",
-							"value"		 => function(RgnCountry $model)
+							"value"		 => function(RgnProvince $model)
 						{
 							return $model->operation->widgetDropdown();
 						},

@@ -10,7 +10,7 @@ use frontend\models\access\RgnPostcodeAccess;
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var frontend\models\search\RgnPostcodeSearch $searchModel
  */
-$this->title = 'Rgn Postcodes';
+$this->title = 'Region Postcodes';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -59,7 +59,10 @@ $this->params['breadcrumbs'][] = $this->title;
 					'headerRowOptions'	 => ['class' => 'x'],
 					'columns'			 => [
 						[
-							'class' => 'yii\grid\SerialColumn',
+							'class'		 => 'yii\grid\SerialColumn',
+							"options"	 => [
+								"width" => "50px",
+							],
 						],
 						[
 							"attribute"	 => "postcode",
@@ -67,21 +70,16 @@ $this->params['breadcrumbs'][] = $this->title;
 							"options"	 => [],
 							"value"		 => function($model)
 						{
-							return $model->operation->linkView;
+							return $model->linkTo;
 						}
 						],
 						[
-							'attribute'	 => 'country_id',
+							'attribute'	 => 'province_id',
 							"format"	 => "raw",
 							"options"	 => [],
 							'value'		 => function ($model)
 						{
-							if ($country = $model->getCountry()->one())
-							{
-								return $country->operation->getLinkView($country->name, ['title' => 'view country', 'data-pjax' => 0]);
-							}
-
-							return '';
+							return ($model->province) ? $model->province->linkTo : '<span class="label label-warning">?</span>';
 						},
 						],
 						[
@@ -90,24 +88,16 @@ $this->params['breadcrumbs'][] = $this->title;
 							"options"	 => [],
 							'value'		 => function ($model)
 						{
-							if ($city = $model->getCity()->one())
-							{
-								return $city->operation->getLinkView($city->name, ['title' => 'view city', 'data-pjax' => 0]);
-							}
-
-							return '';
+							return ($model->city) ? $model->city->linkTo : '<span class="label label-warning">?</span>';
 						},
 						],
 						[
-							"class"		 => \yii\grid\DataColumn::className(),
-							"label"		 => 'Action',
-							"options"	 => [
-								"width" => "120px",
-							],
+							'attribute'	 => 'district_id',
 							"format"	 => "raw",
-							"value"		 => function($model)
+							"options"	 => [],
+							'value'		 => function ($model)
 						{
-							return $model->operation->widgetDropdown();
+							return ($model->district) ? $model->district->linkTo : '<span class="label label-warning">?</span>';
 						},
 						],
 					],

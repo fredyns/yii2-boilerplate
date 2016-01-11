@@ -6,8 +6,8 @@ use yii\helpers\Html;
  * @var yii\web\View $this
  * @var frontend\models\RgnPostcode $model
  */
-$this->title = 'Rgn Postcode ' . $model->id . ', ' . 'Edit';
-$this->params['breadcrumbs'][] = ['label' => 'Rgn Postcodes', 'url' => ['index']];
+$this->title = 'Region Postcode ' . $model->id . ', ' . 'Edit';
+$this->params['breadcrumbs'][] = ['label' => 'Region Postcodes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string) $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Edit';
 

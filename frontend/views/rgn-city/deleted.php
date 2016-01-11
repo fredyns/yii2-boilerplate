@@ -60,10 +60,21 @@ $this->params['breadcrumbs'][] = $this->title;
 					'headerRowOptions'	 => ['class' => 'x'],
 					'columns'			 => [
 						[
-							'class' => 'yii\grid\SerialColumn',
+							'class'		 => 'yii\grid\SerialColumn',
+							"options"	 => [
+								"width" => "50px",
+							],
 						],
 						'number',
-						'name',
+						[
+							"attribute"	 => "name",
+							"format"	 => "raw",
+							"options"	 => [],
+							"value"		 => function($model)
+						{
+							return $model->linkTo;
+						}
+						],
 						'abbreviation',
 						[
 							'attribute'	 => 'province_id',
@@ -71,12 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							"options"	 => [],
 							'value'		 => function ($model)
 						{
-							if ($province = $model->getProvince()->one())
-							{
-								return $province->operation->linkView;
-							}
-
-							return '';
+							return ($model->province) ? $model->province->linkTo : '<span class="label label-warning">?</span>';
 						},
 						],
 						[

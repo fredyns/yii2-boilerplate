@@ -69,7 +69,7 @@ use kartik\depdrop\DepDrop;
 								'depends'		 => ['rgnsubdistrictform-city_id'],
 								'url'			 => Url::to([
 									'/rgn-district/depdrop-options',
-									'selected' => $model->city_id,
+									'selected' => $model->district_id,
 								]),
 								'loadingText'	 => 'Loading districts ...',
 							],
