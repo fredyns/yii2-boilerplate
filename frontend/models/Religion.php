@@ -11,6 +11,8 @@ use yii\helpers\Html;
  * Description of Religion
  *
  * @author fredy
+ *
+ * @property String $linkTo
  */
 class Religion extends BaseReligion
 {
@@ -22,6 +24,12 @@ class Religion extends BaseReligion
 		$this->operation = new ReligionOperation([
 			'model' => $this
 		]);
+
+	}
+
+	public function getLinkTo($linkOptions = ['title' => 'view religion detail', 'data-pjax' => 0])
+	{
+		return $this->operation->getLinkView('', $linkOptions);
 
 	}
 

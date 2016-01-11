@@ -11,6 +11,7 @@ use frontend\models\operation\RgnPostcodeOperation;
  *
  * @author fredy
  *
+ * @property String $linkTo
  * @property \frontend\models\RgnCountry $country
  * @property \frontend\models\RgnProvince $province
  * @property \frontend\models\RgnCity $city
@@ -27,6 +28,12 @@ class RgnPostcode extends BasePostcode
 		$this->operation = new RgnPostcodeOperation([
 			'model' => $this
 		]);
+
+	}
+
+	public function getLinkTo($linkOptions = ['title' => 'view postcode detail', 'data-pjax' => 0])
+	{
+		return $this->operation->getLinkView('', $linkOptions);
 
 	}
 

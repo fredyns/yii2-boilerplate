@@ -13,6 +13,7 @@ use frontend\models\RgnPostcode;
  *
  * @author fredy
  *
+ * @property String $linkTo
  * @property \frontend\models\RgnCountry $country
  * @property \frontend\models\RgnProvince $province
  * @property \frontend\models\RgnCity $city
@@ -33,13 +34,19 @@ class RgnSubdistrict extends BaseSubdistrict
 
 	}
 
+	public function getLinkTo($linkOptions = ['title' => 'view subdistrict detail', 'data-pjax' => 0])
+	{
+		return $this->operation->getLinkView('', $linkOptions);
+
+	}
+
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
 	public function getRgnPostcodes()
 	{
 		return $this
-				->hasMany(RgnPostcode::className(), ['district_id' => 'id'])
+				->hasMany(RgnPostcode::className(), ['subdistrict_id' => 'id'])
 				->andFilterWhere(['like', 'status', RgnPostcode::STATUS_ACTIVE]);
 
 	}

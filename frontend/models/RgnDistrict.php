@@ -14,6 +14,7 @@ use frontend\models\RgnPostcode;
  *
  * @author fredy
  *
+ * @property String $linkTo
  * @property \frontend\models\RgnCountry $country
  * @property \frontend\models\RgnProvince $province
  * @property \frontend\models\RgnCity $city
@@ -31,6 +32,12 @@ class RgnDistrict extends BaseDistrict
 		$this->operation = new RgnDistrictOperation([
 			'model' => $this
 		]);
+
+	}
+
+	public function getLinkTo($linkOptions = ['title' => 'view district detail', 'data-pjax' => 0])
+	{
+		return $this->operation->getLinkView('', $linkOptions);
 
 	}
 

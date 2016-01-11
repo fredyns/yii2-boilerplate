@@ -13,6 +13,8 @@ use frontend\models\RgnPostcode;
  *
  * @author fredy
  *
+ * @property String $linkTo
+ *
  * @property \frontend\models\RgnPostcode[] $rgnPostcodes
  * @property \frontend\models\RgnProvince[] $rgnProvinces
  */
@@ -26,6 +28,12 @@ class RgnCountry extends BaseCountry
 		$this->operation = new RgnCountryOperation([
 			'model' => $this
 		]);
+
+	}
+
+	public function getLinkTo($linkOptions = ['title' => 'view country detail', 'data-pjax' => 0])
+	{
+		return $this->operation->getLinkView('', $linkOptions);
 
 	}
 
