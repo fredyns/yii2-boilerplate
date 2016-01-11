@@ -41,9 +41,11 @@ class Moderation extends \yii\base\Widget
 	{
 		$this->output .= $this->tag_open;
 
+		$this->parseStatus();
+
 		foreach ($this->types as $state)
 		{
-			self::parseModeration($state);
+			$this->parseModeration($state);
 		}
 
 		$this->output .= $this->tag_close;
@@ -52,11 +54,20 @@ class Moderation extends \yii\base\Widget
 
 	}
 
+	public function parseStatus()
+	{
+		if ($this->model->hasAttribute('status'))
+		{
+			$this->output .= "Status: {$this->model->status}<br/>";
+		}
+
+	}
+
 	public function parseModeration($state)
 	{
 		$title = ucfirst($state);
-		$moderator = self::getModerator($state);
-		$moderation = self::getModeration($state);
+		$moderator = $this->getModerator($state);
+		$moderation = $this->getModeration($state);
 
 		if ($moderator OR $moderation)
 		{
