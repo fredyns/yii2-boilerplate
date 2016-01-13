@@ -111,6 +111,26 @@
 							],
 						],
 					],
+					[
+						'label'	 => 'Modules',
+						'icon'	 => 'fa fa-share',
+						'url'	 => '#',
+						'items'	 => [
+							[
+								'label'	 => 'Region',
+								'icon'	 => 'fa fa-circle-o',
+								'url'	 => '/region',
+								'items'	 => [
+									['label' => 'Country', 'icon' => 'fa fa-circle-o', 'url' => ['/region/country'],],
+									['label' => 'Province', 'icon' => 'fa fa-circle-o', 'url' => ['/region/province'],],
+									['label' => 'City', 'icon' => 'fa fa-circle-o', 'url' => ['/region/city'],],
+									['label' => 'District', 'icon' => 'fa fa-circle-o', 'url' => ['/region/district'],],
+									['label' => 'Subdistrict', 'icon' => 'fa fa-circle-o', 'url' => ['/region/subdistrict'],],
+									['label' => 'Postcode', 'icon' => 'fa fa-circle-o', 'url' => ['/region/postcode'],],
+								],
+							],
+						],
+					],
 				],
 			]
 		)
