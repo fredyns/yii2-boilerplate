@@ -70,7 +70,7 @@ class RgnProvinceController extends Controller
 		Url::remember();
 		\Yii::$app->session['__crudReturnUrl'] = null;
 
-		return $this->render('index', [
+		return $this->render('deleted', [
 				'dataProvider'	 => $dataProvider,
 				'searchModel'	 => $searchModel,
 		]);
