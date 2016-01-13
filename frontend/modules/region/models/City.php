@@ -195,6 +195,7 @@ class City extends \common\base\Model
 		{
 			return $labels[$value];
 		}
+
 		return $value;
 
 	}
@@ -220,7 +221,7 @@ class City extends \common\base\Model
 
 	public function getStatusLabel()
 	{
-		return parent::getStatusValueLabel($this->status);
+		return static::getStatusValueLabel($this->status);
 
 	}
 
