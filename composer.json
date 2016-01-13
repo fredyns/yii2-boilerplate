@@ -47,7 +47,9 @@
 		"kartik-v/yii2-widget-depdrop": "^1.0",
 		"box/spout": "^2.3",
 		"vova07/yii2-imperavi-widget": "^1.2",
-		"cornernote/yii2-returnurl": "^1.0"
+		"cornernote/yii2-returnurl": "^1.0",
+		"dmstr/yii2-helpers": "^0.2.0",
+		"insolita/yii2-adminlte-widgets": "^1.1"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",
