@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use \dmstr\bootstrap\Tabs;
+use dmstr\bootstrap\Tabs;
 
 /**
  * @var yii\web\View $this
@@ -39,7 +39,6 @@ use \dmstr\bootstrap\Tabs;
 				<?php $this->beginBlock('main'); ?>
 
                 <p>
-
 					<?= $form->field($model, 'id')->textInput(['disabled' => 'disabled', 'placeholder' => 'autonumber']) ?>
 					<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 					<?= $form->field($model, 'abbreviation')->textInput(['maxlength' => true]) ?>
