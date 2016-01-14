@@ -70,7 +70,7 @@ class RgnPostcodeController extends Controller
 		Url::remember();
 		\Yii::$app->session['__crudReturnUrl'] = null;
 
-		return $this->render('index', [
+		return $this->render('deleted', [
 				'dataProvider'	 => $dataProvider,
 				'searchModel'	 => $searchModel,
 		]);
@@ -145,6 +145,11 @@ class RgnPostcodeController extends Controller
 	public function actionUpdate($id)
 	{
 		$model = $this->findForm($id);
+
+		if ($model->operation->allowUpdate == FALSE)
+		{
+			throw $model->operation->exception('update');
+		}
 
 		if ($model->load($_POST) && $model->save())
 		{
