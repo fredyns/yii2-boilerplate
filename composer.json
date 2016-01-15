@@ -1,8 +1,8 @@
 {
-	"name": "yiisoft/yii2-app-advanced",
-	"description": "Yii 2 Advanced Project Template",
+	"name": "fredyns/yii2-boilerplate",
+	"description": "Yii 2 Project Template",
 	"keywords": ["yii2", "framework", "advanced", "project template"],
-	"homepage": "http://www.yiiframework.com/",
+	"homepage": "http://fredyns.net/",
 	"type": "project",
 	"license": "BSD-3-Clause",
 	"support": {
