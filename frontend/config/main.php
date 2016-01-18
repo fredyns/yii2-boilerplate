@@ -43,4 +43,9 @@ return [
 	 */
 	],
 	'params'				 => $params,
+	'modules'				 => [
+		'region' => [
+			'class' => 'frontend\modules\region\Module',
+		],
+	],
 ];
