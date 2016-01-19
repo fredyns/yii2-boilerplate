@@ -97,10 +97,13 @@ class RgnPostcode extends BaseRgnPostcode
 
 	}
 
-	/*
-	 * search data based on number & country
+	/**
+	 * search model based on number & country
+	 *
+	 * @param integer $number
+	 * @param integer $country_id
+	 * @return RgnPostcode
 	 */
-
 	static function findNumber($number, $country_id)
 	{
 		return static::findOne([
@@ -110,10 +113,12 @@ class RgnPostcode extends BaseRgnPostcode
 
 	}
 
-	/*
+	/**
 	 * Revalidate and/or save postcode
+	 *
+	 * @param type $param
+	 * @return type
 	 */
-
 	static function check($param = [])
 	{
 		$country_id = ArrayHelper::getValue($param, 'country_id');
@@ -135,10 +140,12 @@ class RgnPostcode extends BaseRgnPostcode
 
 	}
 
-	/*
+	/**
 	 * improve data & save it
+	 *
+	 * @param array $newData
+	 * @return \common\models\RgnPostcode
 	 */
-
 	public function improveData($newData)
 	{
 		$improved = FALSE;
@@ -215,12 +222,20 @@ class RgnPostcode extends BaseRgnPostcode
 
 	}
 
+	/**
+	 * get status label
+	 *
+	 * @return string
+	 */
 	public function getStatusLabel()
 	{
 		return parent::getStatusValueLabel($this->status);
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function delete()
 	{
 		$this->status = static::STATUS_ACTIVE;
@@ -229,6 +244,9 @@ class RgnPostcode extends BaseRgnPostcode
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function restore()
 	{
 		$this->status = static::STATUS_ACTIVE;

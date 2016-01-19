@@ -17,6 +17,9 @@ use yii\helpers\Html;
 class Religion extends BaseReligion
 {
 
+	/**
+	 * @inheritdoc
+	 */
 	public function init()
 	{
 		parent::init();
@@ -27,6 +30,12 @@ class Religion extends BaseReligion
 
 	}
 
+	/**
+	 * generate regular link to view model detail
+	 *
+	 * @param array $linkOptions
+	 * @return string
+	 */
 	public function getLinkTo($linkOptions = ['title' => 'view religion detail', 'data-pjax' => 0])
 	{
 		return $this->operation->getLinkView('', $linkOptions);

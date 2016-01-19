@@ -71,12 +71,20 @@ class RgnProvince extends BaseRgnProvince
 
 	}
 
+	/**
+	 * get status label
+	 *
+	 * @return string
+	 */
 	public function getStatusLabel()
 	{
 		return parent::getStatusValueLabel($this->status);
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function delete()
 	{
 		$this->status = static::STATUS_ACTIVE;
@@ -85,6 +93,9 @@ class RgnProvince extends BaseRgnProvince
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function restore()
 	{
 		$this->status = static::STATUS_ACTIVE;

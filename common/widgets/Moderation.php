@@ -6,7 +6,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
- * Description of Moderation
+ * generate widget to display status & model moderation
  *
  * @author fredy
  */
@@ -26,7 +26,7 @@ class Moderation extends \yii\base\Widget
 	public $nameField = ['username'];
 
 	/**
-	 * Initializes the widget.
+	 * @inheritdoc
 	 */
 	public function init()
 	{
@@ -36,6 +36,8 @@ class Moderation extends \yii\base\Widget
 
 	/**
 	 * Renders the widget.
+	 *
+	 * @return string
 	 */
 	public function run()
 	{
@@ -54,6 +56,9 @@ class Moderation extends \yii\base\Widget
 
 	}
 
+	/**
+	 * parsing status property
+	 */
 	public function parseStatus()
 	{
 		if ($this->model->hasAttribute('status'))
@@ -63,6 +68,11 @@ class Moderation extends \yii\base\Widget
 
 	}
 
+	/**
+	 * parse moderation property
+	 *
+	 * @param string $state
+	 */
 	public function parseModeration($state)
 	{
 		$title = ucfirst($state);
@@ -88,6 +98,12 @@ class Moderation extends \yii\base\Widget
 
 	}
 
+	/**
+	 * parse blamable user for moderating
+	 *
+	 * @param string $state
+	 * @return string
+	 */
 	public function getModerator($state)
 	{
 		$title = ucfirst($state);
@@ -116,6 +132,12 @@ class Moderation extends \yii\base\Widget
 
 	}
 
+	/**
+	 * formating moderation timestamps
+	 *
+	 * @param string $state
+	 * @return string
+	 */
 	public function getModeration($state)
 	{
 		$time = $this->model->getAttribute($state . '_at');

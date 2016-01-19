@@ -21,6 +21,9 @@ use frontend\models\operation\RgnPostcodeOperation;
 class RgnPostcode extends BasePostcode
 {
 
+	/**
+	 * @inheritdoc
+	 */
 	public function init()
 	{
 		parent::init();
@@ -31,6 +34,12 @@ class RgnPostcode extends BasePostcode
 
 	}
 
+	/**
+	 * generate regular link to view model detail
+	 *
+	 * @param array $linkOptions
+	 * @return string
+	 */
 	public function getLinkTo($linkOptions = ['title' => 'view postcode detail', 'data-pjax' => 0])
 	{
 		return $this->operation->getLinkView('', $linkOptions);

@@ -3,7 +3,7 @@
 namespace common\helpers;
 
 /**
- * Description of InputHelper
+ * some input filter
  *
  * @author fredy
  */

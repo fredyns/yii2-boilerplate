@@ -9,15 +9,26 @@ use yii\db\BaseActiveRecord;
 use common\models\RgnSubdistrict;
 
 /**
- * Description of RgnSubdistrictBehavior
+ * handling subdistrict property
+ * when typing a name instead of selecting, it will be inserted as new subdistrict
  *
  * @author fredy
  */
 class RgnSubdistrictBehavior extends AttributeBehavior
 {
 
+	/**
+	 * name of district property where the subdistrict belong
+	 *
+	 * @var string
+	 */
 	public $districtAttribute = 'district_id';
 
+	/**
+	 * name of district property to handle
+	 *
+	 * @var string
+	 */
 	public $subdistrictAttribute = 'subdistrict_id';
 
 	public $value;

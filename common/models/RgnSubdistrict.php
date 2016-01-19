@@ -123,7 +123,7 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 	}
 
 	/**
-	 * @return \yii\db\ActiveQuery
+	 * @return RgnCity
 	 */
 	public function getCity()
 	{
@@ -145,7 +145,7 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 	}
 
 	/**
-	 * @return \yii\db\ActiveQuery
+	 * @return RgnProvince
 	 */
 	public function getProvince()
 	{
@@ -162,7 +162,7 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 	}
 
 	/**
-	 * @return \yii\db\ActiveQuery
+	 * @return RgnCountry
 	 */
 	public function getCountry()
 	{
@@ -178,12 +178,20 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 
 	}
 
+	/**
+	 * get status label
+	 *
+	 * @return string
+	 */
 	public function getStatusLabel()
 	{
 		return parent::getStatusValueLabel($this->status);
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function delete()
 	{
 		$this->status = static::STATUS_ACTIVE;
@@ -192,6 +200,9 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function restore()
 	{
 		$this->status = static::STATUS_ACTIVE;

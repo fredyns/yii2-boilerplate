@@ -25,6 +25,9 @@ use frontend\models\RgnPostcode;
 class RgnDistrict extends BaseDistrict
 {
 
+	/**
+	 * @inheritdoc
+	 */
 	public function init()
 	{
 		parent::init();
@@ -35,6 +38,12 @@ class RgnDistrict extends BaseDistrict
 
 	}
 
+	/**
+	 * generate regular link to view model detail
+	 *
+	 * @param array $linkOptions
+	 * @return string
+	 */
 	public function getLinkTo($linkOptions = ['title' => 'view district detail', 'data-pjax' => 0])
 	{
 		return $this->operation->getLinkView('', $linkOptions);

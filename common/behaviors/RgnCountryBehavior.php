@@ -9,13 +9,19 @@ use yii\db\BaseActiveRecord;
 use common\models\RgnCountry;
 
 /**
- * Description of CountryBehavior
+ * handling country property
+ * when typing a name instead of selecting, it will be inserted as new country
  *
  * @author fredy
  */
 class RgnCountryBehavior extends AttributeBehavior
 {
 
+	/**
+	 * name of country property to handle
+	 *
+	 * @var string
+	 */
 	public $countryAttribute = 'country_id';
 
 	public $value;

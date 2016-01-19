@@ -9,15 +9,26 @@ use yii\db\BaseActiveRecord;
 use common\models\RgnDistrict;
 
 /**
- * Description of RgnDistrictBehavior
+ * handling country property
+ * when typing a name instead of selecting, it will be inserted as new country
  *
  * @author fredy
  */
 class RgnDistrictBehavior extends AttributeBehavior
 {
 
+	/**
+	 * name of city property where the district belong
+	 *
+	 * @var string
+	 */
 	public $cityAttribute = 'city_id';
 
+	/**
+	 * name of district property to handle
+	 *
+	 * @var string
+	 */
 	public $districtAttribute = 'district_id';
 
 	public $value;

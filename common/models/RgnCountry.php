@@ -14,10 +14,11 @@ use yii\helpers\ArrayHelper;
 class RgnCountry extends BaseRgnCountry
 {
 
-	/*
+	/**
 	 * Preparing option data for forms
+	 *
+	 * @return array
 	 */
-
 	static function asOption()
 	{
 		$query = static::find()->all();
@@ -71,12 +72,20 @@ class RgnCountry extends BaseRgnCountry
 
 	}
 
+	/**
+	 * get status label
+	 *
+	 * @return string
+	 */
 	public function getStatusLabel()
 	{
 		return parent::getStatusValueLabel($this->status);
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function delete()
 	{
 		$this->status = static::STATUS_ACTIVE;
@@ -85,6 +94,9 @@ class RgnCountry extends BaseRgnCountry
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function restore()
 	{
 		$this->status = static::STATUS_ACTIVE;

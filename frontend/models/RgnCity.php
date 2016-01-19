@@ -24,6 +24,9 @@ use frontend\models\RgnPostcode;
 class RgnCity extends BaseCity
 {
 
+	/**
+	 * @inheritdoc
+	 */
 	public function init()
 	{
 		parent::init();
@@ -34,6 +37,12 @@ class RgnCity extends BaseCity
 
 	}
 
+	/**
+	 * generate regular link to view model detail
+	 *
+	 * @param array $linkOptions
+	 * @return string
+	 */
 	public function getLinkTo($linkOptions = ['title' => 'view city detail', 'data-pjax' => 0])
 	{
 		return $this->operation->getLinkView('', $linkOptions);

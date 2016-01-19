@@ -23,6 +23,9 @@ use frontend\models\RgnPostcode;
 class RgnProvince extends BaseProvince
 {
 
+	/**
+	 * @inheritdoc
+	 */
 	public function init()
 	{
 		parent::init();
@@ -33,6 +36,12 @@ class RgnProvince extends BaseProvince
 
 	}
 
+	/**
+	 * generate regular link to view model detail
+	 *
+	 * @param array $linkOptions
+	 * @return string
+	 */
 	public function getLinkTo($linkOptions = ['title' => 'view province detail', 'data-pjax' => 0])
 	{
 		return $this->operation->getLinkView('', $linkOptions);

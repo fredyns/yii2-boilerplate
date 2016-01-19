@@ -9,15 +9,26 @@ use yii\db\BaseActiveRecord;
 use common\models\RgnCity;
 
 /**
- * Description of CityBehavior
+ * handling city property
+ * when typing a name instead of selecting, it will be inserted as new city
  *
  * @author fredy
  */
 class RgnCityBehavior extends AttributeBehavior
 {
 
+	/**
+	 * name of province property where the city belong
+	 *
+	 * @var string
+	 */
 	public $provinceAttribute = 'province_id';
 
+	/**
+	 * name of city property to handle
+	 *
+	 * @var string
+	 */
 	public $cityAttribute = 'city_id';
 
 	public $value;

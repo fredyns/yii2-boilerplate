@@ -102,7 +102,7 @@ class RgnCity extends BaseRgnCity
 	}
 
 	/**
-	 * @return \yii\db\ActiveQuery
+	 * @return RgnCountry
 	 */
 	public function getCountry()
 	{
@@ -123,12 +123,20 @@ class RgnCity extends BaseRgnCity
 
 	}
 
+	/**
+	 * get status label
+	 *
+	 * @return string
+	 */
 	public function getStatusLabel()
 	{
 		return parent::getStatusValueLabel($this->status);
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function delete()
 	{
 		$this->status = static::STATUS_ACTIVE;
@@ -137,6 +145,9 @@ class RgnCity extends BaseRgnCity
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function restore()
 	{
 		$this->status = static::STATUS_ACTIVE;

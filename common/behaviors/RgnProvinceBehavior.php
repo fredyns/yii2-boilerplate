@@ -9,15 +9,26 @@ use yii\db\BaseActiveRecord;
 use common\models\RgnProvince;
 
 /**
- * Description of ProvinceBehavior
+ * handling province property
+ * when typing a name instead of selecting, it will be inserted as new province
  *
  * @author fredy
  */
 class RgnProvinceBehavior extends AttributeBehavior
 {
 
+	/**
+	 * name of country property where the province belong
+	 *
+	 * @var string
+	 */
 	public $countryAttribute = 'country_id';
 
+	/**
+	 * name of province property to handle
+	 *
+	 * @var string
+	 */
 	public $provinceAttribute = 'province_id';
 
 	public $value;
