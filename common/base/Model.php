@@ -7,9 +7,9 @@ use yii\helpers\ArrayHelper;
 use common\models\User;
 
 /**
- * Model
- * tambahan fungsi untuk active record
  * @inheritdoc
+ * base class for all model
+ *
  * @author fredy
  *
  * @property boolean $isSoftDeleteEnabled
@@ -29,6 +29,9 @@ class Model extends \yii\db\ActiveRecord
 
 	/* ======================== model structure ======================== */
 
+	/**
+	 * @inheritdoc
+	 */
 	public function init()
 	{
 		parent::init();
@@ -41,20 +44,23 @@ class Model extends \yii\db\ActiveRecord
 
 	/* ======================== model helper ======================== */
 
-	/*
+	/**
 	 * check soft-delete functionality
+	 *
+	 * @return boolean
 	 */
-
 	public function getIsSoftDeleteEnabled()
 	{
 		return $this->hasAttribute('deleted_at');
 
 	}
 
-	/*
+	/**
 	 * copy values from other model
+	 *
+	 * @param Model $source
+	 * @param Array $attributes
 	 */
-
 	public function copyValues($source, $attributes)
 	{
 		foreach ($attributes as $targetAttribute => $sourceAttribute)
@@ -69,10 +75,14 @@ class Model extends \yii\db\ActiveRecord
 
 	}
 
-	/*
+	/**
 	 * return an attribute from hasOne-relationship
+	 *
+	 * @param String $relationGetter
+	 * @param String $attribute
+	 * @param String $default
+	 * @return String
 	 */
-
 	public function getRelatedAttribute($relationGetter = NULL, $attribute = NULL, $default = NULL)
 	{
 		if (is_string($relationGetter) && is_string($attribute))
@@ -136,6 +146,8 @@ class Model extends \yii\db\ActiveRecord
 	/**
 	 * prefering soft-delete instead of deleting permanently
 	 * adding delete time & blamable user
+	 *
+	 * @return boolean
 	 */
 	public function softDelete()
 	{
@@ -161,6 +173,8 @@ class Model extends \yii\db\ActiveRecord
 
 	/**
 	 * restore model after soft delete
+	 *
+	 * @return boolean
 	 */
 	public function restore()
 	{
@@ -180,6 +194,8 @@ class Model extends \yii\db\ActiveRecord
 
 	/**
 	 * permanently delete model
+	 *
+	 * @return boolean
 	 */
 	public function hardDelete()
 	{

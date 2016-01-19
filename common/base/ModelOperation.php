@@ -39,18 +39,53 @@ class ModelOperation extends \yii\base\Object
 
 	const TYPE_BUTTON = 'button';
 
+	/**
+	 * model tro control
+	 *
+	 * @var Model
+	 */
 	public $model;
 
+	/**
+	 * store permission for checked operation
+	 *
+	 * @var array
+	 */
 	public $allowed = [];
 
+	/**
+	 * error messages generated while checking permission
+	 *
+	 * @var type
+	 */
 	public $errorMessages = [];
 
+	/**
+	 * separator when generating regular link list
+	 *
+	 * @var string
+	 */
 	public $link_separator = ' &centerdot; ';
 
+	/**
+	 * widget type to generate
+	 *
+	 * @var string
+	 */
 	public $type = 'dropdown';
 
+	/**
+	 * default operation to show
+	 *
+	 * @var array
+	 */
 	public $items = ['view', 'update', 'delete'];
 
+	/**
+	 * widget align
+	 *
+	 * @var string : left|right
+	 */
 	public $align = 'right';
 
 	//* ================ general ================ *//
@@ -83,6 +118,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * get link parameters for operation menu
+	 *
+	 * @param String $name
+	 * @param Array $options
+	 * @return Array
+	 */
 	public function params($name = '', $options = [])
 	{
 		$method = 'getParams' . Inflector::camelize($name);
@@ -96,6 +138,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * prepare parameter for regular link or button
+	 *
+	 * @param Array $param
+	 * @param Array $use used feature: icon|button
+	 * @return Array
+	 */
 	public function prepareParam($param, $use = [])
 	{
 		$icon = ArrayHelper::remove($param, 'icon');
@@ -116,9 +165,11 @@ class ModelOperation extends \yii\base\Object
 	}
 
 	/**
-	 * generate url params
+	 * get url parameter for particular operation
 	 *
-	 * @param type $name
+	 * @param String $name
+	 * @param Array $options
+	 * @return Array
 	 */
 	public function url($name = '', $options = [])
 	{
@@ -131,7 +182,7 @@ class ModelOperation extends \yii\base\Object
 	//* ================ error messages ================ *//
 
 	/**
-	 * store access error messages
+	 * store operation error messages
 	 *
 	 * @param string $name
 	 * @param string $message
@@ -146,7 +197,7 @@ class ModelOperation extends \yii\base\Object
 	}
 
 	/**
-	 * getting access error message
+	 * get error message for particular operation
 	 *
 	 * @param string $name
 	 * @return string
@@ -158,9 +209,9 @@ class ModelOperation extends \yii\base\Object
 	}
 
 	/**
+	 * throw exception for controller
 	 *
 	 * @param string $name
-	 *
 	 * @return HttpException
 	 */
 	public function exception($name = '')
@@ -171,6 +222,13 @@ class ModelOperation extends \yii\base\Object
 
 	//* ================ hyperlink ================ *//
 
+	/**
+	 * generate regular link
+	 *
+	 * @param String $name
+	 * @param Array $options
+	 * @return String
+	 */
 	public function a($name, $options = [])
 	{
 		if (is_string($options))
@@ -200,6 +258,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * generate link if allowed
+	 *
+	 * @param String $name
+	 * @param Array $options
+	 * @return String
+	 */
 	public function link($name, $options = [])
 	{
 		$allow = $this->allow($name);
@@ -213,6 +278,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * generate button link
+	 *
+	 * @param String $name
+	 * @param Array $options
+	 * @return String
+	 */
 	public function btn($name, $options = [])
 	{
 		if (is_string($options))
@@ -248,6 +320,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * generate button link if allowed
+	 *
+	 * @param String $name
+	 * @param Array $options
+	 * @return String
+	 */
 	public function button($name, $options = [])
 	{
 		$allow = $this->allow($name);
@@ -261,6 +340,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * generate link to page that show model detail
+	 *
+	 * @param string $label
+	 * @param array $linkOptions
+	 * @return string
+	 */
 	public function getLinkView($label = '', $linkOptions = ['title' => 'view detail'])
 	{
 		if ($label === '')
@@ -276,12 +362,23 @@ class ModelOperation extends \yii\base\Object
 
 	//* ================ routing ================ *//
 
+	/**
+	 * return route to controller
+	 *
+	 * @return string
+	 */
 	public function controllerRoute()
 	{
 		return '';
 
 	}
 
+	/**
+	 * return route to access added with oontroller route
+	 *
+	 * @param string $action
+	 * @return string
+	 */
 	public function actionRoute($action)
 	{
 		$controllerRoute = $this->controllerRoute();
@@ -292,6 +389,12 @@ class ModelOperation extends \yii\base\Object
 
 	//* ================ widget ================ *//
 
+	/**
+	 * generate items parameter for dropdown menu
+	 *
+	 * @param array $items access list to be shown
+	 * @return array
+	 */
 	public function dropdownItems($items = [])
 	{
 		$params = [];
@@ -324,6 +427,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * generate dropdown widget
+	 *
+	 * @param array $items
+	 * @param array $options
+	 * @return string
+	 */
 	public function widgetDropdown($items = [], $options = [])
 	{
 		if (!$items)
@@ -359,6 +469,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * generate regular link widget
+	 *
+	 * @param array $items
+	 * @param string $link_separator
+	 * @return string
+	 */
 	public function widgetLink($items = [])
 	{
 		if (!$items)
@@ -386,6 +503,13 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * generate button widget
+	 *
+	 * @param array $items
+	 * @param string $align : left|right
+	 * @return string
+	 */
 	public function widgetButton($items = [])
 	{
 		if (!$items)
@@ -424,6 +548,11 @@ class ModelOperation extends \yii\base\Object
 
 	//* ================ arbitary access control ================ *//
 
+	/**
+	 * return permision to view model detail
+	 *
+	 * @return boolean
+	 */
 	public function getAllowView()
 	{
 		// some serious permission control
@@ -449,6 +578,11 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * return permision to open model update form
+	 *
+	 * @return boolean
+	 */
 	public function getAllowUpdate()
 	{
 		// some serious permission control
@@ -474,6 +608,11 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * return permision to delete model
+	 *
+	 * @return boolean
+	 */
 	public function getAllowDelete()
 	{
 		// some serious permission control
@@ -505,6 +644,11 @@ class ModelOperation extends \yii\base\Object
 
 	//* ================ arbitary params ================ *//
 
+	/**
+	 * return 'view' link parameter
+	 *
+	 * @return array
+	 */
 	public function getParamsView()
 	{
 		$primaryKey = $this->model->primaryKey()[0];
@@ -524,6 +668,11 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * return 'update' link parameter
+	 *
+	 * @return array
+	 */
 	public function getParamsUpdate()
 	{
 		$primaryKey = $this->model->primaryKey()[0];
@@ -543,6 +692,11 @@ class ModelOperation extends \yii\base\Object
 
 	}
 
+	/**
+	 * return 'delete' link parameter
+	 *
+	 * @return array
+	 */
 	public function getParamsDelete()
 	{
 		$primaryKey = $this->model->primaryKey()[0];

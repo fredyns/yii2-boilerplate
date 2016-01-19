@@ -5,7 +5,8 @@ namespace common\base;
 use Yii;
 
 /**
- * Description of Controller
+ * Controller
+ * base controller extending yii controller
  *
  * @author fredy
  */

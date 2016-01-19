@@ -26,7 +26,7 @@ class ReligionController extends Controller
 	public $enableCsrfValidation = false;
 
 	/**
-	 * Lists all Religion models.
+	 * Lists all active Religion models.
 	 * @return mixed
 	 */
 	public function actionIndex()
