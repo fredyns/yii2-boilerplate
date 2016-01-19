@@ -273,7 +273,7 @@ class RgnSubdistrictController extends Controller
 				},
 			],
 			'filter'	 => [
-				'status' => RgnProvince::STATUS_ACTIVE,
+				'status' => RgnSubdistrict::STATUS_ACTIVE,
 			],
 			'selected'	 => $selected,
 		]);

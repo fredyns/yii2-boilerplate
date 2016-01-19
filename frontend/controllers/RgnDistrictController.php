@@ -273,7 +273,7 @@ class RgnDistrictController extends Controller
 				},
 			],
 			'filter'	 => [
-				'status' => RgnProvince::STATUS_ACTIVE,
+				'status' => RgnDistrict::STATUS_ACTIVE,
 			],
 			'selected'	 => $selected,
 		]);
