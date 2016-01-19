@@ -272,7 +272,10 @@ class RgnProvinceController extends Controller
 					return ($value > 0) ? $value : "";
 				},
 			],
-			'selected' => $selected,
+			'filter'	 => [
+				'status' => RgnProvince::STATUS_ACTIVE,
+			],
+			'selected'	 => $selected,
 		]);
 
 	}
