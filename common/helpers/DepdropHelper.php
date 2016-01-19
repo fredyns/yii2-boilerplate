@@ -6,7 +6,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
- * Description of ControllerDepdrop
+ * generate option data for depdrop widget
  *
  * @author fredy
  */
@@ -37,6 +37,27 @@ class DepdropHelper
 			if ($filter instanceof \Closure)
 			{
 				$filter($query);
+			}
+			else if (is_array($filter))
+			{
+				$condition = [];
+
+				foreach ($filter as $key => $value)
+				{
+					if (is_string($key) && is_scalar($value))
+					{
+						$condition[$key] = $value;
+					}
+					else if (is_array($value))
+					{
+						$query->andFilterWhere($value);
+					}
+				}
+
+				if ($condition)
+				{
+					$query->andFilterWhere($condition);
+				}
 			}
 
 			$data = $query->all();
