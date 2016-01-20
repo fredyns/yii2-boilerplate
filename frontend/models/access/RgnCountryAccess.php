@@ -15,12 +15,20 @@ use common\widgets\Icon;
 class RgnCountryAccess extends ModelAccess
 {
 
+	/**
+	 * @inheritdoc
+	 */
 	static function controllerRoute()
 	{
 		return 'rgn-country';
 
 	}
 
+	/**
+	 * check permision to access deleted model
+	 *
+	 * @return boolean
+	 */
 	static function allowDeleted()
 	{
 		if (array_key_exists('deleted', static::$allowed) == FALSE)
@@ -32,6 +40,11 @@ class RgnCountryAccess extends ModelAccess
 
 	}
 
+	/**
+	 * link parameter to access deleted model
+	 *
+	 * @return array
+	 */
 	static function paramsDeleted()
 	{
 		return [

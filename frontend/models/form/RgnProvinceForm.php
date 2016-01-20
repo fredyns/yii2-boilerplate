@@ -7,7 +7,7 @@ use frontend\models\RgnProvince;
 use common\behaviors\RgnCountryBehavior;
 
 /**
- * Description of RgnProvinceForm
+ * handling 'province' model for modification
  *
  * @author fredy
  */

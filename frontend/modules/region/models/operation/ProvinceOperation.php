@@ -22,12 +22,20 @@ class ProvinceOperation extends ModelOperation
 
 	public $items = ['view', 'update', 'delete', 'restore'];
 
+	/**
+	 * @inheritdoc
+	 */
 	public function controllerRoute()
 	{
 		return 'region/province';
 
 	}
 
+	/**
+	 * check permision to delete model
+	 *
+	 * @return boolean
+	 */
 	public function getAllowDelete()
 	{
 		// some serious permission control
@@ -57,6 +65,11 @@ class ProvinceOperation extends ModelOperation
 
 	}
 
+	/**
+	 * check permision to restore deleted model
+	 *
+	 * @return boolean
+	 */
 	public function getAllowRestore()
 	{
 		// some serious permission control
@@ -86,6 +99,11 @@ class ProvinceOperation extends ModelOperation
 
 	}
 
+	/**
+	 * link parameter to restore deleted model
+	 *
+	 * @return array
+	 */
 	public function getParamsRestore()
 	{
 		$primaryKey = $this->model->primaryKey()[0];

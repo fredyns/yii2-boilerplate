@@ -6,7 +6,7 @@ use Yii;
 use frontend\modules\region\models\Country;
 
 /**
- * Description of CountryForm
+ * handling 'country' model for modification
  *
  * @author fredy
  */

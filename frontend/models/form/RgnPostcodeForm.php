@@ -11,7 +11,7 @@ use common\behaviors\RgnDistrictBehavior;
 use common\behaviors\RgnSubdistrictBehavior;
 
 /**
- * Description of RgnPostcodeForm
+ * handling 'district' model for modification
  *
  * @author fredy
  */
@@ -84,10 +84,11 @@ class RgnPostcodeForm extends RgnPostcode
 
 	}
 
-	/*
+	/**
 	 * auto parse attribute
+	 *
+	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return [

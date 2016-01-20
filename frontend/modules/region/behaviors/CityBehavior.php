@@ -9,7 +9,11 @@ use yii\db\BaseActiveRecord;
 use frontend\modules\region\models\City;
 
 /**
- * Description of CityBehavior
+ * handling city property
+ * when typing a name instead of selecting, it will be inserted as new city
+ *
+ * @property string $provinceAttribute
+ * @property string $cityAttribute
  *
  * @author fredy
  */

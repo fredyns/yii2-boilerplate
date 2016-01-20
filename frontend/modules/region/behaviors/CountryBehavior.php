@@ -9,7 +9,10 @@ use yii\db\BaseActiveRecord;
 use frontend\modules\region\models\Country;
 
 /**
- * Description of CountryBehavior
+ * handling country property
+ * when typing a name instead of selecting, it will be inserted as new country
+ *
+ * @property string $countryAttribute
  *
  * @author fredy
  */

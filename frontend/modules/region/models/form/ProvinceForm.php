@@ -7,7 +7,7 @@ use frontend\modules\region\models\Province;
 use frontend\modules\region\behaviors\CountryBehavior;
 
 /**
- * Description of ProvinceForm
+ * handling 'province' model for modification
  *
  * @author fredy
  */
@@ -38,6 +38,7 @@ class ProvinceForm extends Province
 
 	/**
 	 * Form behavior when input data
+	 * handling string input, insert it as new model
 	 *
 	 * @return array
 	 */

@@ -8,8 +8,9 @@ use frontend\modules\region\behaviors\CountryBehavior;
 use frontend\modules\region\behaviors\ProvinceBehavior;
 
 /**
- * This is the model class for table "rgn_city".
+ * handling 'city' model for modification
  *
+ * @author fredy
  */
 class CityForm extends City
 {
@@ -49,11 +50,12 @@ class CityForm extends City
 
 	}
 
-	/*
-	 * detect when user typing new province & country
-	 * register first & replace with their ID
+	/**
+	 * Form behavior when input data
+	 * handling string input, insert it as new model
+	 *
+	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return [

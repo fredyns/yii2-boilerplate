@@ -9,7 +9,7 @@ use frontend\modules\region\behaviors\ProvinceBehavior;
 use frontend\modules\region\behaviors\CityBehavior;
 
 /**
- * Description of DistrictForm
+ * handling 'district' model for modification
  *
  * @author fredy
  */
@@ -62,10 +62,12 @@ class DistrictForm extends District
 
 	}
 
-	/*
-	 * auto parse attribute
+	/**
+	 * Form behavior when input data
+	 * handling string input, insert it as new model
+	 *
+	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return [

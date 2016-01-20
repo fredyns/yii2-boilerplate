@@ -8,8 +8,9 @@ use common\behaviors\RgnCountryBehavior;
 use common\behaviors\RgnProvinceBehavior;
 
 /**
- * This is the model class for table "rgn_city".
+ * handling 'city' model for modification
  *
+ * @author fredy
  */
 class RgnCityForm extends RgnCity
 {
@@ -49,11 +50,12 @@ class RgnCityForm extends RgnCity
 
 	}
 
-	/*
+	/**
 	 * detect when user typing new province & country
 	 * register first & replace with their ID
+	 *
+	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return [

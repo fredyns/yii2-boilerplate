@@ -8,19 +8,27 @@ use cornernote\returnurl\ReturnUrl;
 use common\widgets\Icon;
 
 /**
- * Description of Religion
+ * providing access control to 'religion' model
  *
  * @author fredy
  */
 class ReligionAccess extends ModelAccess
 {
 
+	/**
+	 * @inheritdoc
+	 */
 	static function controllerRoute()
 	{
 		return 'religion';
 
 	}
 
+	/**
+	 * check permision to access deleted model
+	 *
+	 * @return boolean
+	 */
 	static function allowDeleted()
 	{
 		if (array_key_exists('deleted', static::$allowed) == FALSE)
@@ -32,6 +40,11 @@ class ReligionAccess extends ModelAccess
 
 	}
 
+	/**
+	 * link parameter to access deleted model
+	 *
+	 * @return array
+	 */
 	static function paramsDeleted()
 	{
 		return [

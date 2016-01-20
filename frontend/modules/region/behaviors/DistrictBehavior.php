@@ -9,7 +9,11 @@ use yii\db\BaseActiveRecord;
 use frontend\modules\region\models\District;
 
 /**
- * Description of DistrictBehavior
+ * handling district property
+ * when typing a name instead of selecting, it will be inserted as new district
+ *
+ * @property string $cityAttribute
+ * @property string $districtAttribute
  *
  * @author fredy
  */

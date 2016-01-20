@@ -76,6 +76,13 @@ class DistrictSearch extends District
 
 	}
 
+	/**
+	 * Creates data provider instance with search query applied for active model
+	 *
+	 * @param array $params
+	 *
+	 * @return ActiveDataProvider
+	 */
 	public function searchIndex($params)
 	{
 		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
@@ -84,6 +91,13 @@ class DistrictSearch extends District
 
 	}
 
+	/**
+	 * Creates data provider instance with search query applied for deleted model
+	 *
+	 * @param array $params
+	 *
+	 * @return ActiveDataProvider
+	 */
 	public function searchDeleted($params)
 	{
 		$params[$this->formName()]['status'] = static::STATUS_DELETED;

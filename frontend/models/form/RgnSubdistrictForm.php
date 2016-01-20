@@ -10,7 +10,7 @@ use common\behaviors\RgnCityBehavior;
 use common\behaviors\RgnDistrictBehavior;
 
 /**
- * Description of RgnSubdistrictForm
+ * handling 'subdistrict' model for modification
  *
  * @author fredy
  */
@@ -74,10 +74,11 @@ class RgnSubdistrictForm extends RgnSubdistrict
 
 	}
 
-	/*
+	/**
 	 * auto parse attribute
+	 *
+	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return [

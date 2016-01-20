@@ -9,7 +9,11 @@ use yii\db\BaseActiveRecord;
 use frontend\modules\region\models\Subdistrict;
 
 /**
- * Description of SubdistrictBehavior
+ * handling subdistrict property
+ * when typing a name instead of selecting, it will be inserted as new subdistrict
+ *
+ * @property string $districtAttribute
+ * @property string $subdistrictAttribute
  *
  * @author fredy
  */

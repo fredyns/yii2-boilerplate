@@ -10,7 +10,7 @@ use common\models\RgnDistrict;
 
 /**
  * handling country property
- * when typing a name instead of selecting, it will be inserted as new country
+ * when typing a name instead of selecting, it will be inserted as new district
  *
  * @author fredy
  */

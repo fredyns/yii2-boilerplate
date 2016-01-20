@@ -9,7 +9,11 @@ use yii\db\BaseActiveRecord;
 use frontend\modules\region\models\Province;
 
 /**
- * Description of ProvinceBehavior
+ * handling province property
+ * when typing a name instead of selecting, it will be inserted as new province
+ *
+ * @property string $countryAttribute
+ * @property string $provinceAttribute
  *
  * @author fredy
  */

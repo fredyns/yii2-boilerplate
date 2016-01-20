@@ -6,7 +6,7 @@ use Yii;
 use frontend\models\RgnCountry;
 
 /**
- * Description of RgnCountryForm
+ * handling 'country' model for modification
  *
  * @author fredy
  */

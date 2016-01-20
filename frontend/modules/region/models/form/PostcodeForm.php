@@ -11,7 +11,7 @@ use frontend\modules\region\behaviors\DistrictBehavior;
 use frontend\modules\region\behaviors\SubdistrictBehavior;
 
 /**
- * Description of PostcodeForm
+ * handling 'postcode' model for modification
  *
  * @author fredy
  */
@@ -84,10 +84,12 @@ class PostcodeForm extends Postcode
 
 	}
 
-	/*
-	 * auto parse attribute
+	/**
+	 * Form behavior when input data
+	 * handling string input, insert it as new model
+	 *
+	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return [

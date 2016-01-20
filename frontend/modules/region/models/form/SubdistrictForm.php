@@ -10,7 +10,7 @@ use frontend\modules\region\behaviors\CityBehavior;
 use frontend\modules\region\behaviors\DistrictBehavior;
 
 /**
- * Description of SubdistrictForm
+ * handling 'subdistrict' model for modification
  *
  * @author fredy
  */
@@ -74,10 +74,12 @@ class SubdistrictForm extends Subdistrict
 
 	}
 
-	/*
-	 * auto parse attribute
+	/**
+	 * Form behavior when input data
+	 * handling string input, insert it as new model
+	 *
+	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return [

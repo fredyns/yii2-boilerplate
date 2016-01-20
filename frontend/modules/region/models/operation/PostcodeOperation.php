@@ -23,12 +23,20 @@ class PostcodeOperation extends ModelOperation
 
 	public $items = ['view', 'update', 'delete', 'restore'];
 
+	/**
+	 * @inheritdoc
+	 */
 	public function controllerRoute()
 	{
 		return 'region/postcode';
 
 	}
 
+	/**
+	 * check permision to delete model
+	 *
+	 * @return boolean
+	 */
 	public function getAllowDelete()
 	{
 		// some serious permission control
@@ -58,6 +66,11 @@ class PostcodeOperation extends ModelOperation
 
 	}
 
+	/**
+	 * check permision to restore deleted model
+	 *
+	 * @return boolean
+	 */
 	public function getAllowRestore()
 	{
 		// some serious permission control
@@ -87,6 +100,11 @@ class PostcodeOperation extends ModelOperation
 
 	}
 
+	/**
+	 * link parameter to restore deleted model
+	 *
+	 * @return array
+	 */
 	public function getParamsRestore()
 	{
 		$primaryKey = $this->model->primaryKey()[0];
@@ -106,6 +124,9 @@ class PostcodeOperation extends ModelOperation
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function getLinkView($label = '', $linkOptions = ['title' => 'view detail'])
 	{
 		if ($label === '')

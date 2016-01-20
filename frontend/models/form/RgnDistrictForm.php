@@ -9,7 +9,7 @@ use common\behaviors\RgnProvinceBehavior;
 use common\behaviors\RgnCityBehavior;
 
 /**
- * Description of RgnDistrictForm
+ * handling 'district' model for modification
  *
  * @author fredy
  */
@@ -62,10 +62,11 @@ class RgnDistrictForm extends RgnDistrict
 
 	}
 
-	/*
+	/**
 	 * auto parse attribute
+	 *
+	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return [

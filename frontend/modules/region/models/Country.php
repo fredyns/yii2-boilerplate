@@ -38,6 +38,9 @@ class Country extends \common\base\Model
 
 	var $enum_labels = false;
 
+	/**
+	 * @inheritdoc
+	 */
 	public function init()
 	{
 		parent::init();
@@ -154,10 +157,11 @@ class Country extends \common\base\Model
 
 	}
 
-	/*
+	/**
 	 * Preparing option data for forms
+	 *
+	 * @return array
 	 */
-
 	static function asOption()
 	{
 		$query = static::find()->all();
@@ -166,12 +170,20 @@ class Country extends \common\base\Model
 
 	}
 
+	/**
+	 * get status label
+	 *
+	 * @return string
+	 */
 	public function getStatusLabel()
 	{
 		return static::getStatusValueLabel($this->status);
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function delete()
 	{
 		$this->status = static::STATUS_ACTIVE;
@@ -180,6 +192,9 @@ class Country extends \common\base\Model
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function restore()
 	{
 		$this->status = static::STATUS_ACTIVE;
@@ -188,6 +203,12 @@ class Country extends \common\base\Model
 
 	}
 
+	/**
+	 * generate regular link to view model detail
+	 *
+	 * @param array $linkOptions
+	 * @return string
+	 */
 	public function getLinkTo($linkOptions = ['title' => 'view country detail', 'data-pjax' => 0])
 	{
 		return $this->operation->getLinkView('', $linkOptions);

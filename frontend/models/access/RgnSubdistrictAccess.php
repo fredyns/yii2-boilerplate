@@ -15,12 +15,20 @@ use common\widgets\Icon;
 class RgnSubdistrictAccess extends ModelAccess
 {
 
+	/**
+	 * @inheritdoc
+	 */
 	static function controllerRoute()
 	{
 		return 'rgn-subdistrict';
 
 	}
 
+	/**
+	 * check permision to access deleted model
+	 *
+	 * @return boolean
+	 */
 	static function allowDeleted()
 	{
 		if (array_key_exists('deleted', static::$allowed) == FALSE)
@@ -32,6 +40,11 @@ class RgnSubdistrictAccess extends ModelAccess
 
 	}
 
+	/**
+	 * link parameter to access deleted model
+	 *
+	 * @return array
+	 */
 	static function paramsDeleted()
 	{
 		return [

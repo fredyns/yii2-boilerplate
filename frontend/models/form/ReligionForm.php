@@ -6,7 +6,7 @@ use Yii;
 use frontend\models\Religion;
 
 /**
- * Description of ReligionForm
+ * handling 'religion' model for modification
  *
  * @author fredy
  */
