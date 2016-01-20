@@ -272,7 +272,10 @@ class CityController extends Controller
 					return ($value > 0) ? $value : "";
 				},
 			],
-			'selected' => $selected,
+			'filter'	 => [
+				'status' => City::STATUS_ACTIVE,
+			],
+			'selected'	 => $selected,
 		]);
 
 	}

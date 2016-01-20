@@ -272,7 +272,10 @@ class SubdistrictController extends Controller
 					return ($value > 0) ? $value : "";
 				},
 			],
-			'selected' => $selected,
+			'filter'	 => [
+				'status' => Subdistrict::STATUS_ACTIVE,
+			],
+			'selected'	 => $selected,
 		]);
 
 	}

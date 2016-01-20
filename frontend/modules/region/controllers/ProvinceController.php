@@ -272,7 +272,10 @@ class ProvinceController extends Controller
 					return ($value > 0) ? $value : "";
 				},
 			],
-			'selected' => $selected,
+			'filter'	 => [
+				'status' => Province::STATUS_ACTIVE,
+			],
+			'selected'	 => $selected,
 		]);
 
 	}
