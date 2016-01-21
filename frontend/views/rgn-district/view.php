@@ -271,6 +271,70 @@ $this->params['breadcrumbs'][] = 'View';
 			);
 
 			?>
+
+			<hr/>
+			<div id="map" style="margin-top: 50px;">
+
+				<?php
+
+				$address = "{$model->name}, " . (($model->city) ? $model->city->name : "");
+				$title = $model->name;
+
+				?>
+				<h3>Map</h3>
+
+				<style>
+					#map-canvas {
+						width:100%;
+						height:400px;
+						border:solid #999 1px;
+					}
+				</style>
+				<div id="map-position"></div>
+				<div id="map-canvas"></div>
+
+				<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+				<script type="text/javascript">
+
+					var map;
+					var geocoder;
+					var marker;
+					var markersArray = [];
+					var myLatlng = new google.maps.LatLng(-6.176655999999999, 106.83058389999997);
+					var mapOptions = {
+						center: myLatlng,
+						zoom: 13
+					};
+
+					geocoder = new google.maps.Geocoder();
+					map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+					geocoder.geocode({'address': '<?= $address ?>'}, function (results, status)
+					{
+						if (status === google.maps.GeocoderStatus.OK)
+						{
+							var position = results[0].geometry.location;
+
+							map.setCenter(results[0].geometry.location);
+							marker = new google.maps.Marker({
+								'map': map,
+								'position': results[0].geometry.location,
+								'title': '<?= $title ?>'
+							});
+							markersArray.push(marker);
+
+
+							document.getElementById("map-position").innerHTML = 'Lat: ' + position.lat() + '; Long: ' + position.lng();
+						}
+						else
+						{
+							document.getElementById("map-position").innerHTML = 'Geocode was not successful for the following reason: ' + status;
+						}
+					});
+				</script>
+
+			</div>
+
         </div>
 
     </div>
