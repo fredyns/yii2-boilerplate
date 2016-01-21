@@ -1,54 +1,48 @@
-Yii 2 Advanced Project Template
+Yii 2 Boilerplate
 ===============================
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+Yii 2 Boilerplate adalah template & contoh aplikasi CRUD sederhana
+dibuat dengan [Yii 2 Advanced Template](https://github.com/yiisoft/yii2-app-advanced/).
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+Didalamnya ada pengelolaan data wilayah Indonesia. Provinsi, Kota, Kecamatan dan Kelurahan.
+Data diambil dari [db-daerah](https://github.com/cahyadsn/daerah).
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+Ditambah lagi dengan pengaturan hak akses tiap modelnya.
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
 
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-advanced/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-advanced/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
 
-DIRECTORY STRUCTURE
--------------------
+PROSES INSTALASI
 
+langsung saja buka projectnya di GitHub. lalu langkahnya sbb:
+
+1. clone repo
+
+2. install komponen
 ```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
-tests                    contains various tests for the advanced application
-    codeception/         contains tests developed with Codeception PHP Testing Framework
+composer install
+```
+
+3. memulai project Yii
+```
+./yii init
+```
+
+4. Buat Database
+
+5. Set database connetion di file common/config/main-local.php
+
+6. migrasi database
+```
+./yii migrate/up --migrationPath=@vendor/dektrium/yii2-user/migrations
+```
+
+7. buka file database/model.mwb dgn Workbench lalu sinkronkan dengan mysql
+
+8. Impor data secara urut
+```
+	a. region_country.sql
+	b. region_province.sql
+	c. region_city.sql
+	d. region_district.sql
+	e. region_subdistrict.sql
 ```
