@@ -291,8 +291,8 @@ $this->params['breadcrumbs'][] = 'View';
 						border:solid #999 1px;
 					}
 				</style>
-				<div id="map-position"></div>
 				<div id="map-canvas"></div>
+				<div id="map-position"></div>
 
 				<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 				<script type="text/javascript">
