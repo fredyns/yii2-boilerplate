@@ -15,30 +15,30 @@ PROSES INSTALASI
 
 langsung saja buka projectnya di GitHub. lalu langkahnya sbb:
 
-1. clone repo
+1 clone repo
 
-2. install komponen
+2 install komponen
 ```
 composer install
 ```
 
-3. memulai project Yii
+3 memulai project Yii
 ```
 ./yii init
 ```
 
-4. Buat Database
+4 Buat Database
 
-5. Set database connetion di file common/config/main-local.php
+5 Set database connetion di file common/config/main-local.php
 
-6. migrasi database
+6 migrasi database
 ```
 ./yii migrate/up --migrationPath=@vendor/dektrium/yii2-user/migrations
 ```
 
-7. buka file database/model.mwb dgn Workbench lalu sinkronkan dengan mysql
+7 buka file database/model.mwb dgn Workbench lalu sinkronkan dengan mysql
 
-8. Impor data secara urut
+8 Impor data secara urut
 ```
 	a. region_country.sql
 	b. region_province.sql
