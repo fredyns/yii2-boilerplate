@@ -9,7 +9,7 @@ Data diambil dari [db-daerah](https://github.com/cahyadsn/daerah).
 
 Ditambah lagi dengan pengaturan hak akses tiap modelnya.
 
-Petunjuk lengkap ada di (blog-post ini)[http://wp.me/p48nYc-ar]
+Petunjuk lengkap ada di [blog-post ini](http://wp.me/p48nYc-ar)
 
 PROSES INSTALASI
 
