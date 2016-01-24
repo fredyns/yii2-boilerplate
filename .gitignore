@@ -31,3 +31,4 @@ phpunit.phar
 /documentation/database/development/
 /database/model.mwb.bak
 /setfrontend.sh
+/common/config/domain/
