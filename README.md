@@ -37,7 +37,8 @@ composer install
 ./yii migrate/up --migrationPath=@vendor/dektrium/yii2-user/migrations
 ```
 
-7 buka file database/model.mwb dgn Workbench lalu sinkronkan dengan mysql
+7 buka file `database/model.mwb` dgn Workbench lalu sinkronkan dengan mysql.
+  atau import sql db changelog di `database/changelog`.
 
 8 Impor data secara urut
 ```
