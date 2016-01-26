@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 
 $this->title = 'Yii 2 Boilerplate';
@@ -25,6 +27,17 @@ $this->title = 'Yii 2 Boilerplate';
 			<a class="btn btn-lg btn-success" href="http://github.com/fredyns/yii2-boilerplate">GitHub Project</a>
 			<a class="btn btn-lg btn-primary" href="http://fredyns.net/blog/2016/01/yii2-boilerplate/">Blog Post</a>
 		</p>
+
+		<br/>
+
+		<p>
+			Silahkan register dulu untuk melihat fitur lainnya.
+		</p>
+
+        <p>
+			<?= Html::a('Register', ['/user/registration/register'], ['class' => 'btn btn-lg btn-info']) ?>
+		</p>
+
     </div>
 
     <div class="body-content">
@@ -112,14 +125,6 @@ $this->title = 'Yii 2 Boilerplate';
 			Jangan sungkan untuk komen ya.
 			:)
 		</p>
-
-		<pre>
-==================
-
-			<?php print_r(Yii::$app->user->identity); ?>
-
-==================
-		</pre>
 
     </div>
 </div>
