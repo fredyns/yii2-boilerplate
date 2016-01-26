@@ -44,7 +44,7 @@
 						'visible'	 => Yii::$app->user->isGuest,
 					],
 					[
-						'label'			 => 'Sign out ( Yii::$app->user->identity->username)',
+						'label'			 => 'Sign out ( ' . ((Yii::$app->user->isGuest == FALSE) ? Yii::$app->user->identity->username : '') . ')',
 						'url'			 => ['/user/security/logout'],
 						'linkOptions'	 => ['data-method' => 'post'],
 						'visible'		 => (Yii::$app->user->isGuest == FALSE),
