@@ -8,13 +8,15 @@
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>
+					<?= Yii::$app->user->identity->username; ?>
+				</p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 
-        <!-- search form -->
+        <!-- search form ->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search..."/>
@@ -32,55 +34,14 @@
 			[
 				'options'	 => ['class' => 'sidebar-menu'],
 				'items'		 => [
-					['label' => 'Auth', 'options' => ['class' => 'header']],
+					['label' => 'Session', 'options' => ['class' => 'header']],
 					[
-						'label'		 => 'Register',
-						'url'		 => ['/user/registration/register'],
-						'visible'	 => Yii::$app->user->isGuest,
-					],
-					[
-						'label'		 => 'Sign in',
-						'url'		 => ['/user/security/login'],
-						'visible'	 => Yii::$app->user->isGuest,
-					],
-					[
-						'label'			 => 'Sign out ( ' . ((Yii::$app->user->isGuest == FALSE) ? Yii::$app->user->identity->username : '') . ')',
+						'label'			 => 'Sign out ( ' . Yii::$app->user->identity->username . ')',
 						'url'			 => ['/user/security/logout'],
 						'linkOptions'	 => ['data-method' => 'post'],
 						'visible'		 => (Yii::$app->user->isGuest == FALSE),
 					],
 					['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-					//*/
-					//['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
-					//['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
-					['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-					[
-						'label'	 => 'Same tools',
-						'icon'	 => 'fa fa-share',
-						'url'	 => '#',
-						'items'	 => [
-							['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
-							['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
-							[
-								'label'	 => 'Level One',
-								'icon'	 => 'fa fa-circle-o',
-								'url'	 => '#',
-								'items'	 => [
-									['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-									[
-										'label'	 => 'Level Two',
-										'icon'	 => 'fa fa-circle-o',
-										'url'	 => '#',
-										'items'	 => [
-											['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-											['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-										],
-									],
-								],
-							],
-						],
-					],
-					//*/
 					[
 						'label'	 => 'Master',
 						'icon'	 => 'fa fa-file',
