@@ -229,61 +229,60 @@ use yii\helpers\Html;
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->
 
-                <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">
-							<?= Yii::$app->user->identity->username; ?>
-						</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                 alt="User Image"/>
+				<?php if (Yii::$app->user->isGuest == FALSE): ?>
 
-                            <p>
+					<li class="dropdown user user-menu">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+							<span class="hidden-xs">
 								<?= Yii::$app->user->identity->username; ?>
-                                <small>
-									Member since
-									<?php
+							</span>
+						</a>
+						<ul class="dropdown-menu">
+							<!-- User image -->
+							<li class="user-header">
+								<img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
+									 alt="User Image"/>
 
-									$date = new DateTime(Yii::$app->user->identity->created_at);
-									echo $date->format('M Y');
+								<p>
+									<?= Yii::$app->user->identity->username; ?>
+									<small>
+										Member since
+										<?= date('M. Y', Yii::$app->user->identity->created_at); ?>
+									</small>
+								</p>
+							</li>
+							<!-- Menu Body -->
+							<li class="user-body">
+								<div class="col-xs-4 text-center">
+									<a href="#">Followers</a>
+								</div>
+								<div class="col-xs-4 text-center">
+									<a href="#">Sales</a>
+								</div>
+								<div class="col-xs-4 text-center">
+									<a href="#">Friends</a>
+								</div>
+							</li>
+							<!-- Menu Footer-->
+							<li class="user-footer">
+								<div class="pull-left">
+									<a href="#" class="btn btn-default btn-flat">Profile</a>
+								</div>
+								<div class="pull-right">
+									<?=
+
+									Html::a(
+										'Sign out', ['/user/security/logout'], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+									)
 
 									?>
-								</small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-								<?=
+								</div>
+							</li>
+						</ul>
+					</li>
 
-								Html::a(
-									'Sign out', ['/user/security/logout'], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
-								)
-
-								?>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+				<?php endif; ?>
 
                 <!-- User Account: style can be found in dropdown.less -->
                 <li>

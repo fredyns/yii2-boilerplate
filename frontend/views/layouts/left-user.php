@@ -34,13 +34,6 @@
 			[
 				'options'	 => ['class' => 'sidebar-menu'],
 				'items'		 => [
-					['label' => 'Session', 'options' => ['class' => 'header']],
-					[
-						'label'			 => 'Sign out ( ' . Yii::$app->user->identity->username . ')',
-						'url'			 => ['/user/security/logout'],
-						'linkOptions'	 => ['data-method' => 'post'],
-						'visible'		 => (Yii::$app->user->isGuest == FALSE),
-					],
 					['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
 					[
 						'label'	 => 'Master',
