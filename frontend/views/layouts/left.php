@@ -1,3 +1,8 @@
+<?php
+
+use Yii;
+
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -32,6 +37,23 @@
 			[
 				'options'	 => ['class' => 'sidebar-menu'],
 				'items'		 => [
+					['label' => 'Auth', 'options' => ['class' => 'header']],
+					[
+						'label'		 => 'Register',
+						'url'		 => ['/user/registration/register'],
+						'visible'	 => Yii::$app->user->isGuest,
+					],
+					[
+						'label'		 => 'Sign in',
+						'url'		 => ['/user/security/login'],
+						'visible'	 => Yii::$app->user->isGuest,
+					],
+					[
+						'label'			 => 'Sign out ( Yii::$app->user->identity->username)',
+						'url'			 => ['/user/security/logout'],
+						'linkOptions'	 => ['data-method' => 'post'],
+						'visible'		 => (Yii::$app->user->isGuest == FALSE),
+					],
 					['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
 					['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
 					['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],

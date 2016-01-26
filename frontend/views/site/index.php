@@ -1,10 +1,21 @@
 <?php
 
+use Yii;
+
 /* @var $this yii\web\View */
 
 $this->title = 'Yii 2 Boilerplate';
 
 ?>
+<style>
+	dd {
+		margin-bottom: 30px;
+	}
+	dt {
+		margin-top: 20px;
+	}
+
+</style>
 <div class="site-index">
 
     <div class="jumbotron">
@@ -93,7 +104,7 @@ $this->title = 'Yii 2 Boilerplate';
 		</dl>
 
 		<p style="text-align: justify;">
-			Selesai!
+			<b>Selesai!</b><br/>
 			coba cek lewat browser. eksplor semua menu yg tersedia di panel kiri .
 			contoh yg sudah jadi ada <a href="http://goo.gl/RoGYTv" target="_blank">disini</a>.
 		</p>
@@ -103,6 +114,14 @@ $this->title = 'Yii 2 Boilerplate';
 			Jangan sungkan untuk komen ya.
 			:)
 		</p>
+
+		<pre>
+==================
+
+			<?php print_r(Yii::$app->user->identity); ?>
+
+==================
+		</pre>
 
     </div>
 </div>

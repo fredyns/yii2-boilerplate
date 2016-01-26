@@ -10,10 +10,12 @@ return [
 	'bootstrap'				 => ['log'],
 	'controllerNamespace'	 => 'frontend\controllers',
 	'components'			 => [
-		'user'			 => [
-			'identityClass'		 => 'common\models\User',
-			'enableAutoLogin'	 => true,
-		],
+		/* /
+		  'user'			 => [
+		  'identityClass'		 => 'common\models\User',
+		  'enableAutoLogin'	 => true,
+		  ],
+		  // */
 		'log'			 => [
 			'traceLevel' => YII_DEBUG ? 3 : 0,
 			'targets'	 => [
@@ -33,6 +35,11 @@ return [
 				],
 			],
 		],
+		'session'		 => [
+			'class'			 => 'yii\web\DbSession',
+			// 'db' => 'mydb',
+			'sessionTable'	 => 'yii_session',
+		]
 	/*
 	  'urlManager' => [
 	  'enablePrettyUrl' => true,
@@ -46,6 +53,10 @@ return [
 	'modules'				 => [
 		'region' => [
 			'class' => 'frontend\modules\region\Module',
+		],
+		'user'	 => [
+			// following line will restrict access to admin controller from frontend application
+			'as frontend' => 'dektrium\user\filters\FrontendFilter',
 		],
 	],
 ];
