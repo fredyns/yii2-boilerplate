@@ -1,8 +1,3 @@
-<?php
-
-use Yii;
-
-?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
