@@ -1,7 +1,5 @@
 <?php
 
-use Yii;
-
 /* @var $this yii\web\View */
 
 $this->title = 'Yii 2 Boilerplate';
