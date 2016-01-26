@@ -32,20 +32,69 @@ $this->title = 'Yii 2 Boilerplate';
 
     <div class="body-content">
 
-
 		<?php if (Yii::$app->user->isGuest): ?>
+
 			<p align="center">
-				Silahkan register dulu untuk melihat fitur lainnya. Gratis kok. Cuma buat coba-coba fitur :D
+				Silahkan login/register dulu untuk melihat fitur lainnya. Gratis kok. Cuma buat coba-coba fitur :D
 			</p>
 
 			<p align="center">
+				<?= Html::a('Login', ['/user/security/login'], ['class' => 'btn btn-lg btn-info']) ?>
+				&nbsp;
 				<?= Html::a('Register', ['/user/registration/register'], ['class' => 'btn btn-lg btn-info']) ?>
-				&nbsp; 
+				&nbsp;
 				<?= Html::a('Lupa Password', ['/user/recovery/request'], ['class' => 'btn btn-lg btn-warning']) ?>
 			</p>
 
 		<?php else: ?>
 
+			Welcome :)
+			<br/>
+
+			<p style="text-align: justify;">
+				<a href="https://github.com/fredyns/yii2-boilerplate" target="_blank"><strong>Yii2-Boilerplate</strong></a> ini berisi:
+			</p>
+
+			<ul>
+				<li style="text-align: justify;">
+					<a href="https://github.com/yiisoft/yii2-app-advanced" target="_blank"><strong>Yii2-app-advance</strong></a>
+				</li>
+				<li style="text-align: justify;">
+					<a href="https://github.com/dmstr/yii2-adminlte-asset" target="_blank"><strong>adminLTE</strong></a>
+				</li>
+				<li style="text-align: justify;">
+					<a href="https://github.com/cahyadsn/daerah" target="_blank">Database wilayah Indonesia</a>.
+				</li>
+			</ul>
+			&nbsp;
+
+			<strong>Tambahan Pribadi</strong>
+
+			Dari saya ada bebera class, fungsi serta extend dari komponen bawaan. Tapi yg utama ada 2, yaitu:
+
+			<dl>
+
+				<dt>1. Access Control tiap Model</dt>
+				<dd>disiapkan class untuk mengatur akses ke model, operasi yg tersedia untuk model serta link generatornya.</dd>
+
+				<dt>2. Module Database Daerah</dt>
+				<dd>biar tau aja bedanya komponen yg ditulis langsung di bawah frontend dan dikelompokkan dalam module.</dd>
+
+			</dl>
+
+			<p style="text-align: justify;">
+				Proses instalasi bisa lihat di
+				<a href="goo.gl/U1jZs6" target="_blank"><strong>blog ini</strong></a>.
+			</p>
+
+			<p style="text-align: justify;">
+				Selamat mencoba, semoga bermanfaat.
+				nanti klo ada update saya kabari lagi.
+				Jangan sungkan untuk komen ya.
+				:)
+			</p>
+
+			<!--
 			<p>
 				Klik menu di sebelah kiri untuk explore menu lainnya.
 			</p>
@@ -123,13 +172,14 @@ $this->title = 'Yii 2 Boilerplate';
 				coba cek lewat browser. eksplor semua menu yg tersedia di panel kiri .
 				contoh yg sudah jadi ada <a href="http://goo.gl/RoGYTv" target="_blank">disini</a>.
 			</p>
+
 			<p style="text-align: justify;">
 				Selamat mencoba, semoga bermanfaat.
 				nanti klo ada update saya kabari lagi.
 				Jangan sungkan untuk komen ya.
 				:)
 			</p>
-
+			-->
 		<?php endif; ?>
 
     </div>
