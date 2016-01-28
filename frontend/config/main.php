@@ -16,6 +16,26 @@ return [
 		  'enableAutoLogin'	 => true,
 		  ],
 		  // */
+		//*/ config sample for dektrium/user
+		'user'			 => [
+			'identityCookie' => [
+				'name'		 => '_frontendIdentity',
+				// replace with your frontend app relative to domain
+				'path'		 => '/yii2-boilerplate/frontend/web/',
+				'httpOnly'	 => true,
+			],
+		],
+		//*/ config sample for separate frontend session
+		'session'		 => [
+			'class'			 => 'yii\web\DbSession',
+			'sessionTable'	 => 'yii_session',
+			'name'			 => 'FRONTENDSESSID',
+			'cookieParams'	 => [
+				'httpOnly'	 => true,
+				// replace with your frontend app relative to domain
+				'path'		 => '/yii2-boilerplate/frontend/web/',
+			],
+		],
 		'log'			 => [
 			'traceLevel' => YII_DEBUG ? 3 : 0,
 			'targets'	 => [
@@ -35,11 +55,6 @@ return [
 				],
 			],
 		],
-		'session'		 => [
-			'class'			 => 'yii\web\DbSession',
-			// 'db' => 'mydb',
-			'sessionTable'	 => 'yii_session',
-		]
 	/*
 	  'urlManager' => [
 	  'enablePrettyUrl' => true,
@@ -55,8 +70,9 @@ return [
 			'class' => 'frontend\modules\region\Module',
 		],
 		'user'	 => [
-			// following line will restrict access to admin controller from frontend application
-			'as frontend' => 'dektrium\user\filters\FrontendFilter',
+			'enableUnconfirmedLogin' => TRUE,
+			//	following line will restrict access to admin controller from frontend application
+			'as frontend'			 => 'dektrium\user\filters\FrontendFilter',
 		],
 	],
 ];

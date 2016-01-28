@@ -9,8 +9,8 @@ return [
 	],
 	'modules'	 => [
 		'user' => [
-			'class'					 => 'dektrium\user\Module',
-			'enableUnconfirmedLogin' => TRUE,
+			'class' => 'dektrium\user\Module',
+		//	'enableUnconfirmedLogin' => TRUE,
 		],
 	],
 ];
