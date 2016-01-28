@@ -73,6 +73,9 @@ $this->title = 'Yii 2 Boilerplate';
 					<a href="https://github.com/yiisoft/yii2-app-advanced" target="_blank"><strong>Yii2-app-advance</strong></a>
 				</li>
 				<li style="text-align: justify;">
+					<a href="https://github.com/dektrium/yii2-user" target="_blank"><strong>Dektrium User Management</strong></a>
+				</li>
+				<li style="text-align: justify;">
 					<a href="https://github.com/dmstr/yii2-adminlte-asset" target="_blank"><strong>adminLTE</strong></a>
 				</li>
 				<li style="text-align: justify;">
