@@ -44,7 +44,8 @@ $this->title = 'Yii 2 Boilerplate';
 		<?php if (Yii::$app->user->isGuest): ?>
 
 			<p align="center">
-				Silahkan login/register dulu untuk melihat fitur lainnya. Gratis kok. Cuma buat coba-coba fitur :D
+				Silahkan login/register dulu untuk melihat fitur lainnya. Gratis kok.
+				Untuk demo fitur user management.
 			</p>
 
 			<p align="center">
