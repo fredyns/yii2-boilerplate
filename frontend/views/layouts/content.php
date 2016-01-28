@@ -62,6 +62,7 @@ use dmstr\widgets\Alert;
 			data-share="true"
 			data-width="450"
 			data-show-faces="false"
+			style="margin: 8px 14px;"
 			>
 		</div>
 
