@@ -18,6 +18,15 @@ $this->title = 'Yii 2 Boilerplate';
 </style>
 <div class="site-index">
 
+	<div
+		class="fb-like"
+		data-share="true"
+		data-width="450"
+		data-show-faces="true"
+		style="float: right;"
+		>
+	</div>
+
     <div class="jumbotron">
         <h1>Yii 2 Boilerplate</h1>
 
@@ -39,11 +48,15 @@ $this->title = 'Yii 2 Boilerplate';
 			</p>
 
 			<p align="center">
-				<?= Html::a('Login', ['/user/security/login'], ['class' => 'btn btn-lg btn-info']) ?>
+				<?= Html::a('Login', ['/user/security/login'], ['class' => 'btn btn-lg btn-info', 'title' => 'masuk ke sistem']) ?>
 				&nbsp;
-				<?= Html::a('Register', ['/user/registration/register'], ['class' => 'btn btn-lg btn-info']) ?>
+				<?= Html::a('Lupa Password', ['/user/recovery/request'], ['class' => 'btn btn-lg btn-warning', 'title' => 'reset password']) ?>
+			</p>
+
+			<p align="center">
+				<?= Html::a('Register', ['/user/registration/register'], ['class' => 'btn btn-lg btn-info', 'title' => 'mendaftarkan akun baru']) ?>
 				&nbsp;
-				<?= Html::a('Lupa Password', ['/user/recovery/request'], ['class' => 'btn btn-lg btn-warning']) ?>
+				<?= Html::a('Resend Confirmation', ['/user/registration/resend'], ['class' => 'btn btn-lg btn-info', 'title' => 'kirim ulang email konfirmasi akun']) ?>
 			</p>
 
 		<?php else: ?>
@@ -180,7 +193,30 @@ $this->title = 'Yii 2 Boilerplate';
 				:)
 			</p>
 			-->
+
 		<?php endif; ?>
 
     </div>
 </div>
+
+
+<script>
+	window.fbAsyncInit = function () {
+		FB.init({
+			appId: '910117462416938',
+			xfbml: true,
+			version: 'v2.5'
+		});
+	};
+
+	(function (d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>

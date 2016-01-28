@@ -55,14 +55,11 @@ return [
 				],
 			],
 		],
-	/*
-	  'urlManager' => [
-	  'enablePrettyUrl' => true,
-	  'showScriptName' => false,
-	  'rules' => [
-	  ],
-	  ],
-	 */
+		'urlManager'	 => [
+			'class'				 => 'yii\web\UrlManager',
+			'enablePrettyUrl'	 => true,
+			'showScriptName'	 => false,
+		],
 	],
 	'params'				 => $params,
 	'modules'				 => [
