@@ -44,7 +44,7 @@ class RgnPostcodeSearch extends RgnPostcode
 	 */
 	public function search($params)
 	{
-		$query = RgnPostcode::find();
+		$query = RgnPostcode::find()->with('province', 'city', 'district');
 
 		$dataProvider = new ActiveDataProvider([
 			'query'		 => $query,

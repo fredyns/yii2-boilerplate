@@ -44,7 +44,7 @@ class RgnDistrictSearch extends RgnDistrict
 	 */
 	public function search($params)
 	{
-		$query = RgnDistrict::find();
+		$query = RgnDistrict::find()->with('city');
 
 		$dataProvider = new ActiveDataProvider([
 			'query'		 => $query,

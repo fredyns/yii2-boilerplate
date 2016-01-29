@@ -45,7 +45,7 @@ class RgnProvinceSearch extends RgnProvince
 	 */
 	public function search($params)
 	{
-		$query = RgnProvince::find();
+		$query = RgnProvince::find()->with('country');
 
 		$dataProvider = new ActiveDataProvider([
 			'query'		 => $query,

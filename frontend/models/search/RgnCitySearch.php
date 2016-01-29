@@ -44,7 +44,7 @@ class RgnCitySearch extends RgnCity
 	 */
 	public function search($params)
 	{
-		$query = RgnCity::find();
+		$query = RgnCity::find()->with('province');
 
 		$dataProvider = new ActiveDataProvider([
 			'query'		 => $query,

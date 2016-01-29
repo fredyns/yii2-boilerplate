@@ -44,7 +44,7 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 	 */
 	public function search($params)
 	{
-		$query = RgnSubdistrict::find();
+		$query = RgnSubdistrict::find()->with('district');
 
 		$dataProvider = new ActiveDataProvider([
 			'query'		 => $query,
