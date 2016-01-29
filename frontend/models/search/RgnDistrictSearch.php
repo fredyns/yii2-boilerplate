@@ -19,8 +19,8 @@ class RgnDistrictSearch extends RgnDistrict
 	public function rules()
 	{
 		return [
-			[['id', 'city_id'], 'integer'],
-			[['status', 'number', 'name'], 'safe'],
+			[['id'], 'integer'],
+			[['status', 'number', 'name', 'city_id'], 'safe'],
 		];
 
 	}
@@ -63,14 +63,29 @@ class RgnDistrictSearch extends RgnDistrict
 		}
 
 		$query->andFilterWhere([
-			'id'		 => $this->id,
-			'city_id'	 => $this->city_id,
+			'rgn_district.id' => $this->id,
 		]);
 
 		$query
-			->andFilterWhere(['like', 'status', $this->status])
-			->andFilterWhere(['like', 'number', $this->number])
-			->andFilterWhere(['like', 'name', $this->name]);
+			->andFilterWhere(['like', 'rgn_district.status', $this->status])
+			->andFilterWhere(['like', 'rgn_district.number', $this->number])
+			->andFilterWhere(['like', 'rgn_district.name', $this->name]);
+
+		if (is_integer($this->city_id))
+		{
+			$query->andFilterWhere([
+				'city_id' => $this->city_id,
+			]);
+		}
+		else if ($this->city_id)
+		{
+			$query->joinWith([
+				'city' => function ($q)
+				{
+					$q->where('rgn_city.name LIKE "%' . $this->city_id . '%"');
+				}
+			]);
+		}
 
 		return $dataProvider;
 

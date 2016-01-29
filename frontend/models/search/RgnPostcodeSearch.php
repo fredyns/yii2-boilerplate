@@ -19,8 +19,8 @@ class RgnPostcodeSearch extends RgnPostcode
 	public function rules()
 	{
 		return [
-			[['id', 'postcode', 'subdistrict_id', 'district_id', 'city_id', 'province_id', 'country_id'], 'integer'],
-			[['status'], 'safe'],
+			[['id', 'postcode'], 'integer'],
+			[['status', 'subdistrict_id', 'district_id', 'city_id', 'province_id', 'country_id'], 'safe'],
 		];
 
 	}
@@ -63,18 +63,123 @@ class RgnPostcodeSearch extends RgnPostcode
 		}
 
 		$query->andFilterWhere([
-			'id'			 => $this->id,
-			'postcode'		 => $this->postcode,
-			'subdistrict_id' => $this->subdistrict_id,
-			'district_id'	 => $this->district_id,
-			'city_id'		 => $this->city_id,
-			'province_id'	 => $this->province_id,
-			'country_id'	 => $this->country_id,
+			'rgn_postcode.id'		 => $this->id,
+			'rgn_postcode.postcode'	 => $this->postcode,
 		]);
 
-		$query->andFilterWhere(['like', 'status', $this->status]);
+		$query->andFilterWhere(['like', 'rgn_postcode.status', $this->status]);
+
+		// filtering subdistrict
+
+		if (is_integer($this->subdistrict_id))
+		{
+			$query->andFilterWhere([
+				'subdistrict_id' => $this->subdistrict_id,
+			]);
+		}
+		else if ($this->subdistrict_id)
+		{
+			$query->joinWith([
+				'subdistrict' => function ($q)
+				{
+					$q->where('rgn_subdistrict.name LIKE "%' . $this->subdistrict_id . '%"');
+				}
+			]);
+		}
+
+		// filtering district
+
+		if (is_integer($this->district_id))
+		{
+			$query->andFilterWhere([
+				'district_id' => $this->district_id,
+			]);
+		}
+		else if ($this->district_id)
+		{
+			$query->joinWith([
+				'district' => function ($q)
+				{
+					$q->where('rgn_district.name LIKE "%' . $this->district_id . '%"');
+				}
+			]);
+		}
+
+		// filtering city
+
+		if (is_integer($this->city_id))
+		{
+			$query->andFilterWhere([
+				'city_id' => $this->city_id,
+			]);
+		}
+		else if ($this->city_id)
+		{
+			$query->joinWith([
+				'city' => function ($q)
+				{
+					$q->where('rgn_city.name LIKE "%' . $this->city_id . '%"');
+				}
+			]);
+		}
+
+		// filtering province
+
+		if (is_integer($this->province_id))
+		{
+			$query->andFilterWhere([
+				'province_id' => $this->province_id,
+			]);
+		}
+		else if ($this->province_id)
+		{
+			$query->joinWith([
+				'province' => function ($q)
+				{
+					$q->where('rgn_province.name LIKE "%' . $this->province_id . '%"');
+				}
+			]);
+		}
+
+		// filtering country
+
+		if (is_integer($this->country_id))
+		{
+			$query->andFilterWhere([
+				'country_id' => $this->country_id,
+			]);
+		}
+		else if ($this->country_id)
+		{
+			$query->joinWith([
+				'country' => function ($q)
+				{
+					$q->where('rgn_country.name LIKE "%' . $this->country_id . '%"');
+				}
+			]);
+		}
 
 		return $dataProvider;
+
+	}
+
+	public function filterRelatedField(&$query, $name, $attribute, $searchField)
+	{
+		if (is_integer($this->district_id))
+		{
+			$query->andFilterWhere([
+				$attribute => $this->$attribute,
+			]);
+		}
+		else if ($this->$attribute)
+		{
+			$query->joinWith([
+				$name => function ($q)
+				{
+					$q->where($searchField . ' LIKE "%' . $this->$attribute . '%"');
+				}
+			]);
+		}
 
 	}
 

@@ -19,9 +19,8 @@ class RgnProvinceSearch extends RgnProvince
 	public function rules()
 	{
 		return [
-			//[['id', 'country_id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
-			[['id', 'country_id'], 'integer'],
-			[['status', 'number', 'name', 'abbreviation'], 'safe'],
+			[['id'], 'integer'],
+			[['status', 'number', 'name', 'abbreviation', 'country_id'], 'safe'],
 		];
 
 	}
@@ -64,21 +63,30 @@ class RgnProvinceSearch extends RgnProvince
 		}
 
 		$query->andFilterWhere([
-			'id'		 => $this->id,
-			'country_id' => $this->country_id,
-			//'created_at'	 => $this->created_at,
-			//'updated_at'	 => $this->updated_at,
-			//'deleted_at'	 => $this->deleted_at,
-			//'createdBy_id'	 => $this->createdBy_id,
-			//'updatedBy_id'	 => $this->updatedBy_id,
-			//'deletedBy_id'	 => $this->deletedBy_id,
+			'rgn_province.id' => $this->id,
 		]);
 
 		$query
-			->andFilterWhere(['like', 'status', $this->status])
-			->andFilterWhere(['like', 'number', $this->number])
-			->andFilterWhere(['like', 'name', $this->name])
-			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
+			->andFilterWhere(['like', 'rgn_province.status', $this->status])
+			->andFilterWhere(['like', 'rgn_province.number', $this->number])
+			->andFilterWhere(['like', 'rgn_province.name', $this->name])
+			->andFilterWhere(['like', 'rgn_province.abbreviation', $this->abbreviation]);
+
+		if (is_integer($this->country_id))
+		{
+			$query->andFilterWhere([
+				'country_id' => $this->country_id,
+			]);
+		}
+		else if ($this->country_id)
+		{
+			$query->joinWith([
+				'country' => function ($q)
+				{
+					$q->where('rgn_country.name LIKE "%' . $this->country_id . '%"');
+				}
+			]);
+		}
 
 		return $dataProvider;
 

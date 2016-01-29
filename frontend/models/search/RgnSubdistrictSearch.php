@@ -19,8 +19,8 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 	public function rules()
 	{
 		return [
-			[['id', 'district_id'], 'integer'],
-			[['status', 'number', 'name'], 'safe'],
+			[['id'], 'integer'],
+			[['status', 'number', 'name', 'district_id'], 'safe'],
 		];
 
 	}
@@ -63,14 +63,29 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 		}
 
 		$query->andFilterWhere([
-			'id'			 => $this->id,
-			'district_id'	 => $this->district_id,
+			'rgn_subdistrict.id' => $this->id,
 		]);
 
 		$query
-			->andFilterWhere(['like', 'status', $this->status])
-			->andFilterWhere(['like', 'number', $this->number])
-			->andFilterWhere(['like', 'name', $this->name]);
+			->andFilterWhere(['like', 'rgn_subdistrict.status', $this->status])
+			->andFilterWhere(['like', 'rgn_subdistrict.number', $this->number])
+			->andFilterWhere(['like', 'rgn_subdistrict.name', $this->name]);
+
+		if (is_integer($this->district_id))
+		{
+			$query->andFilterWhere([
+				'district_id' => $this->district_id,
+			]);
+		}
+		else if ($this->district_id)
+		{
+			$query->joinWith([
+				'district' => function ($q)
+				{
+					$q->where('rgn_district.name LIKE "%' . $this->district_id . '%"');
+				}
+			]);
+		}
 
 		return $dataProvider;
 

@@ -19,8 +19,8 @@ class RgnCitySearch extends RgnCity
 	public function rules()
 	{
 		return [
-			[['id', 'province_id'], 'integer'],
-			[['status', 'number', 'name', 'abbreviation'], 'safe'],
+			[['id'], 'integer'],
+			[['status', 'number', 'name', 'abbreviation', 'province_id'], 'safe'],
 		];
 
 	}
@@ -63,15 +63,30 @@ class RgnCitySearch extends RgnCity
 		}
 
 		$query->andFilterWhere([
-			'id'			 => $this->id,
-			'province_id'	 => $this->province_id,
+			'rgn_city.id' => $this->id,
 		]);
 
 		$query
-			->andFilterWhere(['like', 'status', $this->status])
-			->andFilterWhere(['like', 'number', $this->number])
-			->andFilterWhere(['like', 'name', $this->name])
-			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
+			->andFilterWhere(['like', 'rgn_city.status', $this->status])
+			->andFilterWhere(['like', 'rgn_city.number', $this->number])
+			->andFilterWhere(['like', 'rgn_city.name', $this->name])
+			->andFilterWhere(['like', 'rgn_city.abbreviation', $this->abbreviation]);
+
+		if (is_integer($this->province_id))
+		{
+			$query->andFilterWhere([
+				'province_id' => $this->province_id,
+			]);
+		}
+		else if ($this->province_id)
+		{
+			$query->joinWith([
+				'province' => function ($q)
+				{
+					$q->where('rgn_province.name LIKE "%' . $this->province_id . '%"');
+				}
+			]);
+		}
 
 		return $dataProvider;
 
