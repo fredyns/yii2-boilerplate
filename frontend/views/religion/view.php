@@ -59,10 +59,6 @@ $this->params['breadcrumbs'][] = 'View';
 				'model'		 => $model,
 				'attributes' => [
 					'id',
-					[
-						'attribute'	 => 'status',
-						'value'		 => $model->statusLabel,
-					],
 					'name',
 				],
 			]);

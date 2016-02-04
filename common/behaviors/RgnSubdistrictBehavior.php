@@ -78,7 +78,7 @@ class RgnSubdistrictBehavior extends AttributeBehavior
 			$model = new RgnSubdistrict([
 				'name'			 => $value,
 				'district_id'	 => $parent_id,
-				'status'		 => RgnSubdistrict::STATUS_ACTIVE,
+				'recordStatus'	 => RgnSubdistrict::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

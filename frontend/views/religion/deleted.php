@@ -75,14 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
 								'contentOptions' => ['nowrap' => 'nowrap']
 							],
 							[
-								"attribute"	 => "statusLabel",
-								"options"	 => [],
-								"value"		 => function(Religion $model)
-							{
-								return $model->statusLabel;
-							}
-							],
-							[
 								"attribute"	 => "name",
 								"format"	 => "raw",
 								"options"	 => [],

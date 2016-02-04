@@ -8,7 +8,7 @@ use common\models\base\RgnProvince as BaseRgnProvince;
 /**
  * This is the model class for table "rgn_province".
  *
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  */
 class RgnProvince extends BaseRgnProvince
 {
@@ -20,18 +20,18 @@ class RgnProvince extends BaseRgnProvince
 	{
 		return [
 			/* default value */
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			['recordStatus', 'default', 'value' => static::RECORDSTATUS_USED],
 			/* required */
 			[['name', 'country_id'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['number', 'abbreviation'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
 			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			/* value limitation */
-			['status', 'in', 'range' => [
-					static::STATUS_ACTIVE,
-					static::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					static::RECORDSTATUS_USED,
+					static::RECORDSTATUS_DELETED,
 				],
 			],
 			[
@@ -55,30 +55,31 @@ class RgnProvince extends BaseRgnProvince
 	public function attributeLabels()
 	{
 		return [
-			'id'			 => 'ID',
-			'status'		 => 'Status',
-			'number'		 => 'Number',
-			'name'			 => 'Name',
-			'abbreviation'	 => 'Abbreviation',
-			'country_id'	 => 'Country',
-			'created_at'	 => 'Created At',
-			'updated_at'	 => 'Updated At',
-			'deleted_at'	 => 'Deleted At',
-			'createdBy_id'	 => 'Created By',
-			'updatedBy_id'	 => 'Updated By',
-			'deletedBy_id'	 => 'Deleted By',
+			'id'				 => 'ID',
+			'recordStatus'		 => 'Record Status',
+			'recordStatusLabel'	 => 'Record Status',
+			'number'			 => 'Number',
+			'name'				 => 'Name',
+			'abbreviation'		 => 'Abbreviation',
+			'country_id'		 => 'Country',
+			'created_at'		 => 'Created At',
+			'updated_at'		 => 'Updated At',
+			'deleted_at'		 => 'Deleted At',
+			'createdBy_id'		 => 'Created By',
+			'updatedBy_id'		 => 'Updated By',
+			'deletedBy_id'		 => 'Deleted By',
 		];
 
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return parent::getStatusValueLabel($this->status);
+		return parent::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -87,7 +88,7 @@ class RgnProvince extends BaseRgnProvince
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_DELETED;
 
 		return parent::softDelete();
 
@@ -98,7 +99,7 @@ class RgnProvince extends BaseRgnProvince
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

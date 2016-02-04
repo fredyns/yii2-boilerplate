@@ -64,10 +64,6 @@ $this->params['breadcrumbs'][] = 'View';
 				'model'		 => $model,
 				'attributes' => [
 					'id',
-					[
-						'attribute'	 => 'status',
-						'value'		 => frontend\modules\region\models\Province::getStatusValueLabel($model->status),
-					],
 					'number',
 					'name',
 					'abbreviation',

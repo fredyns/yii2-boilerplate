@@ -6,7 +6,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
- * generate widget to display status & model moderation
+ * generate widget to display record status & model moderation
  *
  * @author fredy
  */
@@ -43,7 +43,7 @@ class Moderation extends \yii\base\Widget
 	{
 		$this->output .= $this->tag_open;
 
-		$this->parseStatus();
+		$this->parseRecordStatus();
 
 		foreach ($this->types as $state)
 		{
@@ -57,13 +57,13 @@ class Moderation extends \yii\base\Widget
 	}
 
 	/**
-	 * parsing status property
+	 * parsing record-status property
 	 */
-	public function parseStatus()
+	public function parseRecordStatus()
 	{
-		if ($this->model->hasAttribute('status'))
+		if ($this->model->hasAttribute('recordStatus'))
 		{
-			$this->output .= "Status: {$this->model->status}<br/>";
+			$this->output .= "Record status: {$this->model->recordStatus}<br/>";
 		}
 
 	}

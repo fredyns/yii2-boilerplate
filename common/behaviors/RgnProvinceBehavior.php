@@ -76,9 +76,9 @@ class RgnProvinceBehavior extends AttributeBehavior
 		else
 		{
 			$model = new RgnProvince([
-				'name'		 => $value,
-				'country_id' => $parent_id,
-				'status'	 => RgnProvince::STATUS_ACTIVE,
+				'name'			 => $value,
+				'country_id'	 => $parent_id,
+				'recordStatus'	 => RgnProvince::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

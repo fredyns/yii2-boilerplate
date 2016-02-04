@@ -49,7 +49,7 @@ class RgnSubdistrictOperation extends ModelOperation
 			{
 				$this->setError('delete', "Cann't delete unsaved data.");
 			}
-			else if ($this->model->status == RgnSubdistrict::STATUS_DELETED)
+			else if ($this->model->recordStatus == RgnSubdistrict::RECORDSTATUS_DELETED)
 			{
 				$this->setError('delete', 'Data already (soft) deleted.');
 			}
@@ -83,9 +83,9 @@ class RgnSubdistrictOperation extends ModelOperation
 			{
 				$this->setError('restore', "Cann't restore unsaved data.");
 			}
-			else if ($this->model->status == RgnSubdistrict::STATUS_ACTIVE)
+			else if ($this->model->recordStatus == RgnSubdistrict::RECORDSTATUS_USED)
 			{
-				$this->setError('restore', 'Data already activated.');
+				$this->setError('restore', 'Data is not deleted.');
 			}
 			// action whitelist
 			else

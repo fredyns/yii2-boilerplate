@@ -9,7 +9,7 @@ use common\models\RgnProvince;
 /**
  * This is the model class for table "rgn_city".
  *
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  * @property integer $country_id
  *
  * @property \common\models\RgnCountry $country
@@ -48,19 +48,20 @@ class RgnCity extends BaseRgnCity
 	public function attributeLabels()
 	{
 		return [
-			'id'			 => 'ID',
-			'status'		 => 'Status',
-			'number'		 => 'Number',
-			'name'			 => 'Name',
-			'abbreviation'	 => 'Abbreviation',
-			'province_id'	 => 'Province',
-			'country_id'	 => 'Country',
-			'created_at'	 => 'Created At',
-			'updated_at'	 => 'Updated At',
-			'deleted_at'	 => 'Deleted At',
-			'createdBy_id'	 => 'Created By',
-			'updatedBy_id'	 => 'Updated By',
-			'deletedBy_id'	 => 'Deleted By',
+			'id'				 => 'ID',
+			'recordStatus'		 => 'Record Status',
+			'recordStatusLabel'	 => 'Record Status',
+			'number'			 => 'Number',
+			'name'				 => 'Name',
+			'abbreviation'		 => 'Abbreviation',
+			'province_id'		 => 'Province',
+			'country_id'		 => 'Country',
+			'created_at'		 => 'Created At',
+			'updated_at'		 => 'Updated At',
+			'deleted_at'		 => 'Deleted At',
+			'createdBy_id'		 => 'Created By',
+			'updatedBy_id'		 => 'Updated By',
+			'deletedBy_id'		 => 'Deleted By',
 		];
 
 	}
@@ -72,18 +73,18 @@ class RgnCity extends BaseRgnCity
 	{
 		return [
 			/* default value */
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			['recordStatus', 'default', 'value' => static::RECORDSTATUS_USED],
 			/* required */
 			[['name', 'province_id'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['number'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
 			[['abbreviation'], 'string', 'max' => 64],
 			/* value limitation */
-			['status', 'in', 'range' => [
-					self::STATUS_ACTIVE,
-					self::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					self::RECORDSTATUS_USED,
+					self::RECORDSTATUS_DELETED,
 				],
 			],
 			[
@@ -124,13 +125,13 @@ class RgnCity extends BaseRgnCity
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return parent::getStatusValueLabel($this->status);
+		return parent::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -139,7 +140,7 @@ class RgnCity extends BaseRgnCity
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_DELETED;
 
 		return parent::softDelete();
 
@@ -150,7 +151,7 @@ class RgnCity extends BaseRgnCity
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

@@ -53,7 +53,7 @@ class RgnCountry extends BaseCountry
 	{
 		return $this
 				->hasMany(RgnPostcode::className(), ['country_id' => 'id'])
-				->andFilterWhere(['like', 'status', RgnPostcode::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', RgnPostcode::RECORDSTATUS_USED]);
 
 	}
 
@@ -64,7 +64,7 @@ class RgnCountry extends BaseCountry
 	{
 		return $this
 				->hasMany(RgnProvince::className(), ['country_id' => 'id'])
-				->andFilterWhere(['like', 'status', RgnProvince::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', RgnProvince::RECORDSTATUS_USED]);
 
 	}
 

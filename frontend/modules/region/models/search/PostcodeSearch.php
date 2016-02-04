@@ -20,7 +20,7 @@ class PostcodeSearch extends Postcode
 	{
 		return [
 			[['id', 'postcode', 'subdistrict_id', 'district_id', 'city_id', 'province_id', 'country_id'], 'integer'],
-			[['status'], 'safe'],
+			[['recordStatus'], 'safe'],
 		];
 
 	}
@@ -72,7 +72,7 @@ class PostcodeSearch extends Postcode
 			'country_id'	 => $this->country_id,
 		]);
 
-		$query->andFilterWhere(['like', 'status', $this->status]);
+		$query->andFilterWhere(['like', 'recordStatus', $this->recordStatus]);
 
 		return $dataProvider;
 
@@ -87,7 +87,7 @@ class PostcodeSearch extends Postcode
 	 */
 	public function searchIndex($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_USED;
 
 		return $this->search($params);
 
@@ -102,7 +102,7 @@ class PostcodeSearch extends Postcode
 	 */
 	public function searchDeleted($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_DELETED;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_DELETED;
 
 		return $this->search($params);
 

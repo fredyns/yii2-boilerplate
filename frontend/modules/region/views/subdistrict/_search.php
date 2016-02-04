@@ -28,7 +28,7 @@ use frontend\modules\region\models\search\SubdistrictSearch;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(SubdistrictSearch::optsstatus()); ?>
+	<?= $form->field($model, 'recordStatus')->dropDownList(SubdistrictSearch::optsRecordStatus()); ?>
 
 	<?= $form->field($model, 'number') ?>
 

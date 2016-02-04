@@ -28,7 +28,7 @@ use kartik\depdrop\DepDrop;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(RgnPostcodeSearch::optsstatus()); ?>
+	<?= $form->field($model, 'recordStatus')->dropDownList(RgnPostcodeSearch::optsRecordStatus()); ?>
 
 	<?= $form->field($model, 'postcode') ?>
 

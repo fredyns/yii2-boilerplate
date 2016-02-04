@@ -273,7 +273,7 @@ class RgnProvinceController extends Controller
 				},
 			],
 			'filter'	 => [
-				'status' => RgnProvince::STATUS_ACTIVE,
+				'recordStatus' => RgnProvince::RECORDSTATUS_USED,
 			],
 			'selected'	 => $selected,
 		]);

@@ -25,7 +25,7 @@ use frontend\modules\region\models\search\CountrySearch;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(CountrySearch::optsstatus()); ?>
+	<?= $form->field($model, 'recordStatus')->dropDownList(CountrySearch::optsRecordStatus()); ?>
 
 	<?= $form->field($model, 'name') ?>
 

@@ -69,9 +69,9 @@ class DistrictBehavior extends AttributeBehavior
 		else
 		{
 			$model = new District([
-				'name'		 => $value,
-				'city_id'	 => $parent_id,
-				'status'	 => District::STATUS_ACTIVE,
+				'name'			 => $value,
+				'city_id'		 => $parent_id,
+				'recordStatus'	 => District::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

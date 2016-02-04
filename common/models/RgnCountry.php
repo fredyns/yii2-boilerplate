@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "rgn_country".
  *
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  */
 class RgnCountry extends BaseRgnCountry
 {
@@ -34,18 +34,18 @@ class RgnCountry extends BaseRgnCountry
 	{
 		return [
 			/* default value */
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			['recordStatus', 'default', 'value' => static::RECORDSTATUS_USED],
 			/* required */
 			[['name'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['name'], 'string', 'max' => 255],
 			[['abbreviation'], 'string', 'max' => 32],
 			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			/* value limitation */
-			['status', 'in', 'range' => [
-					self::STATUS_ACTIVE,
-					self::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					self::RECORDSTATUS_USED,
+					self::RECORDSTATUS_DELETED,
 				]
 			],
 		];
@@ -58,28 +58,29 @@ class RgnCountry extends BaseRgnCountry
 	public function attributeLabels()
 	{
 		return [
-			'id'			 => 'ID',
-			'status'		 => 'Status',
-			'name'			 => 'Name',
-			'abbreviation'	 => 'Abbreviation',
-			'created_at'	 => 'Created At',
-			'updated_at'	 => 'Updated At',
-			'deleted_at'	 => 'Deleted At',
-			'createdBy_id'	 => 'Created By',
-			'updatedBy_id'	 => 'Updated By',
-			'deletedBy_id'	 => 'Deleted By',
+			'id'				 => 'ID',
+			'recordStatus'		 => 'Record Status',
+			'recordStatusLabel'	 => 'Record Status',
+			'name'				 => 'Name',
+			'abbreviation'		 => 'Abbreviation',
+			'created_at'		 => 'Created At',
+			'updated_at'		 => 'Updated At',
+			'deleted_at'		 => 'Deleted At',
+			'createdBy_id'		 => 'Created By',
+			'updatedBy_id'		 => 'Updated By',
+			'deletedBy_id'		 => 'Deleted By',
 		];
 
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return parent::getStatusValueLabel($this->status);
+		return parent::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -88,7 +89,7 @@ class RgnCountry extends BaseRgnCountry
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_DELETED;
 
 		return parent::softDelete();
 
@@ -99,7 +100,7 @@ class RgnCountry extends BaseRgnCountry
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

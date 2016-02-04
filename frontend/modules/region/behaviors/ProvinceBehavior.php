@@ -69,9 +69,9 @@ class ProvinceBehavior extends AttributeBehavior
 		else
 		{
 			$model = new Province([
-				'name'		 => $value,
-				'country_id' => $parent_id,
-				'status'	 => Province::STATUS_ACTIVE,
+				'name'			 => $value,
+				'country_id'	 => $parent_id,
+				'recordStatus'	 => Province::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

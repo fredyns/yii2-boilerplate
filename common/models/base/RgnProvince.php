@@ -8,7 +8,7 @@ use Yii;
  * This is the base-model class for table "rgn_province".
  *
  * @property integer $id
- * @property string $status
+ * @property string $recordStatus
  * @property string $number
  * @property string $name
  * @property string $abbreviation
@@ -30,9 +30,9 @@ class RgnProvince extends \common\base\Model
 	/**
 	 * ENUM field values
 	 */
-	const STATUS_ACTIVE = 'active';
+	const RECORDSTATUS_USED = 'used';
 
-	const STATUS_DELETED = 'deleted';
+	const RECORDSTATUS_DELETED = 'deleted';
 
 	var $enum_labels = false;
 
@@ -51,14 +51,14 @@ class RgnProvince extends \common\base\Model
 	public function rules()
 	{
 		return [
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['name'], 'required'],
 			[['country_id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			[['number', 'abbreviation'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
-			['status', 'in', 'range' => [
-					self::STATUS_ACTIVE,
-					self::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					self::RECORDSTATUS_USED,
+					self::RECORDSTATUS_DELETED,
 				]
 			]
 		];
@@ -72,7 +72,7 @@ class RgnProvince extends \common\base\Model
 	{
 		return [
 			'id'			 => 'ID',
-			'status'		 => 'Status',
+			'recordStatus'	 => 'Record Status',
 			'number'		 => 'Number',
 			'name'			 => 'Name',
 			'abbreviation'	 => 'Abbreviation',
@@ -115,30 +115,32 @@ class RgnProvince extends \common\base\Model
 	}
 
 	/**
-	 * get column status enum value label
+	 * get column recordStatus enum value label
 	 * @param string $value
 	 * @return string
 	 */
-	public static function getStatusValueLabel($value)
+	public static function getRecordStatusValueLabel($value)
 	{
-		$labels = self::optsStatus();
+		$labels = self::optsRecordStatus();
+
 		if (isset($labels[$value]))
 		{
 			return $labels[$value];
 		}
+
 		return $value;
 
 	}
 
 	/**
-	 * column status ENUM value labels
+	 * column recordStatus ENUM value labels
 	 * @return array
 	 */
-	public static function optsStatus()
+	public static function optsRecordStatus()
 	{
 		return [
-			self::STATUS_ACTIVE	 => 'Active',
-			self::STATUS_DELETED => 'Deleted',
+			self::RECORDSTATUS_USED		 => 'Used',
+			self::RECORDSTATUS_DELETED	 => 'Deleted',
 		];
 
 	}

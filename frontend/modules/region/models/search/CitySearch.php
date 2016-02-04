@@ -20,7 +20,7 @@ class CitySearch extends City
 	{
 		return [
 			[['id', 'province_id'], 'integer'],
-			[['status', 'number', 'name', 'abbreviation'], 'safe'],
+			[['recordStatus', 'number', 'name', 'abbreviation'], 'safe'],
 		];
 
 	}
@@ -68,7 +68,7 @@ class CitySearch extends City
 		]);
 
 		$query
-			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'recordStatus', $this->recordStatus])
 			->andFilterWhere(['like', 'number', $this->number])
 			->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
@@ -86,7 +86,7 @@ class CitySearch extends City
 	 */
 	public function searchIndex($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_USED;
 
 		return $this->search($params);
 
@@ -101,7 +101,7 @@ class CitySearch extends City
 	 */
 	public function searchDeleted($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_DELETED;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_DELETED;
 
 		return $this->search($params);
 

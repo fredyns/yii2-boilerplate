@@ -65,8 +65,8 @@ class RgnCountryBehavior extends AttributeBehavior
 		else
 		{
 			$model = new RgnCountry([
-				'name'	 => $value,
-				'status' => RgnCountry::STATUS_ACTIVE,
+				'name'			 => $value,
+				'recordStatus'	 => RgnCountry::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

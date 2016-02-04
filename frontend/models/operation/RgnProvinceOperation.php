@@ -49,7 +49,7 @@ class RgnProvinceOperation extends ModelOperation
 			{
 				$this->setError('delete', "Cann't delete unsaved data.");
 			}
-			else if ($this->model->status == RgnProvince::STATUS_DELETED)
+			else if ($this->model->recordStatus == RgnProvince::RECORDSTATUS_DELETED)
 			{
 				$this->setError('delete', 'Data already (soft) deleted.');
 			}
@@ -83,9 +83,9 @@ class RgnProvinceOperation extends ModelOperation
 			{
 				$this->setError('restore', "Cann't restore unsaved data.");
 			}
-			else if ($this->model->status == RgnProvince::STATUS_ACTIVE)
+			else if ($this->model->recordStatus == RgnProvince::RECORDSTATUS_USED)
 			{
-				$this->setError('restore', 'Data already activated.');
+				$this->setError('restore', 'Data is not deleted.');
 			}
 			// action whitelist
 			else

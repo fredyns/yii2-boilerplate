@@ -66,7 +66,7 @@ class RgnDistrict extends BaseDistrict
 	{
 		return $this
 				->hasMany(RgnPostcode::className(), ['district_id' => 'id'])
-				->andFilterWhere(['like', 'status', RgnPostcode::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', RgnPostcode::RECORDSTATUS_USED]);
 
 	}
 
@@ -77,7 +77,7 @@ class RgnDistrict extends BaseDistrict
 	{
 		return $this
 				->hasMany(RgnSubdistrict::className(), ['district_id' => 'id'])
-				->andFilterWhere(['like', 'status', RgnSubdistrict::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', RgnSubdistrict::RECORDSTATUS_USED]);
 
 	}
 

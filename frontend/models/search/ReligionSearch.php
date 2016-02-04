@@ -21,7 +21,7 @@ class ReligionSearch extends Religion
 		return [
 			//[['id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			[['id'], 'integer'],
-			[['status', 'name'], 'safe'],
+			[['recordStatus', 'name'], 'safe'],
 		];
 
 	}
@@ -74,7 +74,7 @@ class ReligionSearch extends Religion
 		]);
 
 		$query
-			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'recordStatus', $this->recordStatus])
 			->andFilterWhere(['like', 'name', $this->name]);
 
 		return $dataProvider;
@@ -90,7 +90,7 @@ class ReligionSearch extends Religion
 	 */
 	public function searchIndex($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_USED;
 
 		return $this->search($params);
 
@@ -105,7 +105,7 @@ class ReligionSearch extends Religion
 	 */
 	public function searchDeleted($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_DELETED;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_DELETED;
 
 		return $this->search($params);
 

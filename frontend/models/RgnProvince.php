@@ -55,7 +55,7 @@ class RgnProvince extends BaseProvince
 	{
 		return $this
 				->hasMany(RgnCity::className(), ['province_id' => 'id'])
-				->andFilterWhere(['like', 'status', RgnCity::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', RgnCity::RECORDSTATUS_USED]);
 
 	}
 
@@ -66,7 +66,7 @@ class RgnProvince extends BaseProvince
 	{
 		return $this
 				->hasMany(RgnPostcode::className(), ['province_id' => 'id'])
-				->andFilterWhere(['like', 'status', RgnPostcode::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', RgnPostcode::RECORDSTATUS_USED]);
 
 	}
 

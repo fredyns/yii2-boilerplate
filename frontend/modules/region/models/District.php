@@ -9,7 +9,7 @@ use frontend\modules\region\models\operation\DistrictOperation;
  * This is the base-model class for table "rgn_district".
  *
  * @property integer $id
- * @property string $status
+ * @property string $recordStatus
  * @property string $number
  * @property string $name
  * @property integer $city_id
@@ -21,7 +21,7 @@ use frontend\modules\region\models\operation\DistrictOperation;
  * @property integer $deletedBy_id
  *
  * @property String $linkTo
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  * @property integer $country_id
  * @property integer $province_id
  *
@@ -38,9 +38,9 @@ class District extends \common\base\Model
 	/**
 	 * ENUM field values
 	 */
-	const STATUS_ACTIVE = 'active';
+	const RECORDSTATUS_USED = 'used';
 
-	const STATUS_DELETED = 'deleted';
+	const RECORDSTATUS_DELETED = 'deleted';
 
 	var $enum_labels = false;
 
@@ -104,18 +104,18 @@ class District extends \common\base\Model
 	{
 		return [
 			/* default value */
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			['recordStatus', 'default', 'value' => static::RECORDSTATUS_USED],
 			/* required */
 			[['name', 'city_id'], 'required'],
 			/* field type */
-			[['status', 'number'], 'string'],
+			[['recordStatus', 'number'], 'string'],
 			[['number'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
 			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			/* value limitation */
-			['status', 'in', 'range' => [
-					self::STATUS_ACTIVE,
-					self::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					self::RECORDSTATUS_USED,
+					self::RECORDSTATUS_DELETED,
 				]
 			],
 			[
@@ -140,7 +140,7 @@ class District extends \common\base\Model
 	{
 		return [
 			'id'			 => 'ID',
-			'status'		 => 'Status',
+			'recordStatus'	 => 'Record Status',
 			'number'		 => 'Number',
 			'name'			 => 'Name',
 			'city_id'		 => 'City',
@@ -209,7 +209,7 @@ class District extends \common\base\Model
 	{
 		return $this
 				->hasMany(Postcode::className(), ['district_id' => 'id'])
-				->andFilterWhere(['like', 'status', Postcode::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', Postcode::RECORDSTATUS_USED]);
 
 	}
 
@@ -220,18 +220,18 @@ class District extends \common\base\Model
 	{
 		return $this
 				->hasMany(Subdistrict::className(), ['district_id' => 'id'])
-				->andFilterWhere(['like', 'status', Subdistrict::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', Subdistrict::RECORDSTATUS_USED]);
 
 	}
 
 	/**
-	 * get column status enum value label
+	 * get column recordStatus enum value label
 	 * @param string $value
 	 * @return string
 	 */
-	public static function getStatusValueLabel($value)
+	public static function getRecordStatusValueLabel($value)
 	{
-		$labels = self::optsStatus();
+		$labels = self::optsRecordStatus();
 		if (isset($labels[$value]))
 		{
 			return $labels[$value];
@@ -241,14 +241,14 @@ class District extends \common\base\Model
 	}
 
 	/**
-	 * column status ENUM value labels
+	 * column recordStatus ENUM value labels
 	 * @return array
 	 */
-	public static function optsStatus()
+	public static function optsRecordStatus()
 	{
 		return [
-			self::STATUS_ACTIVE	 => 'Active',
-			self::STATUS_DELETED => 'Deleted',
+			self::RECORDSTATUS_USED		 => 'Active',
+			self::RECORDSTATUS_DELETED	 => 'Deleted',
 		];
 
 	}
@@ -266,13 +266,13 @@ class District extends \common\base\Model
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return static::getStatusValueLabel($this->status);
+		return static::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -281,7 +281,7 @@ class District extends \common\base\Model
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::softDelete();
 
@@ -292,7 +292,7 @@ class District extends \common\base\Model
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

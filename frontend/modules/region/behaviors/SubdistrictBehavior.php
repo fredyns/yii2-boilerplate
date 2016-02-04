@@ -71,7 +71,7 @@ class SubdistrictBehavior extends AttributeBehavior
 			$model = new Subdistrict([
 				'name'			 => $value,
 				'district_id'	 => $parent_id,
-				'status'		 => Subdistrict::STATUS_ACTIVE,
+				'recordStatus'	 => Subdistrict::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

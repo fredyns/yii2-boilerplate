@@ -50,7 +50,7 @@ class ReligionOperation extends ModelOperation
 			{
 				$this->setError('delete', "Cann't delete unsaved data.");
 			}
-			else if ($this->model->status == Religion::STATUS_DELETED)
+			else if ($this->model->recordStatus == Religion::RECORDSTATUS_DELETED)
 			{
 				$this->setError('delete', 'Data already (soft) deleted.');
 			}
@@ -84,9 +84,9 @@ class ReligionOperation extends ModelOperation
 			{
 				$this->setError('restore', "Cann't restore unsaved data.");
 			}
-			else if ($this->model->status == Religion::STATUS_ACTIVE)
+			else if ($this->model->recordStatus == Religion::RECORDSTATUS_USED)
 			{
-				$this->setError('restore', 'Data already activated.');
+				$this->setError('restore', 'Data is not deleted.');
 			}
 			// action whitelist
 			else

@@ -76,9 +76,9 @@ class RgnDistrictBehavior extends AttributeBehavior
 		else
 		{
 			$model = new RgnDistrict([
-				'name'		 => $value,
-				'city_id'	 => $parent_id,
-				'status'	 => RgnDistrict::STATUS_ACTIVE,
+				'name'			 => $value,
+				'city_id'		 => $parent_id,
+				'recordStatus'	 => RgnDistrict::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

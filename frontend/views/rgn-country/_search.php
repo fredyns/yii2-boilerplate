@@ -25,7 +25,7 @@ use frontend\models\search\RgnCountrySearch;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(RgnCountrySearch::optsstatus()); ?>
+	<?= $form->field($model, 'recordStatus')->dropDownList(RgnCountrySearch::optsRecordStatus()); ?>
 
 	<?= $form->field($model, 'name') ?>
 

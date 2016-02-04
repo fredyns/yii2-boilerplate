@@ -3,191 +3,115 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use frontend\modules\region\models\access\PostcodeAccess;
 
 /**
-* @var yii\web\View $this
-* @var yii\data\ActiveDataProvider $dataProvider
-* @var frontend\modules\region\models\search\PostcodeSearch $searchModel
-*/
-
+ * @var yii\web\View $this
+ * @var yii\data\ActiveDataProvider $dataProvider
+ * @var frontend\modules\region\models\search\PostcodeSearch $searchModel
+ */
 $this->title = 'Postcodes';
+$this->params['breadcrumbs'][] = ['label' => 'Region', 'url' => ['/region']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
-<div class="giiant-crud postcode-index">
+<div class="giiant-crud postcode-deleted">
 
-    <?php //     echo $this->render('_search', ['model' =>$searchModel]);
-    ?>
+	<?php //     echo $this->render('_search', ['model' =>$searchModel]);?>
 
     <div class="clearfix">
+
         <p class="pull-left">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']) ?>
-        </p>
+			<?= PostcodeAccess::button('create'); ?>
+		</p>
 
         <div class="pull-right">
+			<?= PostcodeAccess::button('index'); ?>
+		</div>
 
-                                                                                                                                                                                                                                                        
-            <?= 
-            \yii\bootstrap\ButtonDropdown::widget(
-                [
-                    'id'       => 'giiant-relations',
-                    'encodeLabel' => false,
-                    'label'    => '<span class="glyphicon glyphicon-paperclip"></span> ' . 'Relations',
-                    'dropdown' => [
-                        'options'      => [
-                            'class' => 'dropdown-menu-right'
-                        ],
-                        'encodeLabels' => false,
-                        'items'        => [            [
-                'url' => ['city/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'City' . '</i>',
-            ],            [
-                'url' => ['country/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'Country' . '</i>',
-            ],            [
-                'url' => ['district/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'District' . '</i>',
-            ],            [
-                'url' => ['province/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'Province' . '</i>',
-            ],            [
-                'url' => ['subdistrict/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'Subdistrict' . '</i>',
-            ],            [
-                'url' => ['user/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'User' . '</i>',
-            ],            [
-                'url' => ['user/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'User' . '</i>',
-            ],            [
-                'url' => ['user/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'User' . '</i>',
-            ],]
-                    ],
-                    'options' => [
-                        'class' => 'btn-default'
-                    ]
-                ]
-            );
-            ?>        </div>
     </div>
 
-    
-        <?php \yii\widgets\Pjax::begin(['id'=>'pjax-main', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-main ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2>
-                    <i><?= 'Postcodes' ?></i>
-                </h2>
-            </div>
+	<?php \yii\widgets\Pjax::begin(['id' => 'pjax-main', 'enableReplaceState' => false, 'linkSelector' => '#pjax-main ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
 
-            <div class="panel-body">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>
+				<i><?= 'Postcodes' ?></i>
+			</h2>
+		</div>
 
-                <div class="table-responsive">
-                <?= GridView::widget([
-                'layout' => '{summary}{pager}{items}{pager}',
-                'dataProvider' => $dataProvider,
-                'pager'        => [
-                    'class'          => yii\widgets\LinkPager::className(),
-                    'firstPageLabel' => 'First',
-                    'lastPageLabel'  => 'Last'                ],
-                'filterModel' => $searchModel,
-                'tableOptions' => ['class' => 'table table-striped table-bordered table-hover'],
-                'headerRowOptions' => ['class'=>'x'],
-                'columns' => [
+		<div class="panel-body">
 
-                        [
-            'class' => 'yii\grid\ActionColumn',
-            'urlCreator' => function($action, $model, $key, $index) {
-                // using the column name as key, not mapping to 'id' like the standard generator
-                $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
-                $params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;
-                return Url::toRoute($params);
-            },
-            'contentOptions' => ['nowrap'=>'nowrap']
-        ],
-			[
-                'attribute'=>'status',
-                'value' => function ($model) {
-                    return frontend\modules\region\models\Postcode::getStatusValueLabel($model->status);
-                }    
-            ],
-			'postcode',
-			// generated by schmunk42\giiant\generators\crud\providers\RelationProvider::columnFormat
-[
-    'class' => yii\grid\DataColumn::className(),
-    'attribute' => 'country_id',
-    'value' => function ($model) {
-        if ($rel = $model->getCountry()->one()) {
-            return Html::a($rel->name, ['country/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-        } else {
-            return '';
-        }
-    },
-    'format' => 'raw',
-],
-			// generated by schmunk42\giiant\generators\crud\providers\RelationProvider::columnFormat
-[
-    'class' => yii\grid\DataColumn::className(),
-    'attribute' => 'subdistrict_id',
-    'value' => function ($model) {
-        if ($rel = $model->getSubdistrict()->one()) {
-            return Html::a($rel->name, ['subdistrict/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-        } else {
-            return '';
-        }
-    },
-    'format' => 'raw',
-],
-			// generated by schmunk42\giiant\generators\crud\providers\RelationProvider::columnFormat
-[
-    'class' => yii\grid\DataColumn::className(),
-    'attribute' => 'district_id',
-    'value' => function ($model) {
-        if ($rel = $model->getDistrict()->one()) {
-            return Html::a($rel->name, ['district/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-        } else {
-            return '';
-        }
-    },
-    'format' => 'raw',
-],
-			// generated by schmunk42\giiant\generators\crud\providers\RelationProvider::columnFormat
-[
-    'class' => yii\grid\DataColumn::className(),
-    'attribute' => 'city_id',
-    'value' => function ($model) {
-        if ($rel = $model->getCity()->one()) {
-            return Html::a($rel->name, ['city/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-        } else {
-            return '';
-        }
-    },
-    'format' => 'raw',
-],
-			// generated by schmunk42\giiant\generators\crud\providers\RelationProvider::columnFormat
-[
-    'class' => yii\grid\DataColumn::className(),
-    'attribute' => 'province_id',
-    'value' => function ($model) {
-        if ($rel = $model->getProvince()->one()) {
-            return Html::a($rel->name, ['province/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-        } else {
-            return '';
-        }
-    },
-    'format' => 'raw',
-],
-                ],
-            ]); ?>
-                </div>
+			<div class="table-responsive">
+				<?=
 
-            </div>
+				GridView::widget([
+					'layout'			 => '{summary}{pager}{items}{pager}',
+					'dataProvider'		 => $dataProvider,
+					'pager'				 => [
+						'class'			 => yii\widgets\LinkPager::className(),
+						'firstPageLabel' => 'First',
+						'lastPageLabel'	 => 'Last',
+					],
+					'filterModel'		 => $searchModel,
+					'tableOptions'		 => ['class' => 'table table-striped table-bordered table-hover'],
+					'headerRowOptions'	 => ['class' => 'x'],
+					'columns'			 => [
+						[
+							'class'		 => 'yii\grid\SerialColumn',
+							"options"	 => [
+								"width" => "50px",
+							],
+						],
+						[
+							"attribute"	 => "postcode",
+							"format"	 => "raw",
+							"options"	 => [],
+							"value"		 => function($model)
+						{
+							return $model->linkTo;
+						}
+						],
+						[
+							'attribute'	 => 'province_id',
+							"format"	 => "raw",
+							"options"	 => [],
+							'value'		 => function ($model)
+						{
+							return ($model->province) ? $model->province->linkTo : '<span class="label label-warning">?</span>';
+						},
+						],
+						[
+							'attribute'	 => 'city_id',
+							"format"	 => "raw",
+							"options"	 => [],
+							'value'		 => function ($model)
+						{
+							return ($model->city) ? $model->city->linkTo : '<span class="label label-warning">?</span>';
+						},
+						],
+						[
+							'attribute'	 => 'district_id',
+							"format"	 => "raw",
+							"options"	 => [],
+							'value'		 => function ($model)
+						{
+							return ($model->district) ? $model->district->linkTo : '<span class="label label-warning">?</span>';
+						},
+						],
+					],
+				]);
 
-        </div>
+				?>
+			</div>
 
-        <?php \yii\widgets\Pjax::end() ?>
+		</div>
 
-    
+	</div>
+
+	<?php \yii\widgets\Pjax::end() ?>
+
+
 </div>

@@ -78,7 +78,7 @@ class RgnCityBehavior extends AttributeBehavior
 			$model = new RgnCity([
 				'name'			 => $value,
 				'province_id'	 => $parent_id,
-				'status'		 => RgnCity::STATUS_ACTIVE,
+				'recordStatus'	 => RgnCity::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

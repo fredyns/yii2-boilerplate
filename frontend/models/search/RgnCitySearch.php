@@ -20,7 +20,7 @@ class RgnCitySearch extends RgnCity
 	{
 		return [
 			[['id'], 'integer'],
-			[['status', 'number', 'name', 'abbreviation', 'province_id'], 'safe'],
+			[['recordStatus', 'number', 'name', 'abbreviation', 'province_id'], 'safe'],
 		];
 
 	}
@@ -67,7 +67,7 @@ class RgnCitySearch extends RgnCity
 		]);
 
 		$query
-			->andFilterWhere(['like', 'rgn_city.status', $this->status])
+			->andFilterWhere(['like', 'rgn_city.recordStatus', $this->recordStatus])
 			->andFilterWhere(['like', 'rgn_city.number', $this->number])
 			->andFilterWhere(['like', 'rgn_city.name', $this->name])
 			->andFilterWhere(['like', 'rgn_city.abbreviation', $this->abbreviation]);
@@ -101,7 +101,7 @@ class RgnCitySearch extends RgnCity
 	 */
 	public function searchIndex($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_USED;
 
 		return $this->search($params);
 
@@ -116,7 +116,7 @@ class RgnCitySearch extends RgnCity
 	 */
 	public function searchDeleted($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_DELETED;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_DELETED;
 
 		return $this->search($params);
 

@@ -273,7 +273,7 @@ class RgnDistrictController extends Controller
 				},
 			],
 			'filter'	 => [
-				'status' => RgnDistrict::STATUS_ACTIVE,
+				'recordStatus' => RgnDistrict::RECORDSTATUS_USED,
 			],
 			'selected'	 => $selected,
 		]);

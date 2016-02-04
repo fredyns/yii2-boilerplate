@@ -62,8 +62,8 @@ class CountryBehavior extends AttributeBehavior
 		else
 		{
 			$model = new Country([
-				'name'	 => $value,
-				'status' => Country::STATUS_ACTIVE,
+				'name'			 => $value,
+				'recordStatus'	 => Country::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

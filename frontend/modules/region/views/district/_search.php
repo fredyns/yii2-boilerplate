@@ -28,7 +28,7 @@ use frontend\modules\region\models\search\DistrictSearch;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status') ?>
+	<?= $form->field($model, 'recordStatus') ?>
 
 	<?= $form->field($model, 'number') ?>
 

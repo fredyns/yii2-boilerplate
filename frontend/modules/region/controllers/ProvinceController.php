@@ -273,7 +273,7 @@ class ProvinceController extends Controller
 				},
 			],
 			'filter'	 => [
-				'status' => Province::STATUS_ACTIVE,
+				'recordStatus' => Province::RECORDSTATUS_USED,
 			],
 			'selected'	 => $selected,
 		]);

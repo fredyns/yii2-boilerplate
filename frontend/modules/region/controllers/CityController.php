@@ -273,7 +273,7 @@ class CityController extends Controller
 				},
 			],
 			'filter'	 => [
-				'status' => City::STATUS_ACTIVE,
+				'recordStatus' => City::RECORDSTATUS_USED,
 			],
 			'selected'	 => $selected,
 		]);

@@ -20,7 +20,7 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 	{
 		return [
 			[['id'], 'integer'],
-			[['status', 'number', 'name', 'district_id'], 'safe'],
+			[['recordStatus', 'number', 'name', 'district_id'], 'safe'],
 		];
 
 	}
@@ -67,7 +67,7 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 		]);
 
 		$query
-			->andFilterWhere(['like', 'rgn_subdistrict.status', $this->status])
+			->andFilterWhere(['like', 'rgn_subdistrict.recordStatus', $this->recordStatus])
 			->andFilterWhere(['like', 'rgn_subdistrict.number', $this->number])
 			->andFilterWhere(['like', 'rgn_subdistrict.name', $this->name]);
 
@@ -100,7 +100,7 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 	 */
 	public function searchIndex($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_USED;
 
 		return $this->search($params);
 
@@ -115,7 +115,7 @@ class RgnSubdistrictSearch extends RgnSubdistrict
 	 */
 	public function searchDeleted($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_DELETED;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_DELETED;
 
 		return $this->search($params);
 

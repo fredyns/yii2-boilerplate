@@ -20,7 +20,7 @@ class CountrySearch extends Country
 	{
 		return [
 			[['id'], 'integer'],
-			[['status', 'name', 'abbreviation'], 'safe'],
+			[['recordStatus', 'name', 'abbreviation'], 'safe'],
 		];
 
 	}
@@ -67,7 +67,7 @@ class CountrySearch extends Country
 		]);
 
 		$query
-			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'recordStatus', $this->recordStatus])
 			->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
 
@@ -84,7 +84,7 @@ class CountrySearch extends Country
 	 */
 	public function searchIndex($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_USED;
 
 		return $this->search($params);
 
@@ -99,7 +99,7 @@ class CountrySearch extends Country
 	 */
 	public function searchDeleted($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_DELETED;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_DELETED;
 
 		return $this->search($params);
 

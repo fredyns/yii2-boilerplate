@@ -8,7 +8,7 @@ use common\models\base\Religion as BaseReligion;
 /**
  * This is the model class for table "religion".
  *
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  */
 class Religion extends BaseReligion
 {
@@ -19,28 +19,28 @@ class Religion extends BaseReligion
 	public function attributeLabels()
 	{
 		return [
-			'id'			 => 'ID',
-			'status'		 => 'Status',
-			'statusLabel'	 => 'Status',
-			'name'			 => 'Name',
-			'created_at'	 => 'Created At',
-			'updated_at'	 => 'Updated At',
-			'deleted_at'	 => 'Deleted At',
-			'createdBy_id'	 => 'Created By',
-			'updatedBy_id'	 => 'Updated By',
-			'deletedBy_id'	 => 'Deleted By',
+			'id'				 => 'ID',
+			'recordStatus'		 => 'Record Status',
+			'recordStatusLabel'	 => 'Record Status',
+			'name'				 => 'Name',
+			'created_at'		 => 'Created At',
+			'updated_at'		 => 'Updated At',
+			'deleted_at'		 => 'Deleted At',
+			'createdBy_id'		 => 'Created By',
+			'updatedBy_id'		 => 'Updated By',
+			'deletedBy_id'		 => 'Deleted By',
 		];
 
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return parent::getStatusValueLabel($this->status);
+		return parent::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -49,7 +49,7 @@ class Religion extends BaseReligion
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_DELETED;
 
 		return parent::softDelete();
 
@@ -60,7 +60,7 @@ class Religion extends BaseReligion
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

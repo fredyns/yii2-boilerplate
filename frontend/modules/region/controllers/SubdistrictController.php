@@ -273,7 +273,7 @@ class SubdistrictController extends Controller
 				},
 			],
 			'filter'	 => [
-				'status' => Subdistrict::STATUS_ACTIVE,
+				'recordStatus' => Subdistrict::RECORDSTATUS_USED,
 			],
 			'selected'	 => $selected,
 		]);

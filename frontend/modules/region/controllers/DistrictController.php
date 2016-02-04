@@ -271,7 +271,7 @@ class DistrictController extends Controller
 				},
 			],
 			'filter'	 => [
-				'status' => District::STATUS_ACTIVE,
+				'recordStatus' => District::RECORDSTATUS_USED,
 			],
 			'selected'	 => $selected,
 		]);

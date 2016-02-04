@@ -21,7 +21,7 @@ class RgnCountrySearch extends RgnCountry
 		return [
 			//[['id', 'created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			[['id'], 'integer'],
-			[['status', 'name', 'abbreviation'], 'safe'],
+			[['recordStatus', 'name', 'abbreviation'], 'safe'],
 		];
 
 	}
@@ -74,7 +74,7 @@ class RgnCountrySearch extends RgnCountry
 		]);
 
 		$query
-			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'recordStatus', $this->recordStatus])
 			->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['like', 'abbreviation', $this->abbreviation]);
 
@@ -91,7 +91,7 @@ class RgnCountrySearch extends RgnCountry
 	 */
 	public function searchIndex($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_USED;
 
 		return $this->search($params);
 
@@ -106,7 +106,7 @@ class RgnCountrySearch extends RgnCountry
 	 */
 	public function searchDeleted($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_DELETED;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_DELETED;
 
 		return $this->search($params);
 

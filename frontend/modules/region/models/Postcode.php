@@ -10,7 +10,7 @@ use frontend\modules\region\models\operation\PostcodeOperation;
  * This is the base-model class for table "rgn_postcode".
  *
  * @property integer $id
- * @property string $status
+ * @property string $recordStatus
  * @property integer $postcode
  * @property integer $subdistrict_id
  * @property integer $district_id
@@ -25,7 +25,7 @@ use frontend\modules\region\models\operation\PostcodeOperation;
  * @property integer $deletedBy_id
  *
  * @property String $linkTo
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  *
  * @property City $city
  * @property Country $country
@@ -39,9 +39,9 @@ class Postcode extends \common\base\Model
 	/**
 	 * ENUM field values
 	 */
-	const STATUS_ACTIVE = 'active';
+	const RECORDSTATUS_USED = 'used';
 
-	const STATUS_DELETED = 'deleted';
+	const RECORDSTATUS_DELETED = 'deleted';
 
 	var $enum_labels = false;
 
@@ -112,18 +112,18 @@ class Postcode extends \common\base\Model
 	{
 		return [
 			/* default value */
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			['recordStatus', 'default', 'value' => static::RECORDSTATUS_USED],
 			/* required */
 			[['postcode', 'country_id'], 'required'],
 			/* optional type */
 			[['subdistrict_id', 'district_id', 'city_id', 'province_id'], 'safe'],
 			/* field type */
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['postcode'], 'integer'],
 			/* value limitation */
-			['status', 'in', 'range' => [
-					self::STATUS_ACTIVE,
-					self::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					self::RECORDSTATUS_USED,
+					self::RECORDSTATUS_DELETED,
 				]
 			],
 			[
@@ -195,7 +195,7 @@ class Postcode extends \common\base\Model
 	{
 		return [
 			'id'			 => 'ID',
-			'status'		 => 'Status',
+			'recordStatus'	 => 'Record Status',
 			'postcode'		 => 'Postcode',
 			'subdistrict_id' => 'Subdistrict',
 			'district_id'	 => 'District',
@@ -258,13 +258,13 @@ class Postcode extends \common\base\Model
 	}
 
 	/**
-	 * get column status enum value label
+	 * get column recordStatus enum value label
 	 * @param string $value
 	 * @return string
 	 */
-	public static function getStatusValueLabel($value)
+	public static function getRecordStatusValueLabel($value)
 	{
-		$labels = self::optsStatus();
+		$labels = self::optsRecordStatus();
 		if (isset($labels[$value]))
 		{
 			return $labels[$value];
@@ -274,14 +274,14 @@ class Postcode extends \common\base\Model
 	}
 
 	/**
-	 * column status ENUM value labels
+	 * column recordStatus ENUM value labels
 	 * @return array
 	 */
-	public static function optsStatus()
+	public static function optsRecordStatus()
 	{
 		return [
-			self::STATUS_ACTIVE	 => 'Active',
-			self::STATUS_DELETED => 'Deleted',
+			self::RECORDSTATUS_USED		 => 'Active',
+			self::RECORDSTATUS_DELETED	 => 'Deleted',
 		];
 
 	}
@@ -299,13 +299,13 @@ class Postcode extends \common\base\Model
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return static::getStatusValueLabel($this->status);
+		return static::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -314,7 +314,7 @@ class Postcode extends \common\base\Model
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::softDelete();
 
@@ -325,7 +325,7 @@ class Postcode extends \common\base\Model
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

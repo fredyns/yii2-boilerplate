@@ -20,7 +20,7 @@ class RgnPostcodeSearch extends RgnPostcode
 	{
 		return [
 			[['id', 'postcode'], 'integer'],
-			[['status', 'subdistrict_id', 'district_id', 'city_id', 'province_id', 'country_id'], 'safe'],
+			[['recordStatus', 'subdistrict_id', 'district_id', 'city_id', 'province_id', 'country_id'], 'safe'],
 		];
 
 	}
@@ -67,7 +67,7 @@ class RgnPostcodeSearch extends RgnPostcode
 			'rgn_postcode.postcode'	 => $this->postcode,
 		]);
 
-		$query->andFilterWhere(['like', 'rgn_postcode.status', $this->status]);
+		$query->andFilterWhere(['like', 'rgn_postcode.recordStatus', $this->recordStatus]);
 
 		// filtering subdistrict
 
@@ -192,7 +192,7 @@ class RgnPostcodeSearch extends RgnPostcode
 	 */
 	public function searchIndex($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_ACTIVE;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_USED;
 
 		return $this->search($params);
 
@@ -207,7 +207,7 @@ class RgnPostcodeSearch extends RgnPostcode
 	 */
 	public function searchDeleted($params)
 	{
-		$params[$this->formName()]['status'] = static::STATUS_DELETED;
+		$params[$this->formName()]['recordStatus'] = static::RECORDSTATUS_DELETED;
 
 		return $this->search($params);
 

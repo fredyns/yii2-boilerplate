@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "rgn_postcode".
  *
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  */
 class RgnPostcode extends BaseRgnPostcode
 {
@@ -21,18 +21,18 @@ class RgnPostcode extends BaseRgnPostcode
 	{
 		return [
 			/* default value */
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			['recordStatus', 'default', 'value' => static::RECORDSTATUS_USED],
 			/* required */
 			[['postcode', 'country_id'], 'required'],
 			/* optional type */
 			[['subdistrict_id', 'district_id', 'city_id', 'province_id'], 'safe'],
 			/* field type */
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['postcode'], 'integer'],
 			/* value limitation */
-			['status', 'in', 'range' => [
-					self::STATUS_ACTIVE,
-					self::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					self::RECORDSTATUS_USED,
+					self::RECORDSTATUS_DELETED,
 				]
 			],
 			[
@@ -204,32 +204,33 @@ class RgnPostcode extends BaseRgnPostcode
 	public function attributeLabels()
 	{
 		return [
-			'id'			 => 'ID',
-			'status'		 => 'Status',
-			'postcode'		 => 'Postcode',
-			'subdistrict_id' => 'Subdistrict',
-			'district_id'	 => 'District',
-			'city_id'		 => 'City',
-			'province_id'	 => 'Province',
-			'country_id'	 => 'Country',
-			'created_at'	 => 'Created At',
-			'updated_at'	 => 'Updated At',
-			'deleted_at'	 => 'Deleted At',
-			'createdBy_id'	 => 'Created By',
-			'updatedBy_id'	 => 'Updated By',
-			'deletedBy_id'	 => 'Deleted By',
+			'id'				 => 'ID',
+			'recordStatus'		 => 'Record Status',
+			'recordStatusLabel'	 => 'Record Status',
+			'postcode'			 => 'Postcode',
+			'subdistrict_id'	 => 'Subdistrict',
+			'district_id'		 => 'District',
+			'city_id'			 => 'City',
+			'province_id'		 => 'Province',
+			'country_id'		 => 'Country',
+			'created_at'		 => 'Created At',
+			'updated_at'		 => 'Updated At',
+			'deleted_at'		 => 'Deleted At',
+			'createdBy_id'		 => 'Created By',
+			'updatedBy_id'		 => 'Updated By',
+			'deletedBy_id'		 => 'Deleted By',
 		];
 
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return parent::getStatusValueLabel($this->status);
+		return parent::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -238,7 +239,7 @@ class RgnPostcode extends BaseRgnPostcode
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_DELETED;
 
 		return parent::softDelete();
 
@@ -249,7 +250,7 @@ class RgnPostcode extends BaseRgnPostcode
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

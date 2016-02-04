@@ -43,8 +43,8 @@ use dmstr\bootstrap\Tabs;
 					<?= $form->field($model, 'id')->textInput(['disabled' => 'disabled', 'placeholder' => 'autonumber']) ?>
 					<?=
 
-					$form->field($model, 'status')->dropDownList(
-						frontend\models\Religion::optsstatus()
+					$form->field($model, 'recordStatus')->dropDownList(
+						frontend\models\Religion::optsRecordStatus()
 					);
 
 					?>

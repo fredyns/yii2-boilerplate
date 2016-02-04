@@ -25,7 +25,7 @@ use frontend\models\search\RgnProvinceSearch;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(RgnProvinceSearch::optsstatus()); ?>
+	<?= $form->field($model, 'recordStatus')->dropDownList(RgnProvinceSearch::optsRecordStatus()); ?>
 
 	<?= $form->field($model, 'number') ?>
 

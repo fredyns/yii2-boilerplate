@@ -9,7 +9,7 @@ use common\models\RgnDistrict;
 /**
  * This is the model class for table "rgn_subdistrict".
  *
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  * @property integer $country_id
  * @property integer $province_id
  * @property integer $city_id
@@ -68,20 +68,21 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 	public function attributeLabels()
 	{
 		return [
-			'id'			 => 'ID',
-			'status'		 => 'Status',
-			'number'		 => 'Number',
-			'name'			 => 'Name',
-			'district_id'	 => 'District',
-			'city_id'		 => 'City',
-			'province_id'	 => 'Province',
-			'country_id'	 => 'Country',
-			'created_at'	 => 'Created At',
-			'updated_at'	 => 'Updated At',
-			'deleted_at'	 => 'Deleted At',
-			'createdBy_id'	 => 'Created By',
-			'updatedBy_id'	 => 'Updated By',
-			'deletedBy_id'	 => 'Deleted By',
+			'id'				 => 'ID',
+			'recordStatus'		 => 'Record Status',
+			'recordStatusLabel'	 => 'Record Status',
+			'number'			 => 'Number',
+			'name'				 => 'Name',
+			'district_id'		 => 'District',
+			'city_id'			 => 'City',
+			'province_id'		 => 'Province',
+			'country_id'		 => 'Country',
+			'created_at'		 => 'Created At',
+			'updated_at'		 => 'Updated At',
+			'deleted_at'		 => 'Deleted At',
+			'createdBy_id'		 => 'Created By',
+			'updatedBy_id'		 => 'Updated By',
+			'deletedBy_id'		 => 'Deleted By',
 		];
 
 	}
@@ -93,18 +94,18 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 	{
 		return [
 			/* default value */
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			['recordStatus', 'default', 'value' => static::RECORDSTATUS_USED],
 			/* required */
 			[['name', 'district_id'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['number'], 'string', 'max' => 32],
 			[['name'], 'string', 'max' => 255],
 			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			/* value limitation */
-			['status', 'in', 'range' => [
-					self::STATUS_ACTIVE,
-					self::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					self::RECORDSTATUS_USED,
+					self::RECORDSTATUS_DELETED,
 				]
 			],
 			[
@@ -179,13 +180,13 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return parent::getStatusValueLabel($this->status);
+		return parent::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -194,7 +195,7 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::softDelete();
 
@@ -205,7 +206,7 @@ class RgnSubdistrict extends BaseRgnSubdistrict
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

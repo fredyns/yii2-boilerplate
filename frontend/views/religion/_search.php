@@ -25,7 +25,7 @@ use frontend\models\search\ReligionSearch;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(ReligionSearch::optsstatus()); ?>
+	<?= $form->field($model, 'recordStatus')->dropDownList(ReligionSearch::optsRecordStatus()); ?>
 
 	<?= $form->field($model, 'name') ?>
 

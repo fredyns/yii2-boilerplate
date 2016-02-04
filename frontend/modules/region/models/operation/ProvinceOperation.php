@@ -49,7 +49,7 @@ class ProvinceOperation extends ModelOperation
 			{
 				$this->setError('delete', "Cann't delete unsaved data.");
 			}
-			else if ($this->model->status == Province::STATUS_DELETED)
+			else if ($this->model->recordStatus == Province::RECORDSTATUS_DELETED)
 			{
 				$this->setError('delete', 'Data already (soft) deleted.');
 			}
@@ -83,7 +83,7 @@ class ProvinceOperation extends ModelOperation
 			{
 				$this->setError('restore', "Cann't restore unsaved data.");
 			}
-			else if ($this->model->status == Province::STATUS_ACTIVE)
+			else if ($this->model->recordStatus == Province::RECORDSTATUS_USED)
 			{
 				$this->setError('restore', 'Data already activated.');
 			}

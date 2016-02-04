@@ -10,7 +10,7 @@ use frontend\modules\region\models\operation\CountryOperation;
  * This is the base-model class for table "rgn_country".
  *
  * @property integer $id
- * @property string $status
+ * @property string $recordStatus
  * @property string $name
  * @property string $abbreviation
  * @property integer $created_at
@@ -21,7 +21,7 @@ use frontend\modules\region\models\operation\CountryOperation;
  * @property integer $deletedBy_id
  *
  * @property String $linkTo
- * @property string $statusLabel
+ * @property string $recordStatusLabel
  *
  * @property Postcode[] $rgnPostcodes
  * @property Province[] $rgnProvinces
@@ -32,9 +32,9 @@ class Country extends \common\base\Model
 	/**
 	 * ENUM field values
 	 */
-	const STATUS_ACTIVE = 'active';
+	const RECORDSTATUS_USED = 'used';
 
-	const STATUS_DELETED = 'deleted';
+	const RECORDSTATUS_DELETED = 'deleted';
 
 	var $enum_labels = false;
 
@@ -67,17 +67,17 @@ class Country extends \common\base\Model
 	{
 		return [
 			/* default value */
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
+			['recordStatus', 'default', 'value' => static::RECORDSTATUS_USED],
 			/* required */
 			[['name'], 'required'],
 			/* field type */
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['name'], 'string', 'max' => 255],
 			[['abbreviation'], 'string', 'max' => 32],
 			/* value limitation */
-			['status', 'in', 'range' => [
-					static::STATUS_ACTIVE,
-					static::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					static::RECORDSTATUS_USED,
+					static::RECORDSTATUS_DELETED,
 				],
 			],
 		];
@@ -91,7 +91,7 @@ class Country extends \common\base\Model
 	{
 		return [
 			'id'			 => 'ID',
-			'status'		 => 'Status',
+			'recordStatus'	 => 'Record Status',
 			'name'			 => 'Name',
 			'abbreviation'	 => 'Abbreviation',
 			'created_at'	 => 'Created At',
@@ -111,7 +111,7 @@ class Country extends \common\base\Model
 	{
 		return $this
 				->hasMany(Postcode::className(), ['country_id' => 'id'])
-				->andFilterWhere(['like', 'status', Postcode::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', Postcode::RECORDSTATUS_USED]);
 
 	}
 
@@ -122,18 +122,18 @@ class Country extends \common\base\Model
 	{
 		return $this
 				->hasMany(Province::className(), ['country_id' => 'id'])
-				->andFilterWhere(['like', 'status', Province::STATUS_ACTIVE]);
+				->andFilterWhere(['like', 'recordStatus', Province::RECORDSTATUS_USED]);
 
 	}
 
 	/**
-	 * get column status enum value label
+	 * get column recordStatus enum value label
 	 * @param string $value
 	 * @return string
 	 */
-	public static function getStatusValueLabel($value)
+	public static function getRecordStatusValueLabel($value)
 	{
-		$labels = self::optsStatus();
+		$labels = self::optsRecordStatus();
 
 		if (isset($labels[$value]))
 		{
@@ -145,14 +145,14 @@ class Country extends \common\base\Model
 	}
 
 	/**
-	 * column status ENUM value labels
+	 * column recordStatus ENUM value labels
 	 * @return array
 	 */
-	public static function optsStatus()
+	public static function optsRecordStatus()
 	{
 		return [
-			self::STATUS_ACTIVE	 => 'Active',
-			self::STATUS_DELETED => 'Deleted',
+			self::RECORDSTATUS_USED		 => 'Active',
+			self::RECORDSTATUS_DELETED	 => 'Deleted',
 		];
 
 	}
@@ -171,13 +171,13 @@ class Country extends \common\base\Model
 	}
 
 	/**
-	 * get status label
+	 * get recordStatus label
 	 *
 	 * @return string
 	 */
-	public function getStatusLabel()
+	public function getRecordStatusLabel()
 	{
-		return static::getStatusValueLabel($this->status);
+		return static::getRecordStatusValueLabel($this->recordStatus);
 
 	}
 
@@ -186,7 +186,7 @@ class Country extends \common\base\Model
 	 */
 	public function delete()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::softDelete();
 
@@ -197,7 +197,7 @@ class Country extends \common\base\Model
 	 */
 	public function restore()
 	{
-		$this->status = static::STATUS_ACTIVE;
+		$this->recordStatus = static::RECORDSTATUS_USED;
 
 		return parent::restore();
 

@@ -71,7 +71,7 @@ class CityBehavior extends AttributeBehavior
 			$model = new City([
 				'name'			 => $value,
 				'province_id'	 => $parent_id,
-				'status'		 => City::STATUS_ACTIVE,
+				'recordStatus'	 => City::RECORDSTATUS_USED,
 			]);
 
 			return $model->save(FALSE) ? $model->id : 0;

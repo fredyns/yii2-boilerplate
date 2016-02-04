@@ -28,7 +28,7 @@ use frontend\modules\region\models\search\PostcodeSearch;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(PostcodeSearch::optsstatus()); ?>
+	<?= $form->field($model, 'recordStatus')->dropDownList(PostcodeSearch::optsRecordStatus()); ?>
 
 	<?= $form->field($model, 'postcode') ?>
 

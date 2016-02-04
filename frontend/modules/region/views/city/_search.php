@@ -28,7 +28,7 @@ use frontend\modules\region\models\search\CitySearch;
 
 	<?= $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'status')->dropDownList(CitySearch::optsstatus()); ?>
+	<?= $form->field($model, 'recordStatus')->dropDownList(CitySearch::optsRecordStatus()); ?>
 
 	<?= $form->field($model, 'number') ?>
 

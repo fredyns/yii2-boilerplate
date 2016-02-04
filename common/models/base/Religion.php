@@ -8,7 +8,7 @@ use Yii;
  * This is the base-model class for table "religion".
  *
  * @property integer $id
- * @property string $status
+ * @property string $recordStatus
  * @property string $name
  * @property integer $created_at
  * @property integer $updated_at
@@ -23,9 +23,9 @@ class Religion extends \common\base\Model
 	/**
 	 * ENUM field values
 	 */
-	const STATUS_ACTIVE = 'active';
+	const RECORDSTATUS_USED = 'used';
 
-	const STATUS_DELETED = 'deleted';
+	const RECORDSTATUS_DELETED = 'deleted';
 
 	var $enum_labels = false;
 
@@ -44,13 +44,13 @@ class Religion extends \common\base\Model
 	public function rules()
 	{
 		return [
-			[['status'], 'string'],
+			[['recordStatus'], 'string'],
 			[['name'], 'required'],
 			[['created_at', 'updated_at', 'deleted_at', 'createdBy_id', 'updatedBy_id', 'deletedBy_id'], 'integer'],
 			[['name'], 'string', 'max' => 64],
-			['status', 'in', 'range' => [
-					self::STATUS_ACTIVE,
-					self::STATUS_DELETED,
+			['recordStatus', 'in', 'range' => [
+					self::RECORDSTATUS_USED,
+					self::RECORDSTATUS_DELETED,
 				]
 			]
 		];
@@ -64,7 +64,7 @@ class Religion extends \common\base\Model
 	{
 		return [
 			'id'			 => 'ID',
-			'status'		 => 'Status',
+			'recordStatus'	 => 'Record Status',
 			'name'			 => 'Name',
 			'created_at'	 => 'Created At',
 			'updated_at'	 => 'Updated At',
@@ -77,13 +77,13 @@ class Religion extends \common\base\Model
 	}
 
 	/**
-	 * get column status enum value label
+	 * get column recordStatus enum value label
 	 * @param string $value
 	 * @return string
 	 */
-	public static function getStatusValueLabel($value)
+	public static function getRecordStatusValueLabel($value)
 	{
-		$labels = self::optsStatus();
+		$labels = self::optsRecordStatus();
 
 		if (isset($labels[$value]))
 		{
@@ -95,14 +95,14 @@ class Religion extends \common\base\Model
 	}
 
 	/**
-	 * column status ENUM value labels
+	 * column recordStatus ENUM value labels
 	 * @return array
 	 */
-	public static function optsStatus()
+	public static function optsRecordStatus()
 	{
 		return [
-			self::STATUS_ACTIVE	 => 'Active',
-			self::STATUS_DELETED => 'Deleted',
+			self::RECORDSTATUS_USED		 => 'Used',
+			self::RECORDSTATUS_DELETED	 => 'Deleted',
 		];
 
 	}
