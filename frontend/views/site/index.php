@@ -41,11 +41,34 @@ $this->title = 'Yii 2 Boilerplate';
 
     <div class="body-content">
 
+		Welcome :)
+		<br/>
+
+		<p style="text-align: justify;">
+			<a href="https://github.com/fredyns/yii2-boilerplate" target="_blank"><strong>Yii2-Boilerplate</strong></a> ini berisi:
+		</p>
+
+		<ul>
+			<li style="text-align: justify;">
+				<a href="https://github.com/yiisoft/yii2-app-advanced" target="_blank"><strong>Yii2-app-advance</strong></a>
+			</li>
+			<li style="text-align: justify;">
+				<a href="https://github.com/dektrium/yii2-user" target="_blank"><strong>Dektrium User Management</strong></a>
+			</li>
+			<li style="text-align: justify;">
+				<a href="https://github.com/dmstr/yii2-adminlte-asset" target="_blank"><strong>adminLTE</strong></a>
+			</li>
+			<li style="text-align: justify;">
+				<a href="https://github.com/cahyadsn/daerah" target="_blank">Database wilayah Indonesia</a>.
+			</li>
+		</ul>
+		&nbsp;
+
 		<?php if (Yii::$app->user->isGuest): ?>
 
 			<p align="center">
 				Silahkan login/register dulu untuk melihat fitur lainnya. Gratis kok.
-				Untuk demo fitur user management.
+				Buat demo fitur user management.
 			</p>
 
 			<p align="center">
@@ -61,29 +84,6 @@ $this->title = 'Yii 2 Boilerplate';
 			</p>
 
 		<?php else: ?>
-
-			Welcome :)
-			<br/>
-
-			<p style="text-align: justify;">
-				<a href="https://github.com/fredyns/yii2-boilerplate" target="_blank"><strong>Yii2-Boilerplate</strong></a> ini berisi:
-			</p>
-
-			<ul>
-				<li style="text-align: justify;">
-					<a href="https://github.com/yiisoft/yii2-app-advanced" target="_blank"><strong>Yii2-app-advance</strong></a>
-				</li>
-				<li style="text-align: justify;">
-					<a href="https://github.com/dektrium/yii2-user" target="_blank"><strong>Dektrium User Management</strong></a>
-				</li>
-				<li style="text-align: justify;">
-					<a href="https://github.com/dmstr/yii2-adminlte-asset" target="_blank"><strong>adminLTE</strong></a>
-				</li>
-				<li style="text-align: justify;">
-					<a href="https://github.com/cahyadsn/daerah" target="_blank">Database wilayah Indonesia</a>.
-				</li>
-			</ul>
-			&nbsp;
 
 			<strong>Tambahan Pribadi</strong>
 
