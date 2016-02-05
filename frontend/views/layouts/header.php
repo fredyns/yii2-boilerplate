@@ -243,7 +243,23 @@ use yii\helpers\Html;
 
 					<li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+
+							<?=
+
+							\common\widgets\Gravatar::widget([
+								'email'		 => Yii::$app->user->identity->email,
+								'options'	 => [
+									'class'	 => 'img-circle',
+									'alt'	 => 'Gravatar image',
+									'title'	 => 'Gravatar image',
+									'width'	 => 25,
+									'height' => 25,
+								],
+								'linkUrl'	 => FALSE,
+							]);
+
+							?>
+
 							<span class="hidden-xs">
 								<?= Yii::$app->user->identity->username; ?>
 							</span>
@@ -251,8 +267,22 @@ use yii\helpers\Html;
 						<ul class="dropdown-menu">
 							<!-- User image -->
 							<li class="user-header">
-								<img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-									 alt="User Image"/>
+
+								<?=
+
+								\common\widgets\Gravatar::widget([
+									'email'			 => Yii::$app->user->identity->email,
+									'options'		 => [
+										'class'	 => 'img-circle',
+										'alt'	 => 'Gravatar image',
+										'title'	 => 'Gravatar image',
+									],
+									'linkOptions'	 => [
+										'style' => "background-color: transparent;"
+									],
+								]);
+
+								?>
 
 								<p>
 									<?= Yii::$app->user->identity->username; ?>

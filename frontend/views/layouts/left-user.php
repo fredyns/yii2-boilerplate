@@ -5,7 +5,22 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+
+				<?=
+
+				\common\widgets\Gravatar::widget([
+					'email'		 => Yii::$app->user->identity->email,
+					'size'		 => 45,
+					'options'	 => [
+						'class'	 => 'img-circle',
+						'alt'	 => 'Gravatar image',
+						'title'	 => 'Gravatar image',
+					],
+					'linkUrl'	 => FALSE,
+				]);
+
+				?>
+
             </div>
             <div class="pull-left info">
                 <p>
