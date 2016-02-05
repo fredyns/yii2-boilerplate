@@ -351,7 +351,14 @@ class ModelOperation extends \yii\base\Object
 	{
 		if ($label === '')
 		{
-			$label = $this->model->name;
+			if ($this->model->hasAttribute('name'))
+			{
+				$label = $this->model->getAttribute('name');
+			}
+			else
+			{
+				$label = 'view';
+			}
 		}
 
 		$url = $this->url('view');
